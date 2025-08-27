@@ -21,6 +21,6 @@
         };
     in {
       nixosConfigurations.tux = createConfig "tux";
-      # nixosConfigurations.tuxnote = createConfig "tuxnote";
+      nixosConfigurations.tuxnote = createConfig "tuxnote";
     };
 }
