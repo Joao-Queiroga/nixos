@@ -1,6 +1,14 @@
 { config, lib, pkgs, ... }: {
   imports = [ ./hardware-configuration.nix ];
+
   networking.hostName = "tux";
+
+  hardware.amdgpu = {
+    initrd.enable = true;
+    opencl.enable = true;
+    overdrive.enable = true;
+  };
+
   systemd.services."ddcci@" = {
     unitConfig = {
       Description = "ddcci service for device %i";

@@ -83,11 +83,6 @@
     enable = true;
     extraPackages = with pkgs; [ mesa vulkan-tools ];
   };
-  hardware.amdgpu = {
-    initrd.enable = true;
-    opencl.enable = true;
-    overdrive.enable = true;
-  };
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.libinput.enable = true;
