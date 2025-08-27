@@ -75,12 +75,9 @@
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
 
-  hardware.opengl = {
-    enable = true;
-    driSupport32Bit = true;
-  };
   hardware.graphics = {
     enable = true;
+    enable32Bit = true;
     extraPackages = with pkgs; [ mesa vulkan-tools ];
   };
 
