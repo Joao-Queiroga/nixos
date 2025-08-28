@@ -13,6 +13,7 @@
         device = "nodev";
         efiSupport = true;
         timeoutStyle = "hidden";
+        splashImage = null;
         mirroredBoots = [{
           devices = [ "nodev" ];
           path = "/boot";
