@@ -8,7 +8,6 @@
   boot = {
     plymouth.enable = true;
     loader = {
-      systemd-boot.enable = true;
       grub = {
         enable = true;
         device = "nodev";
