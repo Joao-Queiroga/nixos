@@ -5,27 +5,37 @@
 { config, lib, pkgs, ... }: {
   nixpkgs.config.allowUnfree = true;
 
-  # Use the systemd-boot EFI boot loader.
-  boot.loader = {
-    grub = {
-      enable = true;
-      device = "nodev";
-      efiSupport = true;
-      timeoutStyle = "hidden";
-      extraConfig = ''
-        set timeout=1
-      '';
-      mirroredBoots = [{
-        devices = [ "nodev" ];
-        path = "/boot";
+  boot = {
+    plymouth.enable = true;
+    loader = {
+      systemd-boot.enable = true;
+      grub = {
+        enable = true;
+        device = "nodev";
+        efiSupport = true;
+        timeoutStyle = "hidden";
+        mirroredBoots = [{
+          devices = [ "nodev" ];
+          path = "/boot";
+          efiSysMountPoint = "/boot/efi";
+          efiBootloaderId = "NixOS";
+        }];
+      };
+      efi = {
+        canTouchEfiVariables = true;
         efiSysMountPoint = "/boot/efi";
-        efiBootloaderId = "NixOS";
-      }];
+      };
+      timeout = 0;
     };
-    efi = {
-      canTouchEfiVariables = true;
-      efiSysMountPoint = "/boot/efi";
-    };
+    consoleLogLevel = 3;
+    initrd.verbose = false;
+    kernelParams = [
+      "quiet"
+      "splash"
+      "boot.shell_on_fail"
+      "udev.log_priority=3"
+      "rd.systemd.show_status=auto"
+    ];
   };
 
   # Use latest kernel.
