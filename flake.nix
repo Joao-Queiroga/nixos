@@ -18,6 +18,7 @@
             ./${hostname}/configuration.nix
             chaotic.nixosModules.default
           ];
+          specialArgs = { inherit inputs; };
         };
     in {
       nixosConfigurations = {
