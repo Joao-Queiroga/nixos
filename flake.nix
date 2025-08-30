@@ -20,7 +20,9 @@
           ];
         };
     in {
-      nixosConfigurations.tux = createConfig "tux";
-      nixosConfigurations.tuxnote = createConfig "tuxnote";
+      nixosConfigurations = {
+        tux = createConfig "tux";
+        tuxnote = createConfig "tuxnote";
+      };
     };
 }
