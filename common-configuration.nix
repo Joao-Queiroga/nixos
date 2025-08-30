@@ -95,8 +95,15 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.libinput.enable = true;
 
+  programs.bash = {
+    enable = true;
+    interactiveShellInit = ''
+      SHELL=${pkgs.fish}/bin/fish exec ${pkgs.fish}/bin/fish
+    '';
+  };
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.defaultUserShell = pkgs.zsh;
+  users.defaultUserShell = pkgs.bash;
   users.users.joaoqueiroga = {
     isNormalUser = true;
     extraGroups =
