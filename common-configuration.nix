@@ -130,9 +130,9 @@
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
   environment.systemPackages = with pkgs; [ vim wget btop file kitty unzip ];
-  environment.variables = { XKB_DEFAULT_LAYOUT = "br"; };
 
   services.displayManager = {
+    environment = { XKB_DEFAULT_LAYOUT = "br"; };
     sddm = {
       enable = true;
       autoNumlock = true;
@@ -140,7 +140,10 @@
       theme = "${
           (pkgs.sddm-astronaut.override { embeddedTheme = "black_hole"; })
         }/share/sddm/themes/sddm-astronaut-theme/";
-      wayland = { enable = true; };
+      wayland = {
+        enable = true;
+        compositor = "kwin";
+      };
       extraPackages = with pkgs.kdePackages; [
         qtmultimedia
         qtsvg
@@ -148,6 +151,13 @@
       ];
     };
   };
+  environment.etc."sddm-kcminputrc".text = ''
+    [Keyboard]
+    NumLock=0
+  '';
+
+  systemd.tmpfiles.rules =
+    [ "L /var/lib/sddm/.config/kcminputrc - - - - /etc/sddm-kcminputrc" ];
 
   chaotic = { nordvpn.enable = true; };
 
