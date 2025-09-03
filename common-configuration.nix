@@ -41,11 +41,10 @@
 
   # Use latest kernel.
   boot = {
-    kernelPackages = pkgs.linuxPackages_cachyos;
-    extraModulePackages = [
-      (pkgs.linuxKernel.packagesFor
-        pkgs.linuxPackages_cachyos.kernel).ddcci-driver
-    ];
+    kernelPackages = pkgs.linuxPackages_cachyos-lto;
+    extraModulePackages =
+      with (pkgs.linuxKernel.packagesFor pkgs.linuxPackages_cachyos-lto.kernel);
+      [ ddcci-driver ];
     kernelModules = [ "ddcci" "i2c-dev" ];
   };
 
