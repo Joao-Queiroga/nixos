@@ -5,6 +5,7 @@
 { config, lib, pkgs, inputs, ... }: {
   nixpkgs.config.allowUnfree = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.use-xdg-base-directories = true;
 
   boot = {
     plymouth.enable = true;
