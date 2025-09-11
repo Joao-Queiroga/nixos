@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }: {
   imports = [ ./hardware-configuration.nix ];
 
-  networking.hostName = "tux";
+  environment.systemPackages = with pkgs; [ lsfg-vk lsfg-vk-ui prismlauncher ];
 
   programs.steam = {
     enable = true;
