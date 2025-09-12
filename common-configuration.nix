@@ -21,7 +21,6 @@
         device = "nodev";
         efiSupport = true;
         timeoutStyle = "hidden";
-        splashImage = null;
         mirroredBoots = [{
           devices = [ "nodev" ];
           path = "/boot";
@@ -190,6 +189,19 @@
     [ "L /var/lib/sddm/.config/kcminputrc - - - - /etc/sddm-kcminputrc" ];
 
   chaotic = { nordvpn.enable = true; };
+
+  stylix = {
+    enable = true;
+    base16Scheme =
+      "${pkgs.base16-schemes}/share/themes/tokyo-night-terminal-dark.yaml";
+    override = {
+      base05 = "#c0caf5";
+      base09 = "#faba4a";
+      base0B = "#9ece6a";
+    };
+    polarity = "dark";
+    targets.grub.useWallpaper = false;
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
