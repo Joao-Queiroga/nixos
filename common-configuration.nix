@@ -148,7 +148,15 @@
 
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
-  environment.systemPackages = with pkgs; [ vim wget btop file kitty unzip ];
+  environment.systemPackages = with pkgs; [
+    vim
+    wget
+    btop
+    file
+    kitty
+    unzip
+    rose-pine-cursor
+  ];
 
   services.displayManager = {
     environment = { XKB_DEFAULT_LAYOUT = "br"; };
@@ -173,6 +181,9 @@
   environment.etc."sddm-kcminputrc".text = ''
     [Keyboard]
     NumLock=0
+    [Mouse]
+    cursorTheme=BreezeX-RosePine-Linux
+    cursorSize=24
   '';
 
   systemd.tmpfiles.rules =
