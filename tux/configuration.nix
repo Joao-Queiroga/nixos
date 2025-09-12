@@ -3,6 +3,11 @@
 
   environment.systemPackages = with pkgs; [ lsfg-vk lsfg-vk-ui prismlauncher ];
 
+  programs.gamescope = {
+    enable = true;
+    capSysNice = true;
+  };
+
   programs.steam = {
     enable = true;
     remotePlay.openFirewall = true;
