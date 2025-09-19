@@ -1,7 +1,12 @@
 { config, lib, pkgs, ... }: {
   imports = [ ./hardware-configuration.nix ];
 
-  environment.systemPackages = with pkgs; [ lsfg-vk lsfg-vk-ui prismlauncher ];
+  environment.systemPackages = with pkgs; [
+    lsfg-vk
+    lsfg-vk-ui
+    prismlauncher
+    discord
+  ];
 
   programs.gamescope = {
     enable = true;
