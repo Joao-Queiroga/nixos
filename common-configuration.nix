@@ -1,12 +1,21 @@
-{ config, lib, pkgs, inputs, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  inputs,
+  ...
+}:
+{
   nixpkgs.config.allowUnfree = true;
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
   nix.settings.use-xdg-base-directories = true;
   nix.settings = {
     substituters = [ "https://hyprland.cachix.org" ];
     trusted-substituters = [ "https://hyprland.cachix.org" ];
-    trusted-public-keys =
-      [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
+    trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
   };
 
   boot = {
@@ -17,12 +26,14 @@
         device = "nodev";
         efiSupport = true;
         timeoutStyle = "hidden";
-        mirroredBoots = [{
-          devices = [ "nodev" ];
-          path = "/boot";
-          efiSysMountPoint = "/boot/efi";
-          efiBootloaderId = "NixOS";
-        }];
+        mirroredBoots = [
+          {
+            devices = [ "nodev" ];
+            path = "/boot";
+            efiSysMountPoint = "/boot/efi";
+            efiBootloaderId = "NixOS";
+          }
+        ];
       };
       efi = {
         canTouchEfiVariables = true;
@@ -43,10 +54,13 @@
 
   boot = {
     kernelPackages = pkgs.linuxPackages_cachyos-lto;
-    extraModulePackages =
-      with (pkgs.linuxKernel.packagesFor pkgs.linuxPackages_cachyos-lto.kernel);
-      [ ddcci-driver ];
-    kernelModules = [ "ddcci" "i2c-dev" ];
+    extraModulePackages = with (pkgs.linuxKernel.packagesFor pkgs.linuxPackages_cachyos-lto.kernel); [
+      ddcci-driver
+    ];
+    kernelModules = [
+      "ddcci"
+      "i2c-dev"
+    ];
   };
 
   networking.networkmanager.enable = true;
@@ -67,7 +81,9 @@
   # Enable CUPS to print documents.
   # services.printing.enable = true;
 
-  services.pipewire = { enable = true; };
+  services.pipewire = {
+    enable = true;
+  };
 
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
@@ -75,7 +91,10 @@
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
-    extraPackages = with pkgs; [ mesa vulkan-tools ];
+    extraPackages = with pkgs; [
+      mesa
+      vulkan-tools
+    ];
   };
 
   programs.bash = {
@@ -83,15 +102,18 @@
     interactiveShellInit = ''
       if [[ $(${pkgs.procps}/bin/ps --no-header --pid=$PPID --format=comm) != "fish" && -z ''${BASH_EXECUTION_STRING} ]] then
         shopt -q login_shell && LOGIN_OPTION='--login' || LOGIN_OPTION=""
-        exec ${pkgs.fish}/bin/fish $LOGIN_OPTION
+        exec "$(command -v fish || echo ${pkgs.fish}/bin/fish)" $LOGIN_OPTION
       fi
     '';
   };
 
   users.users.joaoqueiroga = {
     isNormalUser = true;
-    extraGroups =
-      [ "wheel" "networkmanager" "nordvpn" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+      "nordvpn"
+    ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [ tree ];
   };
 
@@ -101,19 +123,19 @@
       enableCompletion = true;
     };
     nix-ld.enable = true;
-    hyprland = { enable = true; };
+    hyprland = {
+      enable = true;
+    };
     uwsm = {
       enable = true;
       waylandCompositors = {
         hyprland = {
           prettyName = "Hyprland";
           comment = "Hyprland compositor managed by UWSM";
-          binPath = "${
-              pkgs.writeShellScriptBin "Hyprland" ''
-                #!/bin/sh
-                exec Hyprland $@
-              ''
-            }/bin/Hyprland";
+          binPath = "${pkgs.writeShellScriptBin "Hyprland" ''
+            #!/bin/sh
+            exec Hyprland $@
+          ''}/bin/Hyprland";
         };
       };
     };
@@ -133,14 +155,16 @@
   ];
 
   services.displayManager = {
-    environment = { XKB_DEFAULT_LAYOUT = "br"; };
+    environment = {
+      XKB_DEFAULT_LAYOUT = "br";
+    };
     sddm = {
       enable = true;
       autoNumlock = true;
       package = pkgs.kdePackages.sddm;
       theme = "${
-          (pkgs.sddm-astronaut.override { embeddedTheme = "black_hole"; })
-        }/share/sddm/themes/sddm-astronaut-theme/";
+        (pkgs.sddm-astronaut.override { embeddedTheme = "black_hole"; })
+      }/share/sddm/themes/sddm-astronaut-theme/";
       wayland = {
         enable = true;
         compositor = "kwin";
@@ -160,15 +184,15 @@
     cursorSize=24
   '';
 
-  systemd.tmpfiles.rules =
-    [ "L /var/lib/sddm/.config/kcminputrc - - - - /etc/sddm-kcminputrc" ];
+  systemd.tmpfiles.rules = [ "L /var/lib/sddm/.config/kcminputrc - - - - /etc/sddm-kcminputrc" ];
 
-  chaotic = { nordvpn.enable = true; };
+  chaotic = {
+    nordvpn.enable = true;
+  };
 
   stylix = {
     enable = true;
-    base16Scheme =
-      "${pkgs.base16-schemes}/share/themes/tokyo-night-terminal-dark.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-terminal-dark.yaml";
     override = {
       base05 = "#c0caf5";
       base09 = "#faba4a";
@@ -187,8 +211,12 @@
   system.autoUpgrade = {
     enable = true;
     flake = inputs.self.outPath;
-    flags = builtins.concatLists
-      (map (name: [ "--update-input" name ]) (builtins.attrNames inputs));
+    flags = builtins.concatLists (
+      map (name: [
+        "--update-input"
+        name
+      ]) (builtins.attrNames inputs)
+    );
     dates = "2:00";
     randomizedDelaySec = "45min";
   };
