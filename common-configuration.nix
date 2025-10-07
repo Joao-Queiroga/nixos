@@ -4,8 +4,7 @@
   pkgs,
   inputs,
   ...
-}:
-{
+}: {
   nixpkgs.config.allowUnfree = true;
   nix.settings.experimental-features = [
     "nix-command"
@@ -13,9 +12,9 @@
   ];
   nix.settings.use-xdg-base-directories = true;
   nix.settings = {
-    substituters = [ "https://hyprland.cachix.org" ];
-    trusted-substituters = [ "https://hyprland.cachix.org" ];
-    trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
+    substituters = ["https://hyprland.cachix.org"];
+    trusted-substituters = ["https://hyprland.cachix.org"];
+    trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
   };
 
   boot = {
@@ -28,7 +27,7 @@
         timeoutStyle = "hidden";
         mirroredBoots = [
           {
-            devices = [ "nodev" ];
+            devices = ["nodev"];
             path = "/boot";
             efiSysMountPoint = "/boot/efi";
             efiBootloaderId = "NixOS";
@@ -114,7 +113,7 @@
       "networkmanager"
       "nordvpn"
     ]; # Enable ‘sudo’ for the user.
-    packages = with pkgs; [ tree ];
+    packages = with pkgs; [tree];
   };
 
   programs = {
@@ -163,7 +162,7 @@
       autoNumlock = true;
       package = pkgs.kdePackages.sddm;
       theme = "${
-        (pkgs.sddm-astronaut.override { embeddedTheme = "black_hole"; })
+        (pkgs.sddm-astronaut.override {embeddedTheme = "black_hole";})
       }/share/sddm/themes/sddm-astronaut-theme/";
       wayland = {
         enable = true;
@@ -184,7 +183,7 @@
     cursorSize=24
   '';
 
-  systemd.tmpfiles.rules = [ "L /var/lib/sddm/.config/kcminputrc - - - - /etc/sddm-kcminputrc" ];
+  systemd.tmpfiles.rules = ["L /var/lib/sddm/.config/kcminputrc - - - - /etc/sddm-kcminputrc"];
 
   chaotic = {
     nordvpn.enable = true;
@@ -204,8 +203,8 @@
 
   networking.firewall = {
     checkReversePath = false;
-    allowedTCPPorts = [ 443 ];
-    allowedUDPPorts = [ 1194 ];
+    allowedUDPPorts = [80 500 1194 4500];
+    allowedTCPPorts = [443 1701 1723];
   };
 
   system.autoUpgrade = {
