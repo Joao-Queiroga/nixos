@@ -75,6 +75,11 @@
   services.udisks2.enable = true;
   services.gvfs.enable = true;
 
+  services.nordvpn = {
+    enable = true;
+    users = ["joaoqueiroga"];
+  };
+
   services.xserver.xkb.layout = "br";
 
   # Enable CUPS to print documents.
@@ -111,7 +116,6 @@
     extraGroups = [
       "wheel"
       "networkmanager"
-      "nordvpn"
     ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [tree];
   };
@@ -185,10 +189,6 @@
 
   systemd.tmpfiles.rules = ["L /var/lib/sddm/.config/kcminputrc - - - - /etc/sddm-kcminputrc"];
 
-  chaotic = {
-    nordvpn.enable = true;
-  };
-
   stylix = {
     enable = true;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-terminal-dark.yaml";
@@ -199,12 +199,6 @@
     };
     polarity = "dark";
     targets.grub.useWallpaper = false;
-  };
-
-  networking.firewall = {
-    checkReversePath = false;
-    allowedUDPPorts = [80 500 1194 4500];
-    allowedTCPPorts = [443 1701 1723];
   };
 
   system.autoUpgrade = {
