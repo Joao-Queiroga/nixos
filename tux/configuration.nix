@@ -1,5 +1,10 @@
-{ config, lib, pkgs, ... }: {
-  imports = [ ./hardware-configuration.nix ];
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
+  imports = [./hardware-configuration.nix];
 
   environment.systemPackages = with pkgs; [
     lsfg-vk
@@ -12,6 +17,8 @@
     enable = true;
     capSysNice = true;
   };
+
+  networking.hostId = "7df2bda7";
 
   programs.steam = {
     enable = true;
@@ -45,10 +52,10 @@
   };
 
   services.udev.extraRules = ''
-      SUBSYSTEM=="i2c-dev", ACTION=="add",\
-    	ATTR{name}=="AMDGPU DM aux hw bus *",\
-    	TAG+="ddcci",\
-    	TAG+="systemd",\
-    	ENV{SYSTEMD_WANTS}+="ddcci@$kernel.service"
+     SUBSYSTEM=="i2c-dev", ACTION=="add",\
+    ATTR{name}=="AMDGPU DM aux hw bus *",\
+    TAG+="ddcci",\
+    TAG+="systemd",\
+    ENV{SYSTEMD_WANTS}+="ddcci@$kernel.service"
   '';
 }

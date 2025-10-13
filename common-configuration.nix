@@ -24,6 +24,7 @@
         enable = true;
         device = "nodev";
         efiSupport = true;
+        zfsSupport = true;
         timeoutStyle = "hidden";
         mirroredBoots = [
           {
@@ -52,8 +53,9 @@
   };
 
   boot = {
-    kernelPackages = pkgs.linuxPackages_cachyos-lto;
-    extraModulePackages = with (pkgs.linuxKernel.packagesFor pkgs.linuxPackages_cachyos-lto.kernel); [
+    kernelPackages = pkgs.linuxPackages_cachyos;
+    zfs.package = pkgs.zfs_unstable;
+    extraModulePackages = with (pkgs.linuxKernel.packagesFor pkgs.linuxPackages_cachyos.kernel); [
       ddcci-driver
     ];
     kernelModules = [
