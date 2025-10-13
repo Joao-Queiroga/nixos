@@ -37,6 +37,12 @@
     fsType = "zfs";
   };
 
+  fileSystems."/boot" =
+    { device = "/dev/disk/by-uuid/586A-D78A";
+      fsType = "vfat";
+      options = [ "fmask=0022" "dmask=0022" ];
+    };
+
   fileSystems."/boot/efi" = {
     device = "/dev/disk/by-uuid/1FBE-A31F";
     fsType = "vfat";
