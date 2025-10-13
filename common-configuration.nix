@@ -181,15 +181,13 @@
       ];
     };
   };
-  environment.etc."sddm-kcminputrc".text = ''
+  environment.etc."xdg/kcminputrc".text = ''
     [Keyboard]
     NumLock=0
     [Mouse]
     cursorTheme=BreezeX-RosePine-Linux
     cursorSize=24
   '';
-
-  systemd.tmpfiles.rules = ["L /var/lib/sddm/.config/kcminputrc - - - - /etc/sddm-kcminputrc"];
 
   stylix = {
     enable = true;
