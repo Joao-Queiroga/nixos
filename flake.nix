@@ -1,6 +1,7 @@
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     nordvpn-flake = {
       url = "github:conneroisu/nordvpn-flake";
@@ -18,6 +19,7 @@
   };
   outputs = inputs @ {
     self,
+    determinate,
     nixpkgs,
     stylix,
     chaotic,
@@ -33,6 +35,7 @@
       nixpkgs.lib.nixosSystem {
         modules = [
           stylix.nixosModules.stylix
+          determinate.nixosModules.default
           chaotic.nixosModules.default
           nordvpn-flake.nixosModules.default
           {networking.hostName = hostname;}
