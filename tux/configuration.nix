@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }: {
   imports = [./hardware-configuration.nix];
@@ -9,7 +10,16 @@
   environment.systemPackages = with pkgs; [
     lsfg-vk
     lsfg-vk-ui
-    prismlauncher
+    (prismlauncher.override
+      (old: {
+        glfw3-minecraft = pkgs.glfw3-minecraft.overrideAttrs (old: {
+          patches =
+            old.patches
+            ++ [
+              inputs.glfw-patch
+            ];
+        });
+      }))
     discord
   ];
 

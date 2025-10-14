@@ -10,6 +10,11 @@
       url = "github:nix-community/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    glfw-patch = {
+      url = "https://github.com/BoyOrigin/glfw-wayland/raw/main/patches/0001-Key-Modifiers-Fix.patch";
+      flake = false;
+    };
   };
   outputs = inputs @ {
     self,
