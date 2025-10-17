@@ -4,7 +4,7 @@
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     nordvpn-flake = {
-      url = "github:conneroisu/nordvpn-flake";
+      url = "github:Joao-Queiroga/nordvpn-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     stylix = {
