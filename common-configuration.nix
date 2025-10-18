@@ -6,6 +6,9 @@
   ...
 }: {
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.permittedInsecurePackages = [
+    "ventoy-gtk3-1.1.07"
+  ];
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
@@ -156,6 +159,7 @@
     file
     kitty
     unzip
+    ventoy-full-gtk
     rose-pine-cursor
   ];
 
