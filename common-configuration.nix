@@ -56,9 +56,9 @@
   };
 
   boot = {
-    kernelPackages = pkgs.linuxPackages_cachyos;
+    kernelPackages = pkgs.linuxPackages_zen;
     zfs.package = pkgs.zfs_unstable;
-    extraModulePackages = with (pkgs.linuxKernel.packagesFor pkgs.linuxPackages_cachyos.kernel); [
+    extraModulePackages = with (pkgs.linuxKernel.packagesFor pkgs.linuxPackages_zen.kernel); [
       ddcci-driver
     ];
     kernelModules = [
@@ -68,6 +68,7 @@
   };
 
   networking.networkmanager.enable = true;
+  networking.firewall.checkReversePath = false;
 
   time.timeZone = "Brazil/East";
 
@@ -79,11 +80,6 @@
 
   services.udisks2.enable = true;
   services.gvfs.enable = true;
-
-  services.nordvpn = {
-    enable = true;
-    users = ["joaoqueiroga"];
-  };
 
   services.xserver.xkb.layout = "br";
 
@@ -134,6 +130,7 @@
     hyprland = {
       enable = true;
     };
+    niri.enable = true;
     uwsm = {
       enable = true;
       waylandCompositors = {
