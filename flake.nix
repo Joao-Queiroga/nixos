@@ -2,7 +2,6 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
-    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     stylix = {
       url = "github:nix-community/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -13,7 +12,6 @@
     determinate,
     nixpkgs,
     stylix,
-    chaotic,
     ...
   }: let
     system = "x86_64-linux";
@@ -26,7 +24,6 @@
         modules = [
           stylix.nixosModules.stylix
           determinate.nixosModules.default
-          chaotic.nixosModules.default
           {networking.hostName = hostname;}
           ./common-configuration.nix
           ./${hostname}/configuration.nix
