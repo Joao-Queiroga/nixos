@@ -157,6 +157,8 @@
     kitty
     unzip
     ventoy-full-gtk
+    gparted
+    exfatprogs
     rose-pine-cursor
   ];
 
