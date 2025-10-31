@@ -160,6 +160,7 @@
     gparted
     exfatprogs
     rose-pine-cursor
+    killall
   ];
 
   services.displayManager = {
