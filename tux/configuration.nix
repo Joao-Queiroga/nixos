@@ -11,6 +11,7 @@
     lsfg-vk
     lsfg-vk-ui
     prismlauncher
+    mangohud
     discord
   ];
 
@@ -27,6 +28,8 @@
     dedicatedServer.openFirewall = true;
     localNetworkGameTransfers.openFirewall = true;
   };
+
+  services.lact.enable = true;
 
   hardware.amdgpu = {
     initrd.enable = true;
