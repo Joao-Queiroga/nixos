@@ -127,6 +127,7 @@
       enable = true;
       enableCompletion = true;
     };
+    chromium.enable = true;
     nix-ld.enable = true;
     hyprland = {
       enable = true;
@@ -205,6 +206,7 @@
     };
     polarity = "dark";
     targets.grub.useWallpaper = false;
+    targets.chromium.enable = false;
   };
 
   system.autoUpgrade = {
