@@ -131,6 +131,7 @@
     hyprland = {
       enable = true;
     };
+    kdeconnect.enable = true;
     niri.enable = true;
     uwsm = {
       enable = true;
