@@ -131,22 +131,14 @@
     nix-ld.enable = true;
     hyprland = {
       enable = true;
+      withUWSM = true;
     };
     kdeconnect.enable = true;
     niri.enable = true;
-    uwsm = {
-      enable = true;
-      waylandCompositors = {
-        hyprland = {
-          prettyName = "Hyprland";
-          comment = "Hyprland compositor managed by UWSM";
-          binPath = "${pkgs.writeShellScriptBin "Hyprland" ''
-            #!/bin/sh
-            exec Hyprland $@
-          ''}/bin/Hyprland";
-        };
-      };
-    };
+    uwsm.waylandCompositors.hyprland.binPath = lib.mkForce "${pkgs.writeShellScriptBin "Hyprland" ''
+      #!/bin/sh
+      exec Hyprland "$@"
+    ''}/bin/Hyprland";
     gamemode.enable = true;
     thunar.enable = true;
     neovim.enable = true;
@@ -166,6 +158,7 @@
     killall
   ];
 
+  # programs.regreet.enable = true;
   services.displayManager = {
     environment = {
       XKB_DEFAULT_LAYOUT = "br";
