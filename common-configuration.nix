@@ -142,7 +142,6 @@
       #!/bin/sh
       exec Hyprland "$@"
     ''}/bin/Hyprland";
-    gamemode.enable = true;
     thunar.enable = true;
     neovim.enable = true;
   };
