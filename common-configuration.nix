@@ -2,10 +2,12 @@
   config,
   lib,
   pkgs,
+  pkgs-stable,
   inputs,
   ...
 }: {
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowBroken = true;
   nixpkgs.config.permittedInsecurePackages = [
     "ventoy-gtk3-1.1.07"
   ];
@@ -19,7 +21,9 @@
     substituters = ["https://hyprland.cachix.org" "https://niri.cachix.org"];
     trusted-substituters = ["https://hyprland.cachix.org" "https://niri.cachix.org"];
     trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="];
+    lazy-trees = true;
   };
+  nix.optimise.automatic = true;
 
   boot = {
     plymouth.enable = true;
@@ -57,14 +61,13 @@
   };
 
   boot = {
-    kernelPackages = pkgs.linuxPackages_zen;
-    zfs.package = pkgs.zfs_unstable;
-    extraModulePackages = with (pkgs.linuxKernel.packagesFor pkgs.linuxPackages_zen.kernel); [
+    kernelPackages = pkgs-stable.linuxPackages_zen;
+    zfs.package = pkgs-stable.zfs_unstable;
+    extraModulePackages = with pkgs-stable.linuxKernel.packages.linux_zen; [
       ddcci-driver
     ];
     kernelModules = [
       "ddcci"
-      "i2c-dev"
     ];
   };
 
@@ -118,8 +121,8 @@
     extraGroups = [
       "wheel"
       "networkmanager"
-    ]; # Enable ‘sudo’ for the user.
-    packages = with pkgs; [tree];
+      "gamemode"
+    ];
   };
 
   programs = {
@@ -147,6 +150,7 @@
   environment.systemPackages = with pkgs; [
     vim
     wget
+    wineWowPackages.waylandFull
     btop
     file
     kitty
@@ -158,13 +162,13 @@
     killall
   ];
 
-  # programs.regreet.enable = true;
   services.displayManager = {
     environment = {
       XKB_DEFAULT_LAYOUT = "br";
     };
+    gdm.enable = true;
     sddm = {
-      enable = true;
+      enable = false; #getting black screens, switching to gdm temporarily
       autoNumlock = true;
       package = pkgs.kdePackages.sddm;
       theme = "${
