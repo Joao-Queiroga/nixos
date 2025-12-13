@@ -14,6 +14,7 @@
     prismlauncher
     mangohud
     discord
+    obs-studio
   ];
 
   programs.gamescope = {
