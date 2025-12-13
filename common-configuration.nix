@@ -2,7 +2,6 @@
   config,
   lib,
   pkgs,
-  pkgs-stable,
   inputs,
   ...
 }: {
@@ -61,9 +60,8 @@
   };
 
   boot = {
-    kernelPackages = pkgs-stable.linuxPackages_zen;
-    zfs.package = pkgs-stable.zfs_unstable;
-    extraModulePackages = with pkgs-stable.linuxKernel.packages.linux_zen; [
+    kernelPackages = pkgs.linuxPackages_lqx;
+    extraModulePackages = with pkgs.linuxKernel.packages.linux_lqx; [
       ddcci-driver
     ];
     kernelModules = [
@@ -92,6 +90,7 @@
 
   services.pipewire = {
     enable = true;
+    alsa.enable = true;
   };
 
   hardware.bluetooth.enable = true;
