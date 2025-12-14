@@ -10,6 +10,8 @@
   environment.systemPackages = with pkgs; [
     lsfg-vk
     lsfg-vk-ui
+    vkbasalt
+    vkbasalt-cli
     cemu
     prismlauncher
     mangohud
