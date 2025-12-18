@@ -159,6 +159,7 @@
     rose-pine-cursor
     killall
   ];
+  environment.binsh = "${pkgs.dash}/bin/dash";
 
   services.displayManager = {
     environment = {
