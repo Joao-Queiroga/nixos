@@ -55,6 +55,13 @@
       };
     };
   };
+
+  services.sunshine = {
+    enable = true;
+    openFirewall = true;
+    autoStart = false;
+  };
+
   # systemd.services."ddcci@" = {
   #   unitConfig = {
   #     Description = "ddcci service for device %i";
