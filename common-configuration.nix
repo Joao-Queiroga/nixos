@@ -68,6 +68,7 @@
     kernelModules = [
       "ddcci"
     ];
+    zfs.package = pkgs.zfs_unstable;
   };
 
   networking.networkmanager.enable = true;
