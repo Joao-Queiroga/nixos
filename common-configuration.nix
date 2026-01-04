@@ -144,7 +144,7 @@
     niri.enable = true;
     uwsm.waylandCompositors.hyprland.binPath = lib.mkForce "${pkgs.writeShellScriptBin "Hyprland" ''
       #!/bin/sh
-      exec Hyprland "$@"
+      exec start-hyprland "$@"
     ''}/bin/Hyprland";
     thunar.enable = true;
     neovim.enable = true;
