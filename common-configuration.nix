@@ -8,7 +8,7 @@
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.allowBroken = true;
   nixpkgs.config.permittedInsecurePackages = [
-    "ventoy-gtk3-1.1.07"
+    "ventoy-gtk3-1.1.10"
   ];
   nix.settings.experimental-features = [
     "nix-command"
@@ -61,8 +61,8 @@
   };
 
   boot = {
-    kernelPackages = pkgs.linuxPackages_lqx;
-    extraModulePackages = with pkgs.linuxKernel.packages.linux_lqx; [
+    kernelPackages = pkgs.linuxPackages_xanmod_latest;
+    extraModulePackages = with config.boot.kernelPackages; [
       ddcci-driver
     ];
     kernelModules = [
