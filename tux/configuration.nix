@@ -19,6 +19,16 @@
     obs-studio
   ];
 
+  boot = {
+    kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest-lto-x86_64-v3;
+    extraModulePackages = with config.boot.kernelPackages; [
+      ddcci-driver
+    ];
+    kernelModules = [
+      "ddcci"
+    ];
+  };
+
   programs.gamescope = {
     enable = true;
     capSysNice = true;

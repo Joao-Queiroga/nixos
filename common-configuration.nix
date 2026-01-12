@@ -10,6 +10,9 @@
   nixpkgs.config.permittedInsecurePackages = [
     "ventoy-gtk3-1.1.10"
   ];
+  nixpkgs.overlays = [
+    inputs.nix-cachyos-kernel.overlays.pinned
+  ];
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
@@ -17,9 +20,9 @@
   nix.settings.use-xdg-base-directories = true;
   nix.settings = {
     trusted-users = ["root" "@wheel"];
-    substituters = ["https://hyprland.cachix.org" "https://niri.cachix.org"];
-    trusted-substituters = ["https://hyprland.cachix.org" "https://niri.cachix.org"];
-    trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="];
+    substituters = ["https://hyprland.cachix.org" "https://niri.cachix.org" "https://attic.xuyh0120.win/lantian"];
+    trusted-substituters = ["https://hyprland.cachix.org" "https://niri.cachix.org" "https://attic.xuyh0120.win/lantian"];
+    trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964=" "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc="];
     lazy-trees = true;
   };
   nix.optimise.automatic = true;
@@ -61,14 +64,8 @@
   };
 
   boot = {
-    kernelPackages = pkgs.linuxPackages_xanmod_latest;
-    extraModulePackages = with config.boot.kernelPackages; [
-      ddcci-driver
-    ];
-    kernelModules = [
-      "ddcci"
-    ];
-    zfs.package = pkgs.zfs_unstable;
+    kernelPackages = lib.mkDefault pkgs.cachyosKernels.linuxPackages-cachyos-latest-lto;
+    zfs.package = config.boot.kernelPackages.zfs_cachyos;
   };
 
   networking.networkmanager.enable = true;
@@ -142,10 +139,14 @@
     };
     kdeconnect.enable = true;
     niri.enable = true;
-    uwsm.waylandCompositors.hyprland.binPath = lib.mkForce "${pkgs.writeShellScriptBin "Hyprland" ''
-      #!/bin/sh
-      exec start-hyprland "$@"
-    ''}/bin/Hyprland";
+    uwsm.waylandCompositors.hyprland = {
+      prettyName = "Hyprland";
+      comment = "Hyprland compositor managed by UWSM";
+      binPath = lib.mkForce "${pkgs.writeShellScriptBin "Hyprland" ''
+        #!/bin/sh
+        exec start-hyprland "$@"
+      ''}/bin/Hyprland";
+    };
     thunar.enable = true;
     neovim.enable = true;
   };
