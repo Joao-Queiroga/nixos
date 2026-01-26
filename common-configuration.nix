@@ -68,7 +68,10 @@
     zfs.package = config.boot.kernelPackages.zfs_cachyos;
   };
 
-  networking.networkmanager.enable = true;
+  networking.networkmanager = {
+    enable = true;
+    wifi.backend = "iwd";
+  };
   networking.firewall.checkReversePath = false;
 
   time.timeZone = "Brazil/East";
