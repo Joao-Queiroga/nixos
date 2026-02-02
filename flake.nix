@@ -1,6 +1,7 @@
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.11";
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
     nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
     stylix = {
@@ -56,12 +57,17 @@
     self,
     determinate,
     nixpkgs,
+    nixpkgs-stable,
     stylix,
     home-manager,
     ...
   }: let
     system = "x86_64-linux";
     pkgs = import nixpkgs {
+      inherit system;
+      config.allowUnfree = true;
+    };
+    pkgs-stable = import nixpkgs-stable {
       inherit system;
       config.allowUnfree = true;
     };
@@ -74,7 +80,7 @@
           ./modules/hosts/common-configuration.nix
           ./modules/hosts/${hostname}/configuration.nix
         ];
-        specialArgs = {inherit inputs;};
+        specialArgs = {inherit inputs pkgs-stable;};
       };
   in {
     nixosConfigurations = {
@@ -89,8 +95,7 @@
       ];
 
       extraSpecialArgs = {
-        inherit inputs;
-        inherit system;
+        inherit inputs pkgs-stable;
       };
     };
   };

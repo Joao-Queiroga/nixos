@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  pkgs-stable,
   inputs,
   lib,
   ...
@@ -26,7 +27,7 @@
 
   xdg.autostart = {
     enable = true;
-    entries = ["${pkgs.protonvpn-gui}/share/applications/proton.vpn.app.gtk.desktop"];
+    entries = ["${pkgs-stable.protonvpn-gui}/share/applications/proton.vpn.app.gtk.desktop"];
   };
   xdg.portal.enable = lib.mkForce false;
 
@@ -56,7 +57,7 @@
     gcc
     w3m
     gnumake
-    protonvpn-gui
+    pkgs-stable.protonvpn-gui
     jq
   ];
 
@@ -111,7 +112,6 @@
         promptToReturnFromSubprocess = false;
       };
     };
-    quickshell.enable = true;
     btop = {
       enable = true;
       settings = {
