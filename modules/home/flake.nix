@@ -1,12 +1,8 @@
 {
+  description = "Home Manager configuration of joaoqueiroga";
+
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
-    nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
-    stylix = {
-      url = "github:nix-community/stylix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     my-neovim.url = "github:/Joao-Queiroga/nvim";
     my-neovim.inputs.nixpkgs.follows = "nixpkgs";
     wrappers.url = "github:birdeehub/nix-wrapper-modules";
@@ -15,10 +11,15 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    stylix = {
+      url = "github:nix-community/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     astal = {
       url = "github:aylur/astal";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -31,6 +32,10 @@
       url = "github:aylur/ags";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.astal.follows = "astal";
+    };
+    niri = {
+      url = "github:sodiboo/niri-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     hyprland.url = "github:hyprwm/Hyprland";
     hyprsplit = {
@@ -52,40 +57,24 @@
       flake = false;
     };
   };
-  outputs = inputs @ {
-    self,
-    determinate,
+
+  outputs = {
     nixpkgs,
-    stylix,
     home-manager,
     ...
-  }: let
+  } @ inputs: let
     system = "x86_64-linux";
     pkgs = import nixpkgs {
       inherit system;
       config.allowUnfree = true;
+      overlays = [inputs.niri.overlays.niri];
     };
-    createConfig = hostname:
-      nixpkgs.lib.nixosSystem {
-        modules = [
-          stylix.nixosModules.stylix
-          determinate.nixosModules.default
-          {networking.hostName = hostname;}
-          ./modules/hosts/common-configuration.nix
-          ./modules/hosts/${hostname}/configuration.nix
-        ];
-        specialArgs = {inherit inputs;};
-      };
   in {
-    nixosConfigurations = {
-      tux = createConfig "tux";
-      tuxnote = createConfig "tuxnote";
-    };
     homeConfigurations."joaoqueiroga" = home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
       modules = [
         inputs.stylix.homeModules.stylix
-        ./modules/home/home.nix
+        ./home.nix
       ];
 
       extraSpecialArgs = {

@@ -141,7 +141,13 @@
       withUWSM = true;
     };
     kdeconnect.enable = true;
-    niri.enable = true;
+    niri = {
+      enable = true;
+      package = import ../wrappers/niri.nix {
+        inherit pkgs inputs config lib;
+      };
+    };
+
     uwsm.waylandCompositors.hyprland = {
       prettyName = "Hyprland";
       comment = "Hyprland compositor managed by UWSM";
