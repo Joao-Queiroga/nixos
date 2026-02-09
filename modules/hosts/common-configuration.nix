@@ -20,9 +20,9 @@
   nix.settings.use-xdg-base-directories = true;
   nix.settings = {
     trusted-users = ["root" "@wheel"];
-    substituters = ["https://hyprland.cachix.org" "https://niri.cachix.org" "https://attic.xuyh0120.win/lantian"];
-    trusted-substituters = ["https://hyprland.cachix.org" "https://niri.cachix.org" "https://attic.xuyh0120.win/lantian"];
-    trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964=" "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc="];
+    substituters = ["https://hyprland.cachix.org" "https://attic.xuyh0120.win/lantian"];
+    trusted-substituters = ["https://hyprland.cachix.org" "https://attic.xuyh0120.win/lantian"];
+    trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc="];
     lazy-trees = true;
   };
   nix.optimise.automatic = true;
@@ -96,6 +96,8 @@
     enable = true;
     alsa.enable = true;
   };
+
+  services.flatpak.enable = true;
 
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
@@ -177,7 +179,7 @@
   environment.binsh = "${pkgs.dash}/bin/dash";
 
   services.displayManager = {
-    environment = {
+    generic.environment = {
       XKB_DEFAULT_LAYOUT = "br";
     };
     sddm = {

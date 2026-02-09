@@ -34,7 +34,10 @@ in
           variable-refresh-rate = {_attrs = {on-demand = false;};};
           focus-at-startup = [];
         };
-        HDMI-A-1.off = [];
+        "LG Electronics LG TV 0x01010101" = {
+          off = [];
+          mode = "1920x1080";
+        };
       };
       layout = {
         gaps = 16;
@@ -141,10 +144,8 @@ in
         "Mod+Ctrl+Down".move-window-down = [];
         "Mod+Ctrl+Up".move-window-up = [];
         "Mod+Ctrl+Right".move-column-right = [];
-        "Mod+Ctrl+H".move-column-left = [];
         "Mod+Ctrl+J".move-workspace-down = [];
         "Mod+Ctrl+K".move-workspace-up = [];
-        "Mod+Ctrl+L".move-column-right = [];
 
         "Mod+Home".focus-column-first = [];
         "Mod+End".focus-column-last = [];
@@ -155,6 +156,8 @@ in
         "Mod+Shift+Down".focus-monitor-down = [];
         "Mod+Shift+Up".focus-monitor-up = [];
         "Mod+Shift+Right".focus-monitor-right = [];
+        "Mod+Ctrl+H".focus-monitor-left = [];
+        "Mod+Ctrl+L".focus-monitor-right = [];
         "Mod+Shift+H".move-column-left = [];
         "Mod+Shift+J".move-column-to-workspace-down = [];
         "Mod+Shift+K".move-column-to-workspace-up = [];
