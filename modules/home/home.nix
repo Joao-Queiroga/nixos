@@ -75,6 +75,7 @@
     ags = {
       enable = true;
       systemd.enable = true;
+      configDir = ./ags;
       extraPackages = with pkgs // inputs.astal.packages.${pkgs.stdenv.hostPlatform.system}; [
         brightnessctl
         app2unit
@@ -82,11 +83,11 @@
         notifd
         battery
         hyprland
-        # niri lib that is still in a PR
-        (inputs.astal-niri.packages.${pkgs.stdenv.hostPlatform.system}.niri.overrideAttrs (old: {nativeBuildInputs = hyprland.nativeBuildInputs;}))
         powerprofiles
         tray
         wireplumber
+        # niri lib that is still in a PR
+        (inputs.astal-niri.packages.${pkgs.stdenv.hostPlatform.system}.niri.overrideAttrs (old: {nativeBuildInputs = hyprland.nativeBuildInputs;}))
       ];
     };
     zathura = {
