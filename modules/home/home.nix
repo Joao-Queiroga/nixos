@@ -5,7 +5,8 @@
   inputs,
   lib,
   ...
-}: {
+}: let
+in {
   imports = [
     inputs.zen-browser.homeModules.beta
     inputs.ags.homeManagerModules.default
@@ -17,7 +18,7 @@
   home.username = "joaoqueiroga";
   home.homeDirectory = "/home/joaoqueiroga";
 
-  home.stateVersion = "25.05";
+  home.stateVersion = "26.05";
 
   home.sessionPath = [
     "${config.home.sessionVariables.CARGO_HOME}/bin"
@@ -32,7 +33,6 @@
   xdg.portal.enable = lib.mkForce false;
 
   home.packages = with pkgs; [
-    inputs.my-neovim.packages.${pkgs.stdenv.hostPlatform.system}.neovim
     nerd-fonts.jetbrains-mono
     app2unit
     yadm
@@ -221,8 +221,10 @@
       };
     };
     targets.kitty.variant256Colors = true;
+    targets.neovim.enable = false;
     targets.zen-browser.enable = false;
   };
+  wrappers.neovim.enable = true;
 
   gtk.enable = true;
   gtk.gtk2.configLocation = "${config.xdg.configHome}/gtk-2.0/gtkrc";

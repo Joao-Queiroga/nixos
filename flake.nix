@@ -74,8 +74,8 @@
     createConfig = hostname:
       nixpkgs.lib.nixosSystem {
         modules = [
-          stylix.nixosModules.stylix
           determinate.nixosModules.default
+          stylix.nixosModules.stylix
           {networking.hostName = hostname;}
           ./modules/hosts/common-configuration.nix
           ./modules/hosts/${hostname}/configuration.nix
@@ -91,6 +91,7 @@
       inherit pkgs;
       modules = [
         inputs.stylix.homeModules.stylix
+        inputs.my-neovim.homeModules.default
         ./modules/home/home.nix
       ];
 
