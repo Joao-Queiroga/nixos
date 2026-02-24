@@ -39,8 +39,8 @@ const TrayItem = ({ item }: { item: AstalTray.TrayItem }) => (
       has_arrow={false}
       $={self => {
         self.insert_action_group("dbusmenu", item.actionGroup);
-        const ag = item.connect("notify::action-group", (ag: Gio.ActionGroup) =>
-          self.insert_action_group("dbusmenu", ag),
+        const ag = item.connect("notify::action-group", (item: AstalTray.TrayItem) =>
+          self.insert_action_group("dbusmenu", item.actionGroup),
         );
         onCleanup(() => item.disconnect(ag));
       }}
