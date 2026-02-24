@@ -35,7 +35,6 @@ in {
   home.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
     app2unit
-    yadm
     dust
     fd
     pfetch
@@ -63,6 +62,7 @@ in {
 
   programs = {
     zen-browser.enable = true;
+    zen-browser.suppressXdgMigrationWarning = true;
     chromium = {
       enable = true;
       package = pkgs.brave;
