@@ -34,13 +34,9 @@
       inputs.astal.follows = "astal";
     };
     hyprland.url = "github:hyprwm/Hyprland";
-    hyprsplit = {
-      url = "github:shezdy/hyprsplit";
-      inputs.hyprland.follows = "hyprland";
-    };
     hyprland-plugins = {
       url = "github:hyprwm/hyprland-plugins";
-      inputs.hyprland.follows = "hyprland";
+      flake = false;
     };
 
     # Yazi plugins

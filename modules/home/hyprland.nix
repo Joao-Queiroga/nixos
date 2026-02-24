@@ -6,11 +6,11 @@
 }: {
   wayland.windowManager.hyprland = {
     enable = true;
-    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-    portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
-    plugins = with inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}; [
-      hyprscrolling
-      inputs.hyprsplit.packages.${pkgs.stdenv.hostPlatform.system}.hyprsplit
+    plugins = with pkgs.hyprlandPlugins; [
+      (hyprscrolling.overrideAttrs {
+        src = "${inputs.hyprland-plugins}/hyprscrolling";
+      })
+      hyprsplit
     ];
     systemd.enable = false;
     settings = {
@@ -22,6 +22,7 @@
       ];
       plugin = {
         hyprscrolling = {
+          column_width = 1;
           fullscreen_on_one_column = true;
           focus_fit_method = 1;
         };
@@ -253,7 +254,6 @@
       background = {
         monitor = "";
         path = "~/.config/.lockscreen.jpg";
-        #color = "rgba(25, 20, 20, 1.0)";
 
         blur_passes = 0;
         blur_size = 7;
