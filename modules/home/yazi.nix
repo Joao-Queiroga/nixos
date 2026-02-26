@@ -109,6 +109,50 @@
         }
       ];
     };
+    theme = {
+      icon.prepend_dirs = [
+        {
+          name = "Área de trabalho";
+          text = "";
+          fg = "#00bcd4";
+        }
+        {
+          name = "Projects";
+          text = "";
+          fg = "#00bcd4";
+        }
+        {
+          name = "Documentos";
+          text = "";
+          fg = "#00bcd4";
+        }
+        {
+          name = "Bilbioteca";
+          text = "";
+          fg = "#00bcd4";
+        }
+        {
+          name = "Músicas";
+          text = "";
+          fg = "#00bcd4";
+        }
+        {
+          name = "Imagens";
+          text = "";
+          fg = "#00bcd4";
+        }
+        {
+          name = "Público";
+          text = "";
+          fg = "#00bcd4";
+        }
+        {
+          name = "Vídeos";
+          text = "";
+          fg = "#00bcd4";
+        }
+      ];
+    };
     initLua = ./yazi.lua;
   };
 }
