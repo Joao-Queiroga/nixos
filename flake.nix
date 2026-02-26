@@ -1,36 +1,36 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.11";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
     nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
     stylix = {
       url = "github:nix-community/stylix";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     my-neovim.url = "github:/Joao-Queiroga/nvim";
-    my-neovim.inputs.nixpkgs.follows = "nixpkgs";
+    my-neovim.inputs.nixpkgs.follows = "nixpkgs-unstable";
     wrappers.url = "github:birdeehub/nix-wrapper-modules";
-    wrappers.inputs.nixpkgs.follows = "nixpkgs";
+    wrappers.inputs.nixpkgs.follows = "nixpkgs-unstable";
     home-manager = {
       url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     astal = {
       url = "github:aylur/astal";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     astal-niri = {
       url = "github:sameoldlab/astal?ref=feat/niri";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     ags = {
       url = "github:aylur/ags";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
       inputs.astal.follows = "astal";
     };
     hyprland.url = "github:hyprwm/Hyprland";
@@ -53,7 +53,7 @@
     self,
     determinate,
     nixpkgs,
-    nixpkgs-stable,
+    nixpkgs-unstable,
     stylix,
     home-manager,
     ...
@@ -63,7 +63,7 @@
       inherit system;
       config.allowUnfree = true;
     };
-    pkgs-stable = import nixpkgs-stable {
+    pkgs-unstable = import nixpkgs-unstable {
       inherit system;
       config.allowUnfree = true;
     };
@@ -76,7 +76,10 @@
           ./modules/hosts/common-configuration.nix
           ./modules/hosts/${hostname}/configuration.nix
         ];
-        specialArgs = {inherit inputs pkgs-stable;};
+        specialArgs = {
+          inherit inputs;
+          inherit pkgs-unstable;
+        };
       };
   in {
     nixosConfigurations = {
@@ -84,7 +87,7 @@
       tuxnote = createConfig "tuxnote";
     };
     homeConfigurations."joaoqueiroga" = home-manager.lib.homeManagerConfiguration {
-      inherit pkgs;
+      pkgs = pkgs-unstable;
       modules = [
         inputs.stylix.homeModules.stylix
         inputs.my-neovim.homeModules.default
@@ -92,7 +95,8 @@
       ];
 
       extraSpecialArgs = {
-        inherit inputs pkgs-stable;
+        inherit inputs;
+        pkgs-stable = pkgs;
       };
     };
   };

@@ -2,12 +2,13 @@
   config,
   lib,
   pkgs,
+  pkgs-unstable,
   inputs,
   ...
 }: {
   imports = [./hardware-configuration.nix];
 
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = with pkgs-unstable; [
     lsfg-vk
     lsfg-vk-ui
     vkbasalt
@@ -38,6 +39,7 @@
 
   programs.steam = {
     enable = true;
+    package = pkgs-unstable.steam;
     remotePlay.openFirewall = true;
     dedicatedServer.openFirewall = true;
     localNetworkGameTransfers.openFirewall = true;

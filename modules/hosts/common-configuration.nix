@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  pkgs-unstable,
   inputs,
   ...
 }: {
@@ -9,6 +10,7 @@
   nixpkgs.config.allowBroken = true;
   nixpkgs.config.permittedInsecurePackages = [
     "ventoy-gtk3-1.1.10"
+    "ventoy-gtk3-1.1.07"
   ];
   nixpkgs.overlays = [
     inputs.nix-cachyos-kernel.overlays.pinned
@@ -179,7 +181,7 @@
   environment.binsh = "${pkgs.dash}/bin/dash";
 
   services.displayManager = {
-    generic.environment = {
+    environment = {
       XKB_DEFAULT_LAYOUT = "br";
     };
     sddm = {
