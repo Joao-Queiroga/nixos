@@ -201,17 +201,7 @@
     export XDG_SESSION_TYPE=wayland
     export XDG_SESSION_DESKTOP=Hyprland
   '';
-  services.hyprpaper = {
-    enable = true;
-    settings = {
-      wallpaper = [
-        {
-          monitor = "";
-          path = "~/.config/.background";
-        }
-      ];
-    };
-  };
+  services.swww.enable = true;
   services.hyprpolkitagent = {
     enable = true;
   };

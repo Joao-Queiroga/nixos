@@ -35,6 +35,7 @@ in {
   home.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
     app2unit
+    waypaper
     dust
     fd
     pfetch
@@ -42,7 +43,6 @@ in {
     git
     p7zip
     filezilla
-    ns-usbloader
     telegram-desktop
     rose-pine-hyprcursor
     ncpamixer
