@@ -6,11 +6,10 @@
 }: {
   wayland.windowManager.hyprland = {
     enable = true;
-    plugins = with pkgs.hyprlandPlugins; [
-      (hyprscrolling.overrideAttrs {
-        src = "${inputs.hyprland-plugins}/hyprscrolling";
-      })
-      hyprsplit
+    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+    portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+    plugins = [
+      inputs.hyprsplit.packages.${pkgs.stdenv.hostPlatform.system}.hyprsplit
     ];
     systemd.enable = false;
     settings = {
@@ -21,11 +20,6 @@
         ", highrr, auto, 1"
       ];
       plugin = {
-        hyprscrolling = {
-          column_width = 1;
-          fullscreen_on_one_column = true;
-          focus_fit_method = 1;
-        };
       };
       input = {
         kb_layout = "br";
@@ -53,6 +47,11 @@
         new_status = "inherit";
         new_on_top = true;
         special_scale_factor = 0.99;
+      };
+      scrolling = {
+        column_width = 1;
+        fullscreen_on_one_column = true;
+        focus_fit_method = 1;
       };
       windowrule = [
         "match:class (brave-browser), workspace 2"
