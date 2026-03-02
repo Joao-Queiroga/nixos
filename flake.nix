@@ -1,7 +1,7 @@
 {
   inputs = {
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+    nixpkgs-unstable.url = "https://flakehub.com/f/NixOS/nixpkgs/0.1";
+    nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0";
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
     nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
     stylix = {
