@@ -10,7 +10,7 @@ const Workspace = ({ id }: { id: number }) => (
     onClicked={() => hypr.dispatch("focusworkspaceoncurrentmonitor", id.toString())}
     $={self => {
       const events = hypr.connect("event", () => {
-        const workspace = hypr.get_workspace(id);
+        const workspace = hypr.get_workspace_by_name(id.toString());
         const active = hypr.get_focused_workspace().get_id() === id;
         const occupied = !!workspace;
         self.cssClasses = [active && "active", occupied && "occupied"].filter(Boolean) as string[];
