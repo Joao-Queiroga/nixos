@@ -1,4 +1,4 @@
-import { createBinding, For, onCleanup } from "ags";
+import { createBinding, createEffect, For, onCleanup } from "ags";
 import { Gdk, Gtk } from "ags/gtk4";
 import AstalTray from "gi://AstalTray";
 import Gio from "gi://Gio?version=2.0";
@@ -35,14 +35,12 @@ const TrayItem = ({ item }: { item: AstalTray.TrayItem }) => (
     <image class="tray-icon" gicon={createBinding(item, "gicon")} />
     <Gtk.PopoverMenu
       flags={Gtk.PopoverMenuFlags.NESTED}
-      menu_model={createBinding(item, "menuModel")}
+      menu_model={item.menu_model}
       has_arrow={false}
       $={self => {
-        self.insert_action_group("dbusmenu", item.actionGroup);
-        const ag = item.connect("notify::action-group", (item: AstalTray.TrayItem) =>
-          self.insert_action_group("dbusmenu", item.actionGroup),
-        );
-        onCleanup(() => item.disconnect(ag));
+        const ag = createBinding(item, "actionGroup");
+        createEffect(() => self.insert_action_group("dbusmenu", ag()));
+        self.insert_action_group("dbusmenu", ag.peek());
       }}
     />
   </menubutton>

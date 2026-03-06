@@ -12,16 +12,14 @@ const Workspace = ({ id }: { id: number }) => (
       const events = hypr.connect("event", () => {
         const workspace = hypr.get_workspace_by_name(id.toString());
         const active = hypr.get_focused_workspace().get_id() === id;
-        const occupied = !!workspace;
-        self.cssClasses = [active && "active", occupied && "occupied"].filter(Boolean) as string[];
-        if (active) {
-          self.remove_css_class("urgent");
+        if (!workspace) {
+          self.css_classes = [];
+          return;
         }
+        self.cssClasses = [active && "active", "occupied"].filter(Boolean) as string[];
       });
-      const urgent = hypr.connect("urgent", (_, client) => client.workspace.id === id && self.add_css_class("urgent"));
       onCleanup(() => {
         hypr.disconnect(events);
-        hypr.disconnect(urgent);
       });
     }}
   >
