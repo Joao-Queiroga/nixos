@@ -87,6 +87,10 @@
   services.udisks2.enable = true;
   services.gvfs.enable = true;
   services.geoclue2.enable = true;
+  services.mullvad-vpn = {
+    enable = true;
+    package = pkgs.mullvad-vpn;
+  };
 
   services.xserver.xkb.layout = "br";
   services.xserver.xkb.options = "numlock:on";

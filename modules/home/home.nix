@@ -26,12 +26,6 @@ in {
     "$HOME/.local/bin"
   ];
 
-  xdg.autostart = {
-    enable = true;
-    entries = ["${pkgs-stable.protonvpn-gui}/share/applications/proton.vpn.app.gtk.desktop"];
-  };
-  xdg.portal.enable = lib.mkForce false;
-
   home.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
     app2unit
