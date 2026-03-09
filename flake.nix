@@ -33,10 +33,9 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
       inputs.astal.follows = "astal";
     };
-    hyprland.url = "github:hyprwm/Hyprland";
     hyprsplit = {
-      url = "github:shezdy/hyprsplit";
-      inputs.hyprland.follows = "hyprland";
+      url = "github:shezdy/hyprsplit?ref=v0.54.1";
+      flake = false;
     };
 
     # Yazi plugins

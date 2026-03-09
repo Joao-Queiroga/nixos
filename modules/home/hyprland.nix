@@ -6,13 +6,17 @@
 }: {
   wayland.windowManager.hyprland = {
     enable = true;
-    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-    portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
-    plugins = [
-      inputs.hyprsplit.packages.${pkgs.stdenv.hostPlatform.system}.hyprsplit
+    plugins = with pkgs.hyprlandPlugins; [
+      (hyprsplit.overrideAttrs {
+        src = inputs.hyprsplit;
+      })
     ];
     systemd.enable = false;
     settings = {
+      exec-once = [
+        "wl-paste --type text --watch ${pkgs.cliphist}/bin/cliphist store"
+        "wl-paste --type image --watch ${pkgs.cliphist}/bin/cliphist store"
+      ];
       monitor = [
         "eDP-1, preferred, auto, 1"
         "DP-1, highrr, auto, 1, bitdepth, 10, cm, auto, sdrbrightness, 1.2, sdrsaturation, 1.1"
@@ -84,6 +88,7 @@
           "$mod_SHIFT, Return, exec, app2unit -- thunar"
           "$mod, B, exec, app2unit -- brave"
           "$mod_SHIFT, B, exec, [workspace special] app2unit -- brave --incognito"
+          "$mod, V, exec, ${pkgs.cliphist}/bin/cliphist list | bemenu | ${pkgs.cliphist}/bin/cliphist decode | wl-copy"
 
           # Reset ags
           "$mod, q, exec, systemctl --user restart ags.service"

@@ -26,6 +26,8 @@ in {
     "$HOME/.local/bin"
   ];
 
+  xdg.portal.enable = lib.mkForce false;
+
   home.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
     app2unit
@@ -56,7 +58,6 @@ in {
 
   programs = {
     zen-browser.enable = true;
-    zen-browser.suppressXdgMigrationWarning = true;
     chromium = {
       enable = true;
       package = pkgs.brave;
