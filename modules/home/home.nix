@@ -5,11 +5,9 @@
   inputs,
   lib,
   ...
-}: let
-in {
+}: {
   imports = [
     inputs.zen-browser.homeModules.beta
-    inputs.ags.homeManagerModules.default
     ./shell.nix
     ./hyprland.nix
     ./dir_colors.nix
@@ -52,8 +50,8 @@ in {
     gcc
     w3m
     gnumake
-    pkgs-stable.protonvpn-gui
     jq
+    inputs.my-neovim.packages.${system}.default
   ];
 
   programs = {
@@ -63,27 +61,16 @@ in {
       package = pkgs.brave;
     };
     bemenu.enable = true;
+    wofi = {
+      enable = true;
+    };
     helix = {
       enable = true;
       package = pkgs.evil-helix;
     };
-    ags = {
+    quickshell = {
       enable = true;
       systemd.enable = true;
-      configDir = ./ags;
-      extraPackages = with pkgs // inputs.astal.packages.${pkgs.stdenv.hostPlatform.system}; [
-        brightnessctl
-        app2unit
-        apps
-        notifd
-        battery
-        hyprland
-        powerprofiles
-        tray
-        wireplumber
-        # niri lib that is still in a PR
-        (inputs.astal-niri.packages.${pkgs.stdenv.hostPlatform.system}.niri.overrideAttrs (old: {nativeBuildInputs = hyprland.nativeBuildInputs;}))
-      ];
     };
     zathura = {
       enable = true;
@@ -136,6 +123,9 @@ in {
     kdeconnect = {
       enable = true;
       indicator = true;
+    };
+    dunst = {
+      enable = true;
     };
     wluma = {
       enable = true;
@@ -216,10 +206,8 @@ in {
       };
     };
     targets.kitty.variant256Colors = true;
-    targets.neovim.enable = false;
     targets.zen-browser.enable = false;
   };
-  wrappers.neovim.enable = true;
 
   gtk.enable = true;
   gtk.gtk2.configLocation = "${config.xdg.configHome}/gtk-2.0/gtkrc";

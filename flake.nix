@@ -20,19 +20,6 @@
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
-    astal = {
-      url = "github:aylur/astal";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
-    astal-niri = {
-      url = "github:sameoldlab/astal?ref=feat/niri";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
-    ags = {
-      url = "github:aylur/ags";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-      inputs.astal.follows = "astal";
-    };
     hyprsplit = {
       url = "github:shezdy/hyprsplit?ref=v0.54.1";
       flake = false;

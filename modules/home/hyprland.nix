@@ -80,7 +80,7 @@
           "$mod_SHIFT, C, killactive, "
           "$mod_SHIFT, Q, exec, loginctl kill-session $XDG_SESSION_ID"
           "$mod, T, togglefloating, "
-          "$mod, R, exec, ags toggle launcher"
+          ''$mod, R, exec, app2unit -- "$(wofi --show drun -I --define=drun-print_desktop_file=true | sed -E "s/(\.desktop) /\1:/")"''
           "$mod, P, exec, app2unit -- $(bemenu-run --binding vim)"
 
           # Launch keybindings
