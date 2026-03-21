@@ -61,15 +61,16 @@
       package = pkgs.brave;
     };
     bemenu.enable = true;
-    wofi = {
-      enable = true;
-    };
     helix = {
       enable = true;
       package = pkgs.evil-helix;
     };
     quickshell = {
       enable = true;
+      activeConfig = "default";
+      configs = {
+        default = ./quickshell;
+      };
       systemd.enable = true;
     };
     zathura = {

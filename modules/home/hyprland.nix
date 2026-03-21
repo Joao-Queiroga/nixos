@@ -80,7 +80,7 @@
           "$mod_SHIFT, C, killactive, "
           "$mod_SHIFT, Q, exec, loginctl kill-session $XDG_SESSION_ID"
           "$mod, T, togglefloating, "
-          ''$mod, R, exec, app2unit -- "$(wofi --show drun -I --define=drun-print_desktop_file=true | sed -E "s/(\.desktop) /\1:/")"''
+          ''$mod, R, exec, app2unit -- qs ipc call launcher toggle''
           "$mod, P, exec, app2unit -- $(bemenu-run --binding vim)"
 
           # Launch keybindings
@@ -91,7 +91,7 @@
           "$mod, V, exec, ${pkgs.cliphist}/bin/cliphist list | bemenu | ${pkgs.cliphist}/bin/cliphist decode | wl-copy"
 
           # Reset ags
-          "$mod, q, exec, systemctl --user restart ags.service"
+          "$mod, q, exec, systemctl --user restart quickshell.service"
 
           # Move focus with mod + arrow keys
           "$mod, left, movefocus, l"
