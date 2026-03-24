@@ -13,11 +13,11 @@ Repeater {
   Rectangle {
     required property int index
     property HyprlandMonitor mon: root.mon
-    property int wid: index + ((mon ? mon.id : 0) * 10) + 1
+    property int wid: index + ((mon ? mon.id : 0) * 9) + 1
     property HyprlandWorkspace ws: Hyprland.workspaces.values.find(w => w.id === wid)
     property bool isActive: mon.activeWorkspace.id === wid
 
-    color: isActive ? Config.purple : (ws ? Config.blue : Config.comment)
+    color: isActive ? Config.purple : ((ws && ws.toplevels.values.length > 0) ? Config.blue : Config.comment)
     implicitWidth: isActive ? 18 : 10
     implicitHeight: 10
     radius: 5

@@ -43,8 +43,7 @@ Item {
     radius: 8
     color: root.ListView.isCurrentItem && root.ListView.view.activeFocus ? Config.bg_highlight : "transparent"
     border.color: root.ListView.isCurrentItem && root.ListView.view.activeFocus ? Config.blue : "transparent"
-    Row {
-      spacing: 8
+    Item {
       anchors.verticalCenter: parent.verticalCenter
       anchors.top: parent.top
       anchors.left: parent.left
@@ -54,6 +53,7 @@ Item {
         id: icon
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: parent.left
+        anchors.leftMargin: 8
         anchors.margins: 5
         implicitSize: 48
         source: Quickshell.iconPath(root.entry.icon, "application-x-executable")

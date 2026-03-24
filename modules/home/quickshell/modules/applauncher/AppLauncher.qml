@@ -28,7 +28,6 @@ Singleton {
 
     PanelWindow {
       id: lwindow
-      screen: Quickshell.screens.values.find(s => s.name === Hyprland.focusedMonitor.name)
       color: "transparent"
       implicitWidth: 500
       implicitHeight: 500

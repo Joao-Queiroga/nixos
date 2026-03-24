@@ -24,6 +24,10 @@
         ", highrr, auto, 1"
       ];
       plugin = {
+        hyprsplit = {
+          num_workspaces = 9;
+          persistent_workspaces = true;
+        };
       };
       input = {
         kb_layout = "br";
