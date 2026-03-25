@@ -96,7 +96,7 @@
       mpv.enable = true;
       nh = {
         enable = true;
-        flake = "${config.home.homeDirectory}/Projects/nixconfig";
+        flake = "${config.home.homeDirectory}/Projects/nixos";
       };
       lazygit = {
         enable = true;

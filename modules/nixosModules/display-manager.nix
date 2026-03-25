@@ -8,6 +8,9 @@
     services.displayManager = {
       generic.environment = {
         XKB_DEFAULT_LAYOUT = "br";
+        XCURSOR_PATH = "${config.stylix.cursor.package}/share/icons:${config.stylix.cursor.package}/share/cursors";
+        XCURSOR_THEME = config.stylix.cursor.name;
+        XCURSOR_SIZE = toString config.stylix.cursor.size;
       };
       sddm = {
         enable = true;

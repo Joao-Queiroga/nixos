@@ -143,7 +143,6 @@
       ventoy-full-gtk
       gparted
       exfatprogs
-      rose-pine-cursor
       killall
     ];
     environment.binsh = "${pkgs.dash}/bin/dash";
