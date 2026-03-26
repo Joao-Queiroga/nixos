@@ -1,5 +1,8 @@
 {inputs, ...}: {
   flake.homeModules.hyprland = {pkgs, ...}: {
+    home.packages = with pkgs; [
+      noctalia-shell
+    ];
     wayland.windowManager.hyprland = {
       enable = true;
       plugins = with pkgs.hyprlandPlugins; [
@@ -12,6 +15,7 @@
         exec-once = [
           "wl-paste --type text --watch ${pkgs.cliphist}/bin/cliphist store"
           "wl-paste --type image --watch ${pkgs.cliphist}/bin/cliphist store"
+          "app2unit -- noctalia-shell"
         ];
         monitor = [
           "eDP-1, preferred, auto, 1"
@@ -80,7 +84,7 @@
             "$mod_SHIFT, C, killactive, "
             "$mod_SHIFT, Q, exec, loginctl kill-session $XDG_SESSION_ID"
             "$mod, T, togglefloating, "
-            ''$mod, R, exec, app2unit -- qs ipc call launcher toggle''
+            ''$mod, R, exec, noctalia-shell ipc call launcher toggle''
             "$mod, P, exec, app2unit -- $(bemenu-run --binding vim)"
 
             # Launch keybindings
@@ -189,8 +193,8 @@
         ];
         bindn = [
           # Notifications
-          "CONTROL, Space, exec, ags request clearLastNotification"
-          "CONTROL SHIFT, Space, exec, ags request clearAllNotifications"
+          "CONTROL, Space, exec, noctalia-shell ipc call notifications dismissOldest"
+          "CONTROL SHIFT, Space, exec, noctalia-shell ipc call notifications dismissAll"
         ];
         bindm = [
           # Move/resize windows with mod + LMB/RMB and dragging

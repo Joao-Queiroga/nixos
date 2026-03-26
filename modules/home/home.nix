@@ -75,14 +75,6 @@
         enable = true;
         package = pkgs.evil-helix;
       };
-      quickshell = {
-        enable = true;
-        activeConfig = "default";
-        configs = {
-          default = ./quickshell;
-        };
-        systemd.enable = true;
-      };
       zathura = {
         enable = true;
         options = {
@@ -134,9 +126,6 @@
       kdeconnect = {
         enable = true;
         indicator = true;
-      };
-      dunst = {
-        enable = true;
       };
       wluma = {
         enable = true;

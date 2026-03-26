@@ -7,7 +7,10 @@
     };
   };
 
-  imports = [inputs.home-manager.flakeModules.home-manager];
+  imports = [
+    inputs.home-manager.flakeModules.home-manager
+    inputs.wrapper-modules.flakeModules.wrappers
+  ];
   config = {
     systems = [
       "aarch64-linux"

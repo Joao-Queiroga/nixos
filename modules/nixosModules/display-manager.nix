@@ -5,6 +5,7 @@
     lib,
     ...
   }: {
+    environment.systemPackages = [config.stylix.cursor.package];
     services.displayManager = {
       generic.environment = {
         XKB_DEFAULT_LAYOUT = "br";
