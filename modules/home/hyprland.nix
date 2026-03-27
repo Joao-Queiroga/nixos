@@ -1,7 +1,10 @@
 {inputs, ...}: {
-  flake.homeModules.hyprland = {pkgs, ...}: {
-    home.packages = with pkgs; [
-      noctalia-shell
+  flake.homeModules.hyprland = {pkgs, ...}: let
+    noctalia = pkgs.noctalia-shell;
+    noctaliabin = "${noctalia}/bin/noctalia-shell";
+  in {
+    home.packages = [
+      noctalia
     ];
     wayland.windowManager.hyprland = {
       enable = true;
@@ -15,7 +18,7 @@
         exec-once = [
           "wl-paste --type text --watch ${pkgs.cliphist}/bin/cliphist store"
           "wl-paste --type image --watch ${pkgs.cliphist}/bin/cliphist store"
-          "app2unit -- noctalia-shell"
+          "app2unit -- ${noctaliabin}"
         ];
         monitor = [
           "eDP-1, preferred, auto, 1"
@@ -84,7 +87,7 @@
             "$mod_SHIFT, C, killactive, "
             "$mod_SHIFT, Q, exec, loginctl kill-session $XDG_SESSION_ID"
             "$mod, T, togglefloating, "
-            ''$mod, R, exec, noctalia-shell ipc call launcher toggle''
+            ''$mod, R, exec, ${noctaliabin} ipc call launcher toggle''
             "$mod, P, exec, app2unit -- $(bemenu-run --binding vim)"
 
             # Launch keybindings
@@ -193,8 +196,8 @@
         ];
         bindn = [
           # Notifications
-          "CONTROL, Space, exec, noctalia-shell ipc call notifications dismissOldest"
-          "CONTROL SHIFT, Space, exec, noctalia-shell ipc call notifications dismissAll"
+          "CONTROL, Space, exec, ${noctaliabin} ipc call notifications dismissOldest"
+          "CONTROL SHIFT, Space, exec, ${noctaliabin} ipc call notifications dismissAll"
         ];
         bindm = [
           # Move/resize windows with mod + LMB/RMB and dragging
@@ -212,64 +215,6 @@
     services.swww.enable = true;
     services.hyprpolkitagent = {
       enable = true;
-    };
-    services.hypridle = {
-      enable = true;
-      systemdTarget = "hyprland-session.target";
-      settings = {
-        general = {
-          lock_cmd = "pidof hyprlock || hyprlock";
-          before_sleep_cmd = "loginctl lock-session";
-          after_sleep_cmd = "hyprctl dispatch dpms on";
-          ignore_dbus_inhibit = false;
-          ignore_systemd_inhibit = false;
-        };
-        listener = [
-          {
-            timeout = 150;
-            on-timeout = "brightnessctl -s set 10";
-            on-resume = "brightnessctl -r";
-          }
-          {
-            timeout = 300;
-            on-timeout = "loginctl lock-session";
-          }
-          {
-            timeout = 330;
-            on-timeout = "hyprctl dispatch dpms off";
-            on-resume = "hyprctl dispatch dpms on";
-          }
-        ];
-      };
-    };
-    programs.hyprlock = {
-      enable = true;
-      settings = {
-        general = {
-          ignore_empty_input = true;
-          text_trim = true;
-        };
-        background = {
-          monitor = "";
-          path = "~/.config/.lockscreen.jpg";
-
-          blur_passes = 0;
-          blur_size = 7;
-          noise = 1.17e-2;
-          contrast = 0.8916;
-          brightness = 0.8172;
-          vibrancy = 0.1696;
-          vibrancy_darkness = 0.0;
-        };
-        input_field = {
-          monitor = "";
-          size = "200, 50";
-          outline_thickness = 2;
-          rounding = -1;
-          fail_text = "<i>$FAIL <b>($ATTEMPTS)</b></i>";
-          position = "0, -20";
-        };
-      };
     };
   };
 }
