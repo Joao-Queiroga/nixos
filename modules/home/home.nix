@@ -17,7 +17,6 @@
   }: {
     imports = [
       inputs.zen-browser.homeModules.beta
-      inputs.stylix.homeModules.stylix
       self.homeModules.dirColors
       self.homeModules.shell
       self.homeModules.hyprland
@@ -61,7 +60,6 @@
       w3m
       gnumake
       jq
-      inputs.my-neovim.packages.${pkgs.stdenv.hostPlatform.system}.default
     ];
 
     programs = {
@@ -178,41 +176,9 @@
 
     home.file = {};
 
-    stylix = {
-      enable = true;
-      enableReleaseChecks = false;
-      base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-terminal-dark.yaml";
-      override = {
-        base05 = "#c0caf5";
-        base09 = "#faba4a";
-        base0B = "#9ece6a";
-      };
-      polarity = "dark";
-      icons = {
-        enable = true;
-        dark = "Papirus-Dark";
-        light = "Papirus-Light";
-        package = pkgs.papirus-icon-theme;
-      };
-      cursor = {
-        name = "BreezeX-RosePine-Linux";
-        package = pkgs.rose-pine-cursor;
-        size = 27;
-      };
-      fonts = {
-        monospace = {
-          name = "JetBrainsMono Nerd Font";
-          package = pkgs.nerd-fonts.jetbrains-mono;
-        };
-      };
-      targets.kitty.variant256Colors = true;
-      targets.zen-browser.enable = false;
-    };
-
     gtk.enable = true;
     gtk.gtk2.configLocation = "${config.xdg.configHome}/gtk-2.0/gtkrc";
     qt.enable = true;
-    qt.platformTheme.name = "gtk3";
 
     xdg.terminal-exec = {
       enable = true;

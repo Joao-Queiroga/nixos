@@ -15,6 +15,7 @@
       self.nixosModules.displayManager
       inputs.determinate.nixosModules.default
       inputs.stylix.nixosModules.stylix
+      self.nixosModules.myHome
     ];
     nixpkgs.config.allowUnfree = true;
     nixpkgs.config.allowBroken = true;
@@ -119,17 +120,9 @@
         withUWSM = true;
       };
       kdeconnect.enable = true;
-
-      uwsm.waylandCompositors.hyprland = {
-        prettyName = "Hyprland";
-        comment = "Hyprland compositor managed by UWSM";
-        binPath = lib.mkForce "${pkgs.writeShellScriptBin "Hyprland" ''
-          #!/bin/sh
-          exec start-hyprland "$@"
-        ''}/bin/Hyprland";
-      };
       thunar.enable = true;
       neovim.enable = true;
+      neovim.package = inputs.my-neovim.packages.${pkgs.stdenv.hostPlatform.system}.default;
     };
 
     environment.systemPackages = with pkgs; [
@@ -149,16 +142,23 @@
 
     stylix = {
       enable = true;
-      base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-terminal-dark.yaml";
-      override = {
-        base05 = "#c0caf5";
-        base09 = "#faba4a";
-        base0B = "#9ece6a";
-      };
+      base16Scheme = self.theme;
       cursor = {
         name = "BreezeX-RosePine-Linux";
         package = pkgs.rose-pine-cursor;
         size = 27;
+      };
+      icons = {
+        enable = true;
+        dark = "Papirus-Dark";
+        light = "Papirus-Light";
+        package = pkgs.papirus-icon-theme;
+      };
+      fonts = {
+        monospace = {
+          name = "JetBrainsMono Nerd Font";
+          package = pkgs.nerd-fonts.jetbrains-mono;
+        };
       };
       polarity = "dark";
       targets.grub.useWallpaper = false;

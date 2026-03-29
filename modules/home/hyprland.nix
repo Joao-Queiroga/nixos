@@ -13,12 +13,12 @@
           src = inputs.hyprsplit;
         })
       ];
+      package = null;
+      portalPackage = null;
       systemd.enable = false;
       settings = {
         exec-once = [
-          "wl-paste --type text --watch ${pkgs.cliphist}/bin/cliphist store"
-          "wl-paste --type image --watch ${pkgs.cliphist}/bin/cliphist store"
-          "app2unit -- ${noctaliabin}"
+          "${noctaliabin}"
         ];
         monitor = [
           "eDP-1, preferred, auto, 1"
@@ -95,10 +95,10 @@
             "$mod_SHIFT, Return, exec, app2unit -- thunar"
             "$mod, B, exec, app2unit -- brave"
             "$mod_SHIFT, B, exec, [workspace special] app2unit -- brave --incognito"
-            "$mod, V, exec, ${pkgs.cliphist}/bin/cliphist list | bemenu | ${pkgs.cliphist}/bin/cliphist decode | wl-copy"
+            "$mod, V, exec, ${noctaliabin} ipc call launcher clipboard"
 
             # Reset ags
-            "$mod, q, exec, systemctl --user restart quickshell.service"
+            # "$mod, q, exec, systemctl --user restart quickshell.service"
 
             # Move focus with mod + arrow keys
             "$mod, left, movefocus, l"
@@ -149,10 +149,10 @@
             "$mod CONTROL, o,exec, hyprctl dispatch dpms on"
 
             # Multimedia Keys
-            ", XF86AudioPlay, exec, playerctl play-pause"
-            ", XF86AudioNext, exec, playerctl next"
-            ", XF86AudioPrev, exec, playerctl previous"
-            ", XF86audiostop, exec, playerctl stop"
+            ", XF86AudioPlay, exec, ${pkgs.playerctl}/bin/playerctl play-pause"
+            ", XF86AudioNext, exec, ${pkgs.playerctl}/bin/playerctl next"
+            ", XF86AudioPrev, exec, ${pkgs.playerctl}/bin/playerctl previous"
+            ", XF86audiostop, exec, ${pkgs.playerctl}/bin/playerctl stop"
           ]
           ++ (builtins.concatLists (builtins.genList (i: let
               ws = i + 1;
@@ -190,8 +190,8 @@
           "SHIFT, print, exec, grimblast save area"
 
           # OBS vars
-          "SUPER, F10, pass, ^(com.obsproject.Studio)$"
-          "SUPER, F11, pass, ^(com.obsproject.Studio)$"
+          "CONTROL, F10, pass, ^(com.obsproject.Studio)$"
+          "CONTROL, F11, pass, ^(com.obsproject.Studio)$"
           ", PAUSE, pass, ^(com.obsproject.Studio)$"
         ];
         bindn = [
