@@ -20,7 +20,6 @@
       self.homeModules.dirColors
       self.homeModules.shell
       self.homeModules.hyprland
-      self.homeModules.yazi
     ];
     home.username = "joaoqueiroga";
     home.homeDirectory = "/home/joaoqueiroga";

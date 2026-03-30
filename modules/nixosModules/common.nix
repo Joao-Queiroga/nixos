@@ -137,6 +137,7 @@
       gparted
       exfatprogs
       killall
+      self.packages.${pkgs.stdenv.hostPlatform.system}.yazi
     ];
     environment.binsh = "${pkgs.dash}/bin/dash";
 

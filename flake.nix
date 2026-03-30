@@ -1,6 +1,10 @@
 {
   description = "My flake";
 
+  outputs = inputs:
+    inputs.flake-parts.lib.mkFlake {inherit inputs;}
+    (inputs.import-tree ./modules);
+
   inputs = {
     nixpkgs.url = "github:Nixos/nixpkgs/nixos-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
@@ -39,8 +43,4 @@
       flake = false;
     };
   };
-
-  outputs = inputs:
-    inputs.flake-parts.lib.mkFlake {inherit inputs;}
-    (inputs.import-tree ./modules);
 }
