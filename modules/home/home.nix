@@ -48,7 +48,7 @@
       telegram-desktop
       rose-pine-hyprcursor
       ncpamixer
-      nodePackages.nodejs
+      nodejs
       rustup
       go
       brightnessctl
