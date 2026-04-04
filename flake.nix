@@ -42,5 +42,10 @@
       url = "github:boydaihungst/gvfs.yazi";
       flake = false;
     };
+
+    qylock = {
+      url = "github:Darkkal44/qylock";
+      flake = false;
+    };
   };
 }

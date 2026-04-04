@@ -1,4 +1,8 @@
-{inputs, ...}: {
+{
+  inputs,
+  self,
+  ...
+}: {
   flake.nixosModules.displayManager = {
     pkgs,
     config,
@@ -16,14 +20,10 @@
       sddm = {
         enable = true;
         autoNumlock = true;
-        theme = "${
-          (pkgs.sddm-astronaut.override {embeddedTheme = "black_hole";})
-        }/share/sddm/themes/sddm-astronaut-theme/";
+        theme = "${self.packages.${pkgs.stdenv.hostPlatform.system}.qylock}/share/sddm/themes/pixel-hollowknight";
         wayland.enable = true;
-        extraPackages = with pkgs.kdePackages; [
-          qtmultimedia
-          qtsvg
-          qtvirtualkeyboard
+        extraPackages = with pkgs; [
+          self.packages.${pkgs.stdenv.hostPlatform.system}.qylock
         ];
         settings = {
           Theme = {

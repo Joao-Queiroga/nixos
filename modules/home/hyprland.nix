@@ -16,9 +16,7 @@
     wayland.windowManager.hyprland = {
       enable = true;
       plugins = with pkgs.hyprlandPlugins; [
-        (hyprsplit.overrideAttrs {
-          src = inputs.hyprsplit;
-        })
+        hyprsplit
       ];
       package = null;
       portalPackage = null;
