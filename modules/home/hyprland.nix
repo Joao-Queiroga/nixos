@@ -1,10 +1,17 @@
-{inputs, ...}: {
-  flake.homeModules.hyprland = {pkgs, ...}: let
-    noctalia = pkgs.noctalia-shell;
-    noctaliabin = "${noctalia}/bin/noctalia-shell";
+{
+  inputs,
+  self,
+  ...
+}: {
+  flake.homeModules.hyprland = {
+    pkgs,
+    lib,
+    ...
+  }: let
+    noctalia = lib.getExe self.packages.${pkgs.stdenv.hostPlatform.system}.noctalia-shell;
   in {
     home.packages = [
-      noctalia
+      self.packages.${pkgs.stdenv.hostPlatform.system}.noctalia-shell
     ];
     wayland.windowManager.hyprland = {
       enable = true;
@@ -18,7 +25,7 @@
       systemd.enable = false;
       settings = {
         exec-once = [
-          "${noctaliabin}"
+          "${noctalia}"
         ];
         monitor = [
           "eDP-1, preferred, auto, 1"
@@ -87,7 +94,7 @@
             "$mod_SHIFT, C, killactive, "
             "$mod_SHIFT, Q, exec, loginctl kill-session $XDG_SESSION_ID"
             "$mod, T, togglefloating, "
-            ''$mod, R, exec, ${noctaliabin} ipc call launcher toggle''
+            ''$mod, R, exec, ${noctalia} ipc call launcher toggle''
             "$mod, P, exec, app2unit -- $(bemenu-run --binding vim)"
 
             # Launch keybindings
@@ -95,7 +102,7 @@
             "$mod_SHIFT, Return, exec, app2unit -- thunar"
             "$mod, B, exec, app2unit -- brave"
             "$mod_SHIFT, B, exec, [workspace special] app2unit -- brave --incognito"
-            "$mod, V, exec, ${noctaliabin} ipc call launcher clipboard"
+            "$mod, V, exec, ${noctalia} ipc call launcher clipboard"
 
             # Reset ags
             # "$mod, q, exec, systemctl --user restart quickshell.service"
@@ -196,8 +203,8 @@
         ];
         bindn = [
           # Notifications
-          "CONTROL, Space, exec, ${noctaliabin} ipc call notifications dismissOldest"
-          "CONTROL SHIFT, Space, exec, ${noctaliabin} ipc call notifications dismissAll"
+          "CONTROL, Space, exec, ${noctalia} ipc call notifications dismissOldest"
+          "CONTROL SHIFT, Space, exec, ${noctalia} ipc call notifications dismissAll"
         ];
         bindm = [
           # Move/resize windows with mod + LMB/RMB and dragging
@@ -212,7 +219,6 @@
       export XDG_SESSION_TYPE=wayland
       export XDG_SESSION_DESKTOP=Hyprland
     '';
-    services.swww.enable = true;
     services.hyprpolkitagent = {
       enable = true;
     };

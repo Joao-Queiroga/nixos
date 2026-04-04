@@ -20,34 +20,36 @@
     config,
     lib,
     ...
-  }: {
+  }: let
+    noctalia = lib.getExe self.packages.${pkgs.stdenv.hostPlatform.system}.noctalia-shell;
+  in {
     imports = [wlib.wrapperModules.niri];
     settings = {
       xwayland-satellite.path = lib.getExe pkgs.xwayland-satellite;
-      spawn-at-startup = ["noctalia-shell"];
+      spawn-at-startup = ["${noctalia}"];
       input = {
         keyboard = {
           xkb = {
             layout = "br";
           };
-          numlock = [];
+          numlock = _: {};
         };
-        touchpad = {tap = [];};
-        focus-follows-mouse = {
-          _attrs = {
+        touchpad = {tap = _: {};};
+        focus-follows-mouse = _: {
+          props = {
             max-scroll-amount = "0%";
           };
         };
       };
-      prefer-no-csd = [];
+      prefer-no-csd = _: {};
       outputs = {
         DP-1 = {
           mode = "1920x1080";
-          variable-refresh-rate = {_attrs = {on-demand = false;};};
-          focus-at-startup = [];
+          variable-refresh-rate = _: {props = {on-demand = false;};};
+          focus-at-startup = _: {};
         };
         "LG Electronics LG TV 0x01010101" = {
-          off = [];
+          off = _: {};
           mode = "1920x1080";
         };
       };
@@ -59,7 +61,7 @@
           top = 0;
           bottom = 0;
         };
-        focus-ring = {off = [];};
+        focus-ring = {off = _: {};};
         border = {
           width = 1;
           active-color = self.theme.base0D;
@@ -81,32 +83,32 @@
       binds = {
         "Mod+Shift+Slash".show-hotkey-overlay = {};
 
-        "Mod+Return" = {
-          _attrs = {hotkey-overlay-title = "Open a Terminal: Kitty";};
-          spawn = ["kitty" "-1"];
+        "Mod+Return" = _: {
+          props = {hotkey-overlay-title = "Open a Terminal: Kitty";};
+          content.spawn = ["kitty" "-1"];
         };
-        "Ctrl+Shift+Escape" = {
-          _attrs = {hotkey-overlay-title = "Open a Terminal: Kitty";};
-          spawn = ["kitty" "-1" "btop"];
+        "Ctrl+Shift+Escape" = _: {
+          props = {hotkey-overlay-title = "Open a Terminal: Kitty";};
+          content.spawn = ["kitty" "-1" "btop"];
         };
-        "Mod+Shift+Return" = {
-          _attrs = {hotkey-overlay-title = "Open a File Manager";};
-          spawn = ["thunar"];
-        };
-
-        "Mod+R" = {
-          _attrs = {hotkey-overlay-title = "Run an Application: noctalia-shell";};
-          spawn = ["noctalia-shell" "ipc" "call" "launcher" "toggle"];
+        "Mod+Shift+Return" = _: {
+          props = {hotkey-overlay-title = "Open a File Manager";};
+          content.spawn = ["thunar"];
         };
 
-        "Mod+P" = {
-          _attrs = {hotkey-overlay-title = "Run an Command: bemenu";};
-          spawn = ["bemenu-run"];
+        "Mod+R" = _: {
+          props = {hotkey-overlay-title = "Run an Application: ${noctalia}";};
+          content.spawn = ["${noctalia}" "ipc" "call" "launcher" "toggle"];
         };
 
-        "Mod+B" = {
-          _attrs = {hotkey-overlay-title = "Open Browser";};
-          spawn = ["brave"];
+        "Mod+P" = _: {
+          props = {hotkey-overlay-title = "Run an Command: bemenu";};
+          content.spawn = ["bemenu-run"];
+        };
+
+        "Mod+B" = _: {
+          props = {hotkey-overlay-title = "Open Browser";};
+          content.spawn = ["brave"];
         };
 
         "XF86AudioRaiseVolume".spawn-sh = ["wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+"];
@@ -117,103 +119,103 @@
         "XF86MonBrightnessUp".spawn = ["brightnessctl" "--class=backlight" "set" "+10%"];
         "XF86MonBrightnessDown".spawn = ["brightnessctl" "--class=backlight" "set" "10%-"];
 
-        "Ctrl+Space".spawn = ["noctalia-shell" "ipc" "call" "notifications" "dismissOldest"];
-        "Ctrl+Shift+Space".spawn = ["noctalia-shell" "ipc" "call" "notifications" "dismissAll"];
+        "Ctrl+Space".spawn = ["${noctalia}" "ipc" "call" "notifications" "dismissOldest"];
+        "Ctrl+Shift+Space".spawn = ["${noctalia}" "ipc" "call" "notifications" "dismissAll"];
 
-        "Mod+O" = {
-          _attrs = {repeat = false;};
-          toggle-overview = [];
+        "Mod+O" = _: {
+          props = {repeat = false;};
+          content.toggle-overview = _: {};
         };
 
-        "Mod+Shift+C" = {
-          _attrs = {repeat = false;};
-          close-window = [];
+        "Mod+Shift+C" = _: {
+          props = {repeat = false;};
+          content.close-window = _: {};
         };
 
-        "Mod+Left".focus-column-left = [];
-        "Mod+Down".focus-window-down = [];
-        "Mod+Up".focus-window-up = [];
-        "Mod+Right".focus-column-right = [];
-        "Mod+H".focus-column-left = [];
-        "Mod+J".focus-workspace-down = [];
-        "Mod+K".focus-workspace-up = [];
-        "Mod+L".focus-column-right = [];
+        "Mod+Left".focus-column-left = _: {};
+        "Mod+Down".focus-window-down = _: {};
+        "Mod+Up".focus-window-up = _: {};
+        "Mod+Right".focus-column-right = _: {};
+        "Mod+H".focus-column-left = _: {};
+        "Mod+J".focus-workspace-down = _: {};
+        "Mod+K".focus-workspace-up = _: {};
+        "Mod+L".focus-column-right = _: {};
 
-        "Mod+Ctrl+Left".move-column-left = [];
-        "Mod+Ctrl+Down".move-window-down = [];
-        "Mod+Ctrl+Up".move-window-up = [];
-        "Mod+Ctrl+Right".move-column-right = [];
-        "Mod+Ctrl+J".move-workspace-down = [];
-        "Mod+Ctrl+K".move-workspace-up = [];
+        "Mod+Ctrl+Left".move-column-left = _: {};
+        "Mod+Ctrl+Down".move-window-down = _: {};
+        "Mod+Ctrl+Up".move-window-up = _: {};
+        "Mod+Ctrl+Right".move-column-right = _: {};
+        "Mod+Ctrl+J".move-workspace-down = _: {};
+        "Mod+Ctrl+K".move-workspace-up = _: {};
 
-        "Mod+Home".focus-column-first = [];
-        "Mod+End".focus-column-last = [];
-        "Mod+Ctrl+Home".move-column-to-first = [];
-        "Mod+Ctrl+End".move-column-to-last = [];
+        "Mod+Home".focus-column-first = _: {};
+        "Mod+End".focus-column-last = _: {};
+        "Mod+Ctrl+Home".move-column-to-first = _: {};
+        "Mod+Ctrl+End".move-column-to-last = _: {};
 
-        "Mod+Shift+Left".focus-monitor-left = [];
-        "Mod+Shift+Down".focus-monitor-down = [];
-        "Mod+Shift+Up".focus-monitor-up = [];
-        "Mod+Shift+Right".focus-monitor-right = [];
-        "Mod+Ctrl+H".focus-monitor-left = [];
-        "Mod+Ctrl+L".focus-monitor-right = [];
-        "Mod+Shift+H".move-column-left = [];
-        "Mod+Shift+J".move-column-to-workspace-down = [];
-        "Mod+Shift+K".move-column-to-workspace-up = [];
-        "Mod+Shift+L".move-column-right = [];
+        "Mod+Shift+Left".focus-monitor-left = _: {};
+        "Mod+Shift+Down".focus-monitor-down = _: {};
+        "Mod+Shift+Up".focus-monitor-up = _: {};
+        "Mod+Shift+Right".focus-monitor-right = _: {};
+        "Mod+Ctrl+H".focus-monitor-left = _: {};
+        "Mod+Ctrl+L".focus-monitor-right = _: {};
+        "Mod+Shift+H".move-column-left = _: {};
+        "Mod+Shift+J".move-column-to-workspace-down = _: {};
+        "Mod+Shift+K".move-column-to-workspace-up = _: {};
+        "Mod+Shift+L".move-column-right = _: {};
 
-        "Mod+Shift+Ctrl+Left".move-column-to-monitor-left = [];
-        "Mod+Shift+Ctrl+Down".move-column-to-monitor-down = [];
-        "Mod+Shift+Ctrl+Up".move-column-to-monitor-up = [];
-        "Mod+Shift+Ctrl+Right".move-column-to-monitor-right = [];
-        "Mod+Shift+Ctrl+H".move-column-to-monitor-left = [];
-        "Mod+Shift+Ctrl+J".move-column-to-monitor-down = [];
-        "Mod+Shift+Ctrl+K".move-column-to-monitor-up = [];
-        "Mod+Shift+Ctrl+L".move-column-to-monitor-right = [];
+        "Mod+Shift+Ctrl+Left".move-column-to-monitor-left = _: {};
+        "Mod+Shift+Ctrl+Down".move-column-to-monitor-down = _: {};
+        "Mod+Shift+Ctrl+Up".move-column-to-monitor-up = _: {};
+        "Mod+Shift+Ctrl+Right".move-column-to-monitor-right = _: {};
+        "Mod+Shift+Ctrl+H".move-column-to-monitor-left = _: {};
+        "Mod+Shift+Ctrl+J".move-column-to-monitor-down = _: {};
+        "Mod+Shift+Ctrl+K".move-column-to-monitor-up = _: {};
+        "Mod+Shift+Ctrl+L".move-column-to-monitor-right = _: {};
 
-        "Mod+Page_Down".focus-workspace-down = [];
-        "Mod+Page_Up".focus-workspace-up = [];
-        "Mod+U".focus-workspace-down = [];
-        "Mod+I".focus-workspace-up = [];
-        "Mod+Ctrl+Page_Down".move-column-to-workspace-down = [];
-        "Mod+Ctrl+Page_Up".move-column-to-workspace-up = [];
-        "Mod+Ctrl+U".move-column-to-workspace-down = [];
-        "Mod+Ctrl+I".move-column-to-workspace-up = [];
+        "Mod+Page_Down".focus-workspace-down = _: {};
+        "Mod+Page_Up".focus-workspace-up = _: {};
+        "Mod+U".focus-workspace-down = _: {};
+        "Mod+I".focus-workspace-up = _: {};
+        "Mod+Ctrl+Page_Down".move-column-to-workspace-down = _: {};
+        "Mod+Ctrl+Page_Up".move-column-to-workspace-up = _: {};
+        "Mod+Ctrl+U".move-column-to-workspace-down = _: {};
+        "Mod+Ctrl+I".move-column-to-workspace-up = _: {};
 
-        "Mod+Shift+Page_Down".move-workspace-down = [];
-        "Mod+Shift+Page_Up".move-workspace-up = [];
-        "Mod+Shift+U".move-workspace-down = [];
-        "Mod+Shift+I".move-workspace-up = [];
+        "Mod+Shift+Page_Down".move-workspace-down = _: {};
+        "Mod+Shift+Page_Up".move-workspace-up = _: {};
+        "Mod+Shift+U".move-workspace-down = _: {};
+        "Mod+Shift+I".move-workspace-up = _: {};
 
-        "Mod+WheelScrollDown" = {
-          _attrs = {cooldown-ms = 150;};
-          focus-workspace-down = [];
+        "Mod+WheelScrollDown" = _: {
+          props = {cooldown-ms = 150;};
+          content.focus-workspace-down = _: {};
         };
 
-        "Mod+WheelScrollUp" = {
-          _attrs = {cooldown-ms = 150;};
-          focus-workspace-up = [];
+        "Mod+WheelScrollUp" = _: {
+          props = {cooldown-ms = 150;};
+          content.focus-workspace-up = _: {};
         };
 
-        "Mod+Ctrl+WheelScrollDown" = {
-          _attrs = {cooldown-ms = 150;};
-          move-column-to-workspace-down = [];
+        "Mod+Ctrl+WheelScrollDown" = _: {
+          props = {cooldown-ms = 150;};
+          content.move-column-to-workspace-down = _: {};
         };
 
-        "Mod+Ctrl+WheelScrollUp" = {
-          _attrs = {cooldown-ms = 150;};
-          move-column-to-workspace-up = [];
+        "Mod+Ctrl+WheelScrollUp" = _: {
+          props = {cooldown-ms = 150;};
+          content.move-column-to-workspace-up = _: {};
         };
 
-        "Mod+WheelScrollRight".focus-column-right = [];
-        "Mod+WheelScrollLeft".focus-column-left = [];
-        "Mod+Ctrl+WheelScrollRight".move-column-right = [];
-        "Mod+Ctrl+WheelScrollLeft".move-column-left = [];
+        "Mod+WheelScrollRight".focus-column-right = _: {};
+        "Mod+WheelScrollLeft".focus-column-left = _: {};
+        "Mod+Ctrl+WheelScrollRight".move-column-right = _: {};
+        "Mod+Ctrl+WheelScrollLeft".move-column-left = _: {};
 
-        "Mod+Shift+WheelScrollDown".focus-column-right = [];
-        "Mod+Shift+WheelScrollUp".focus-column-left = [];
-        "Mod+Ctrl+Shift+WheelScrollDown".move-column-right = [];
-        "Mod+Ctrl+Shift+WheelScrollUp".move-column-left = [];
+        "Mod+Shift+WheelScrollDown".focus-column-right = _: {};
+        "Mod+Shift+WheelScrollUp".focus-column-left = _: {};
+        "Mod+Ctrl+Shift+WheelScrollDown".move-column-right = _: {};
+        "Mod+Ctrl+Shift+WheelScrollUp".move-column-left = _: {};
 
         "Mod+1".focus-workspace = 1;
         "Mod+2".focus-workspace = 2;
@@ -235,22 +237,22 @@
         "Mod+Ctrl+8".move-column-to-workspace = 8;
         "Mod+Ctrl+9".move-column-to-workspace = 9;
 
-        "Mod+BracketLeft".consume-or-expel-window-left = [];
-        "Mod+BracketRight".consume-or-expel-window-right = [];
+        "Mod+BracketLeft".consume-or-expel-window-left = _: {};
+        "Mod+BracketRight".consume-or-expel-window-right = _: {};
 
-        "Mod+Comma".consume-window-into-column = [];
-        "Mod+Period".expel-window-from-column = [];
+        "Mod+Comma".consume-window-into-column = _: {};
+        "Mod+Period".expel-window-from-column = _: {};
 
-        "Mod+S".switch-preset-column-width = [];
-        "Mod+Shift+S".switch-preset-window-height = [];
-        "Mod+Ctrl+S".reset-window-height = [];
-        "Mod+F".maximize-column = [];
-        "Mod+Shift+F".fullscreen-window = [];
+        "Mod+S".switch-preset-column-width = _: {};
+        "Mod+Shift+S".switch-preset-window-height = _: {};
+        "Mod+Ctrl+S".reset-window-height = _: {};
+        "Mod+F".maximize-column = _: {};
+        "Mod+Shift+F".fullscreen-window = _: {};
 
-        "Mod+Ctrl+F".expand-column-to-available-width = [];
+        "Mod+Ctrl+F".expand-column-to-available-width = _: {};
 
-        "Mod+C".center-column = [];
-        "Mod+Ctrl+C".center-visible-columns = [];
+        "Mod+C".center-column = _: {};
+        "Mod+Ctrl+C".center-visible-columns = _: {};
 
         "Mod+Minus".set-column-width = "-10%";
         "Mod+Equal".set-column-width = "+10%";
@@ -258,22 +260,22 @@
         "Mod+Shift+Minus".set-window-height = "-10%";
         "Mod+Shift+Equal".set-window-height = "+10%";
 
-        "Mod+V".toggle-window-floating = [];
-        "Mod+Shift+V".switch-focus-between-floating-and-tiling = [];
+        "Mod+V".toggle-window-floating = _: {};
+        "Mod+Shift+V".switch-focus-between-floating-and-tiling = _: {};
 
-        "Print".screenshot = [];
-        "Ctrl+Print".screenshot-screen = [];
-        "Alt+Print".screenshot-window = [];
+        "Print".screenshot = _: {};
+        "Ctrl+Print".screenshot-screen = _: {};
+        "Alt+Print".screenshot-window = _: {};
 
-        "Mod+Escape" = {
-          _attrs = {allow-inhibiting = false;};
-          toggle-keyboard-shortcuts-inhibit = [];
+        "Mod+Escape" = _: {
+          props = {allow-inhibiting = false;};
+          content.toggle-keyboard-shortcuts-inhibit = _: {};
         };
 
-        "Mod+Shift+Q".quit._attrs.skip-confirmation = true;
-        "Ctrl+Alt+Delete".quit = [];
+        "Mod+Shift+Q".quit = _: {props.skip-confirmation = true;};
+        "Ctrl+Alt+Delete".quit = _: {};
 
-        "Mod+Shift+P".power-off-monitors = [];
+        "Mod+Shift+P".power-off-monitors = _: {};
       };
     };
   };
