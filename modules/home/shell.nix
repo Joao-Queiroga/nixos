@@ -17,20 +17,57 @@
       enable = true;
       functions = {
         fish_greeting.body = "${pkgs.pfetch-rs}/bin/pfetch";
+        starship_transient_prompt_func.body = "starship module character";
       };
-      shellInitLast =
+      binds = {
+        up = {
+          command = "_atuin_bind_up";
+          mode = "default";
+        };
+        up-insert = {
+          name = "up";
+          command = "_atuin_bind_up";
+          mode = "insert";
+        };
+        ctrl-k = {
+          command = "_atuin_bind_up";
+          mode = "default";
+        };
+        ctrl-k-insert = {
+          name = "ctrl-k";
+          command = "_atuin_bind_up";
+          mode = "insert";
+        };
+        enter = {
+          command = [
+            "expand-abbr"
+            "execute"
+          ];
+          mode = "default";
+        };
+        enter-insert = {
+          name = "enter";
+          command = [
+            "expand-abbr"
+            "execute"
+          ];
+          mode = "insert";
+        };
+        "\\t" = {
+          command = [
+            "expand-abbr"
+            "complete"
+          ];
+          mode = "insert";
+        };
+      };
+      interactiveShellInit =
         /*
         fish
         */
         ''
           set -U fish_color_command cyan
           fish_vi_key_bindings
-          bind -M insert up _atuin_bind_up
-          bind -M default up _atuin_bind_up
-          bind -M insert ctrl-k _atuin_bind_up
-          bind -M default ctrl-k _atuin_bind_up
-          bind -M insert enter expand-abbr execute
-          bind -M default enter expand-abbr execute
         '';
       plugins = with pkgs.fishPlugins; [
         {
@@ -43,7 +80,6 @@
         }
       ];
     };
-    programs.bash.enable = true;
     programs.zsh = {
       enable = true;
       autocd = true;
@@ -90,6 +126,7 @@
       };
       starship = {
         enable = true;
+        enableTransience = true;
         settings = {
           add_newline = false;
           character = {
