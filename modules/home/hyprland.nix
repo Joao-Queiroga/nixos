@@ -23,7 +23,7 @@
       systemd.enable = false;
       settings = {
         exec-once = [
-          "${noctalia}"
+          "app2unit -- ${noctalia}"
         ];
         monitor = [
           "eDP-1, preferred, auto, 1"
@@ -217,6 +217,7 @@
       export XDG_SESSION_TYPE=wayland
       export XDG_SESSION_DESKTOP=Hyprland
     '';
+    services.awww.enable = true;
     services.hyprpolkitagent = {
       enable = true;
     };

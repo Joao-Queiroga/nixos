@@ -6,6 +6,7 @@
   flake.wrappers.noctalia-shell = {
     pkgs,
     wlib,
+    lib,
     ...
   }: {
     imports = [wlib.wrapperModules.noctalia-shell];
@@ -16,8 +17,11 @@
       appLauncher = {
         iconMode = "native";
         terminalCommand = "kitty -1 -e";
+        customLaunchPrefix = lib.getExe pkgs.runapp;
         showCategories = false;
         overviewLayer = true;
+        enableClipboardHistory = true;
+        enableClipboardChips = true;
       };
       bar = {
         density = "comfortable";
@@ -103,9 +107,11 @@
         useWallpaperColors = false;
       };
       wallpaper = {
-        DP-1 = ".config/.background";
-        eDP-1 = ".config/.background";
-        HDMI-A-1 = ".config/.background";
+        enabled = false;
+      };
+      hooks = {
+        enabled = true;
+        startup = "pkill mullvad-gui && mullvad-gui"; # kinda fix tray not appearing
       };
     };
     colors = {
