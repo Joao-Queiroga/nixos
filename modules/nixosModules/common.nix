@@ -31,19 +31,13 @@
     nix.settings.use-xdg-base-directories = true;
     nix.settings = {
       trusted-users = ["root" "@wheel"];
-      substituters = ["https://hyprland.cachix.org" "https://attic.xuyh0120.win/lantian"];
-      trusted-substituters = ["https://hyprland.cachix.org" "https://attic.xuyh0120.win/lantian"];
-      trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc="];
       lazy-trees = true;
     };
     nix.optimise.automatic = true;
-    nixpkgs.overlays = [
-      inputs.nix-cachyos-kernel.overlays.pinned
-    ];
 
     boot = {
-      kernelPackages = lib.mkDefault pkgs.cachyosKernels.linuxPackages-cachyos-latest-lto;
-      zfs.package = config.boot.kernelPackages.zfs_cachyos;
+      kernelPackages = lib.mkDefault pkgs.linuxPackages_xanmod_latest;
+      zfs.package = pkgs.zfs_unstable;
     };
 
     networking.networkmanager = {
@@ -128,7 +122,6 @@
     environment.systemPackages = with pkgs; [
       vim
       wget
-      # wineWowPackages.waylandFull
       btop
       file
       kitty
@@ -140,6 +133,7 @@
       self.packages.${pkgs.stdenv.hostPlatform.system}.yazi
     ];
     environment.binsh = "${pkgs.dash}/bin/dash";
+    security.apparmor.enable = true;
 
     stylix = {
       enable = true;

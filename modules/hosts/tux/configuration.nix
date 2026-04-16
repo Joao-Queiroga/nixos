@@ -30,7 +30,6 @@
     ];
 
     boot = {
-      kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest-lto-x86_64-v3;
       extraModulePackages = with config.boot.kernelPackages; [
         ddcci-driver
       ];
