@@ -8,7 +8,6 @@
           enable = true;
           device = "nodev";
           efiSupport = true;
-          zfsSupport = true;
           timeoutStyle = "hidden";
           mirroredBoots = [
             {

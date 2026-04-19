@@ -37,7 +37,6 @@
 
     boot = {
       kernelPackages = lib.mkDefault pkgs.linuxPackages_xanmod_latest;
-      zfs.package = pkgs.zfs_unstable;
     };
 
     networking.networkmanager = {

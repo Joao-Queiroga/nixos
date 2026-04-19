@@ -10,35 +10,33 @@
       (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-    boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "usbhid"];
+    boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "usbhid" "usb_storage" "sd_mod"];
     boot.initrd.kernelModules = ["amdgpu"];
     boot.kernelModules = ["kvm-amd"];
     boot.extraModulePackages = [];
 
     fileSystems."/" = {
-      device = "rpool/root";
-      fsType = "zfs";
-    };
-
-    fileSystems."/nix" = {
-      device = "rpool/nix";
-      fsType = "zfs";
-    };
-
-    fileSystems."/var" = {
-      device = "rpool/var";
-      fsType = "zfs";
+      device = "/dev/disk/by-uuid/b59005ae-34a8-4c3e-9257-0a6c2fedfdf1";
+      fsType = "btrfs";
+      options = ["subvol=@" "compress=zstd" "noatime"];
     };
 
     fileSystems."/home" = {
-      device = "rpool/home";
-      fsType = "zfs";
+      device = "/dev/disk/by-uuid/b59005ae-34a8-4c3e-9257-0a6c2fedfdf1";
+      fsType = "btrfs";
+      options = ["subvol=@home" "compress=zstd" "noatime"];
     };
 
-    fileSystems."/boot" = {
-      device = "/dev/disk/by-uuid/586A-D78A";
-      fsType = "vfat";
-      options = ["fmask=0022" "dmask=0022"];
+    fileSystems."/var/log" = {
+      device = "/dev/disk/by-uuid/b59005ae-34a8-4c3e-9257-0a6c2fedfdf1";
+      fsType = "btrfs";
+      options = ["subvol=@log" "compress=zstd" "noatime"];
+    };
+
+    fileSystems."/nix" = {
+      device = "/dev/disk/by-uuid/b59005ae-34a8-4c3e-9257-0a6c2fedfdf1";
+      fsType = "btrfs";
+      options = ["subvol=@nix" "compress=zstd" "noatime"];
     };
 
     fileSystems."/boot/efi" = {
@@ -48,7 +46,7 @@
     };
 
     swapDevices = [
-      {device = "/dev/disk/by-uuid/4a6d9f75-32af-4249-9376-0c279a4b050f";}
+      {device = "/dev/disk/by-uuid/f4d70b06-f952-40e1-9764-fc6a38f8a58f";}
     ];
 
     nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
