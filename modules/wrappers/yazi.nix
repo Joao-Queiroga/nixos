@@ -9,7 +9,9 @@
     lib,
     config,
     ...
-  }: let
+  }: {
+    imports = [wlib.wrapperModules.yazi];
+    extraPackages = with pkgs; [ripdrag glow glib];
     plugins = with pkgs.yaziPlugins; {
       smart-enter = smart-enter;
       drag = inputs.drag;
@@ -18,20 +20,6 @@
       starship = starship;
       full-border = full-border;
     };
-    makePlugin = name: pluginDrv: {
-      content = "";
-      relPath = "${config.binName}-config/plugins/${name}.yazi";
-      builder = ''
-        mkdir -p "$(dirname "$2")"
-        ln -s "${pluginDrv}" "$2"
-      '';
-      key = "plugin_${builtins.replaceStrings ["-"] ["_"] name}";
-    };
-
-    pluginConfigs = lib.mapAttrs makePlugin plugins;
-  in {
-    imports = [wlib.wrapperModules.yazi];
-    extraPackages = with pkgs; [ripdrag glow glib];
     settings.yazi = {
       opener = {
         jar = [
@@ -174,26 +162,24 @@
         ];
       }
       // self.yaziColors;
-    constructFiles =
-      pluginConfigs
-      // {
-        luaInit = {
-          content =
-            /*
-            lua
-            */
-            ''
-              require("starship"):setup()
-              require("full-border"):setup()
-              require("git"):setup()
-              require("zoxide"):setup({
-              	update_db = true,
-              })
-              require("gvfs"):setup()
-            '';
-          relPath = "${config.binName}-config/init.lua";
-        };
+    constructFiles = {
+      luaInit = {
+        content =
+          /*
+          lua
+          */
+          ''
+            require("starship"):setup()
+            require("full-border"):setup()
+            require("git"):setup()
+            require("zoxide"):setup({
+            	update_db = true,
+            })
+            require("gvfs"):setup()
+          '';
+        relPath = "${config.binName}-config/init.lua";
       };
+    };
   };
   # Coppied from stylix yazi module
   flake.yaziColors = with self.theme; let
