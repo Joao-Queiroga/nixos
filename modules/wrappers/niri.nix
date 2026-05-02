@@ -121,7 +121,7 @@
         };
 
         "Mod+V" = _: {
-          props = {hotkey-overlay-title = "Run an Command: bemenu";};
+          props = {hotkey-overlay-title = "Clipboard History";};
           content.spawn = ["${noctalia}" "ipc" "call" "launcher" "clipboard"];
         };
 
