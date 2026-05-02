@@ -39,6 +39,12 @@
       kernelPackages = lib.mkDefault pkgs.linuxPackages_xanmod_latest;
     };
 
+    zramSwap = {
+      enable = true;
+      algorithm = "zstd";
+      priority = 100;
+    };
+
     networking.networkmanager = {
       enable = true;
       wifi.backend = "iwd";
