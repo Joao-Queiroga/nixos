@@ -76,10 +76,24 @@
         {
           open-maximized = false;
           open-maximized-to-edges = false;
-          geometry-corner-radius = 12;
+          geometry-corner-radius = 20;
           clip-to-geometry = true;
         }
       ];
+      layer-rules = [
+        {
+          matches = [{namespace = "^noctalia-(background|launcher-overlay|dock)-.*$";}];
+          background-effect = {
+            blur = true;
+            xray = false;
+          };
+        }
+        {
+          matches = [{namespace = "^noctalia-overview*";}];
+          place-within-backdrop = true;
+        }
+      ];
+      debug.honor-xdg-activation-with-invalid-serial = _: {};
       binds = {
         "Mod+Shift+Slash".show-hotkey-overlay = {};
 
@@ -97,19 +111,29 @@
         };
 
         "Mod+R" = _: {
-          props = {hotkey-overlay-title = "Run an Application: ${noctalia}";};
+          props = {hotkey-overlay-title = "Run an Application: Noctalia-shell";};
           content.spawn = ["${noctalia}" "ipc" "call" "launcher" "toggle"];
         };
 
         "Mod+P" = _: {
           props = {hotkey-overlay-title = "Run an Command: bemenu";};
-          content.spawn = ["bemenu-run"];
+          content.spawn = ["bemenu-run" "--binding" "vim"];
+        };
+
+        "Mod+V" = _: {
+          props = {hotkey-overlay-title = "Run an Command: bemenu";};
+          content.spawn = ["${noctalia}" "ipc" "call" "launcher" "clipboard"];
         };
 
         "Mod+B" = _: {
           props = {hotkey-overlay-title = "Open Browser";};
           content.spawn = ["brave"];
         };
+
+        "XF86AudioPlay".spawn = [(lib.getExe pkgs.playerctl) "play"];
+        "XF86AudioNext".spawn = [(lib.getExe pkgs.playerctl) "next"];
+        "XF86AudioPrev".spawn = [(lib.getExe pkgs.playerctl) "previous"];
+        "XF86AudioStop".spawn = [(lib.getExe pkgs.playerctl) "stop"];
 
         "XF86AudioRaiseVolume".spawn-sh = ["wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+"];
         "XF86AudioLowerVolume".spawn-sh = ["wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-"];
@@ -260,8 +284,8 @@
         "Mod+Shift+Minus".set-window-height = "-10%";
         "Mod+Shift+Equal".set-window-height = "+10%";
 
-        "Mod+V".toggle-window-floating = _: {};
-        "Mod+Shift+V".switch-focus-between-floating-and-tiling = _: {};
+        #"Mod+V".toggle-window-floating = _: {};
+        #"Mod+Shift+V".switch-focus-between-floating-and-tiling = _: {};
 
         "Print".screenshot = _: {};
         "Ctrl+Print".screenshot-screen = _: {};
