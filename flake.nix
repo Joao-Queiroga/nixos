@@ -6,7 +6,8 @@
     (inputs.import-tree ./modules);
 
   inputs = {
-    nixpkgs.url = "github:Nixos/nixpkgs/nixos-unstable-small";
+    nixpkgs.url = "github:Nixos/nixpkgs/nixos-unstable";
+    nixpkgs-small.url = "github:Nixos/nixpkgs/nixos-unstable-small";
     flake-parts.url = "github:hercules-ci/flake-parts";
     import-tree.url = "github:vic/import-tree";
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
