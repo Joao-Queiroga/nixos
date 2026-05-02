@@ -13,16 +13,17 @@
     services.displayManager = {
       generic.environment = {
         XKB_DEFAULT_LAYOUT = "br";
-        XCURSOR_PATH = "${config.stylix.cursor.package}/share/icons:${config.stylix.cursor.package}/share/cursors";
-        XCURSOR_THEME = config.stylix.cursor.name;
-        XCURSOR_SIZE = toString config.stylix.cursor.size;
+        # XCURSOR_PATH = "${config.stylix.cursor.package}/share/icons:${config.stylix.cursor.package}/share/cursors";
+        # XCURSOR_THEME = config.stylix.cursor.name;
+        # XCURSOR_SIZE = toString config.stylix.cursor.size;
       };
+      gdm.enable = true;
       sddm = {
-        enable = true;
+        enable = false;
         autoNumlock = true;
         theme = "${self.packages.${pkgs.stdenv.hostPlatform.system}.qylock}/share/sddm/themes/pixel-hollowknight";
         wayland.enable = true;
-        extraPackages = with pkgs; [
+        extraPackages = [
           self.packages.${pkgs.stdenv.hostPlatform.system}.qylock
         ];
         settings = {
@@ -43,10 +44,6 @@
                 keymap_variant = xcfg.xkb.variant;
                 keymap_options = xcfg.xkb.options;
                 numlock-on = config.services.displayManager.sddm.autoNumlock;
-              };
-              shell = {
-                cursor-theme = config.stylix.cursor.name;
-                cursor-size = config.stylix.cursor.size;
               };
             };
           in "${lib.getExe pkgs.weston} --shell=kiosk -c ${westonIni}";
