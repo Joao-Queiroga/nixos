@@ -80,9 +80,13 @@
           "match:title (Nova guia privada - Brave), workspace special"
         ];
         layerrule = [
-          "match:namespace gtk4-layer-shell, blur on"
-          "match:namespace gtk4-layer-shell, ignore_alpha 0"
-          "match:namespace gtk4-layer-shell, xray 0"
+          {
+            name = "noctalia";
+            "match:namespace" = "noctalia-background-.*$";
+            ignore_alpha = 0.5;
+            blur = true;
+            blur_popups = true;
+          }
         ];
         "$mod" = "Super";
         "$term" = "app2unit -- kitty -1";
@@ -217,7 +221,7 @@
       export XDG_SESSION_TYPE=wayland
       export XDG_SESSION_DESKTOP=Hyprland
     '';
-    services.awww.enable = true;
+    # services.awww.enable = true;
     services.hyprpolkitagent = {
       enable = true;
     };
