@@ -13,13 +13,12 @@
     services.displayManager = {
       generic.environment = {
         XKB_DEFAULT_LAYOUT = "br";
-        # XCURSOR_PATH = "${config.stylix.cursor.package}/share/icons:${config.stylix.cursor.package}/share/cursors";
-        # XCURSOR_THEME = config.stylix.cursor.name;
-        # XCURSOR_SIZE = toString config.stylix.cursor.size;
+        XCURSOR_PATH = "${config.stylix.cursor.package}/share/icons:${config.stylix.cursor.package}/share/cursors";
+        XCURSOR_THEME = config.stylix.cursor.name;
+        XCURSOR_SIZE = toString config.stylix.cursor.size;
       };
-      gdm.enable = true;
       sddm = {
-        enable = false;
+        enable = true;
         autoNumlock = true;
         theme = "${self.packages.${pkgs.stdenv.hostPlatform.system}.qylock}/share/sddm/themes/pixel-hollowknight";
         wayland.enable = true;
