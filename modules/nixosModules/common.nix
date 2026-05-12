@@ -122,6 +122,7 @@
       thunar.enable = true;
       neovim.enable = true;
       neovim.package = inputs.my-neovim.packages.${pkgs.stdenv.hostPlatform.system}.default;
+      java.enable = true;
     };
 
     environment.systemPackages = with pkgs; [
