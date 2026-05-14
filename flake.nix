@@ -14,7 +14,7 @@
       url = "github:nix-community/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    hyprland.url = "github:hyprwm/Hyprland";
+    hyprnix.url = "github:hyprwm/hyprnix";
     my-neovim.url = "github:/Joao-Queiroga/nvim";
     my-neovim.inputs.nixpkgs.follows = "nixpkgs";
     wrapper-modules.url = "github:birdeehub/nix-wrapper-modules";

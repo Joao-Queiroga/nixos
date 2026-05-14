@@ -119,8 +119,8 @@
       nix-ld.enable = true;
       hyprland = {
         enable = true;
-        package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-        portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+        package = inputs.hyprnix.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+        portalPackage = inputs.hyprnix.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
       };
       kdeconnect.enable = true;
       thunar.enable = true;
@@ -141,7 +141,7 @@
       exfatprogs
       killall
       self.packages.${pkgs.stdenv.hostPlatform.system}.yazi
-      inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland
+      inputs.hyprnix.packages.${pkgs.stdenv.hostPlatform.system}.hyprland
     ];
     environment.pathsToLink = ["/share/hypr"];
     environment.binsh = "${pkgs.dash}/bin/dash";

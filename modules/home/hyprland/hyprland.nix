@@ -23,8 +23,8 @@
       systemd.enableXdgAutostart = true;
       extraConfig = let
         myPkgs = with pkgs; [
+          inputs.hyprnix.packages.${pkgs.stdenv.hostPlatform.system}.hyprshutdown
           runapp
-          hyprshutdown
           playerctl
           brightnessctl
         ];

@@ -23,11 +23,18 @@ hl.monitor({
 	scale = "auto",
 })
 
-for _, mon in pairs(hl.get_monitors()) do
+local function monitor_set(mon)
 	for i = 1, 9 do
-		hl.workspace_rule({ workspace = (mon.id * 9) + i, monitor = mon.name, persistent = true })
+		local ws = (mon.id * 9) + i
+		hl.workspace_rule({ workspace = ws, monitor = mon.name, persistent = true })
+		hl.dispatch(hl.dsp.workspace.move({ workspace = ws, monitor = mon.name }))
 	end
 	hl.workspace_rule({ workspace = (mon.id * 9) + 1, default = true })
+end
+local function workspaces_set()
+	for _, mon in pairs(hl.get_monitors()) do
+		monitor_set(mon)
+	end
 end
 
 --variables and functions
@@ -49,7 +56,12 @@ hl.on("hyprland.start", function()
 		hl.exec_cmd(nix.pkgs.runapp .. " -- " .. cmd)
 	end
 	exec(nix.pkgs.noctalia)
+	workspaces_set()
 end)
+
+hl.on("monitor.added", monitor_set)
+
+hl.on("config.reloaded", workspaces_set)
 
 -- Look and feel
 
@@ -150,7 +162,7 @@ bind(mainMod .. " + down", dsp.focus({ direction = "down" }))
 
 --workspaces
 for i = 1, 9 do
-	bind(mainMod .. " + " .. i, dsp.focus({ workspace = "r~" .. i }))
+	bind(mainMod .. " + " .. i, dsp.focus({ workspace = "r~" .. i, on_current_monitor = true }))
 	bind(mainMod .. " + SHIFT + " .. i, dsp.window.move({ workspace = "r~" .. i }))
 end
 bind(mainMod .. " + 0", dsp.workspace.toggle_special())
