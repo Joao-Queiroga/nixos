@@ -119,7 +119,6 @@
         settings = {program_options = {terminal = "kitty -1";};};
       };
       network-manager-applet.enable = true;
-      blueman-applet.enable = true;
       kdeconnect = {
         enable = true;
         indicator = true;

@@ -14,6 +14,7 @@
       url = "github:nix-community/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    hyprland.url = "github:hyprwm/Hyprland";
     my-neovim.url = "github:/Joao-Queiroga/nvim";
     my-neovim.inputs.nixpkgs.follows = "nixpkgs";
     wrapper-modules.url = "github:birdeehub/nix-wrapper-modules";
@@ -26,10 +27,6 @@
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-    hyprsplit = {
-      url = "github:shezdy/hyprsplit?ref=v0.54.1";
-      flake = false;
     };
 
     # Yazi plugins

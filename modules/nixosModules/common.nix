@@ -32,6 +32,9 @@
     nix.settings = {
       trusted-users = ["root" "@wheel"];
       lazy-trees = true;
+      substituters = ["https://hyprland.cachix.org"];
+      trusted-substituters = ["https://hyprland.cachix.org"];
+      trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
     };
     nix.optimise.automatic = true;
 
@@ -116,7 +119,8 @@
       nix-ld.enable = true;
       hyprland = {
         enable = true;
-        withUWSM = true;
+        package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+        portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
       };
       kdeconnect.enable = true;
       thunar.enable = true;
@@ -137,7 +141,9 @@
       exfatprogs
       killall
       self.packages.${pkgs.stdenv.hostPlatform.system}.yazi
+      inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland
     ];
+    environment.pathsToLink = ["/share/hypr"];
     environment.binsh = "${pkgs.dash}/bin/dash";
     security.apparmor.enable = true;
 
