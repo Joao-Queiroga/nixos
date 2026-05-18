@@ -215,7 +215,7 @@ bind("CONTROL + SHIFT + ESCAPE", exec_term("btop"))
 -- Laptop multimedia keys for volume and LCD brightness
 bind(
 	"XF86AudioRaiseVolume",
-	dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"),
+	dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"),
 	{ locked = true, repeating = true }
 )
 bind(

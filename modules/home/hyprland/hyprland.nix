@@ -12,9 +12,9 @@
   in {
     home.packages = [
       self.packages.${pkgs.stdenv.hostPlatform.system}.noctalia-shell
+      inputs.hyprnix.packages.${pkgs.stdenv.hostPlatform.system}.hyprpwcenter
       pkgs.runapp
     ];
-    stylix.targets.hyprland.enable = false;
     wayland.windowManager.hyprland = {
       enable = true;
       package = null;
