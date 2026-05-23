@@ -107,12 +107,11 @@ hl.config({
 
 --window rules
 hl.window_rule({ match = { class = "(brave-browser)" }, workspace = 2 })
-hl.window_rule({ match = { class = "^(zen.*)$" }, workspace = 2 })
+hl.window_rule({ match = { class = "(firefox)" }, workspace = 2 })
 hl.window_rule({ match = { class = "(discord)" }, workspace = 6 })
 hl.window_rule({ match = { class = "(WebCord)" }, workspace = 6 })
 hl.window_rule({ match = { class = "(teams-for-linux)" }, workspace = 7 })
 hl.window_rule({ match = { class = "(info.cemu.Cemu)" }, idle_inhibit = "focus" })
-hl.window_rule({ match = { title = "(Nova guia privada - Brave)" }, workspace = "special" })
 
 --layer rules
 hl.layer_rule({
@@ -151,7 +150,7 @@ bind(mainMod .. " + P", exec("$(bemenu-run --binding vim)"))
 -- Launch keybindings
 bind(mainMod .. " + Return", exec(terminal))
 bind(mainMod .. " + SHIFT + Return", exec("thunar"))
-bind(mainMod .. " + B", exec("brave"))
+bind(mainMod .. " + B", exec("firefox"))
 bind(mainMod .. " + V", noctalia("launcher clipboard"))
 
 -- Move focus with mainMod + arrow keys
