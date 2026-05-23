@@ -16,7 +16,7 @@
     ...
   }: {
     imports = [
-      inputs.zen-browser.homeModules.beta
+      self.homeModules.firefox
       self.homeModules.dirColors
       self.homeModules.shell
       self.homeModules.hyprland
@@ -62,7 +62,6 @@
     ];
 
     programs = {
-      zen-browser.enable = true;
       chromium = {
         enable = true;
         package = pkgs.brave;

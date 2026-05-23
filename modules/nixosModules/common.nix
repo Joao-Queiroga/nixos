@@ -13,6 +13,7 @@
       self.nixosModules.boot
       self.nixosModules.niri
       self.nixosModules.displayManager
+      self.nixosModules.firefox
       inputs.determinate.nixosModules.default
       inputs.stylix.nixosModules.stylix
       self.nixosModules.myHome
