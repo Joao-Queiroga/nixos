@@ -11,7 +11,7 @@
     import-tree.url = "github:vic/import-tree";
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
     stylix = {
-      url = "github:ReeSilva/stylix/feat/hyprland-lua";
+      url = "github:nix-community/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     hyprnix.url = "github:hyprwm/hyprnix";
