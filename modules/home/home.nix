@@ -32,7 +32,7 @@
       "$HOME/.local/bin"
     ];
 
-    xdg.portal.enable = lib.mkForce false;
+    xdg.enable = true;
 
     home.packages = with pkgs; [
       nerd-fonts.jetbrains-mono
@@ -198,7 +198,7 @@
       EDITOR = "nvim";
       PF_INFO = "ascii title os host kernel uptime pkgs wm memory palette";
 
-      MESA_SHADER_CACHE_DIR = "$HOME/.cache/mesa_shader_cache";
+      MESA_SHADER_CACHE_DIR = "${config.home.homeDirectory}/.cache/mesa_shader_cache";
       MESA_SHADER_CACHE_MAX_SIZE = "12G";
       RADV_PERFTEST = "aco";
       NIXOS_OZONE_WL = "1";
@@ -226,7 +226,6 @@
       MANPAGER = "nvim +Man!";
     };
 
-    xdg.configFile."uwsm/env".source = "${config.home.sessionVariablesPackage}/etc/profile.d/hm-session-vars.sh";
     xdg.configFile."w3m/config".text = "inline_img_protocol 4";
 
     programs.home-manager.enable = true;

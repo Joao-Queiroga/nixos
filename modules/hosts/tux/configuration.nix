@@ -23,6 +23,11 @@
       obs-studio
     ];
 
+    environment.sessionVariables = {
+      ACO_COMPILER = "aco";
+      QSG_RHI_BACKEND = "vulkan";
+    };
+
     boot = {
       extraModulePackages = with config.boot.kernelPackages; [
         ddcci-driver
