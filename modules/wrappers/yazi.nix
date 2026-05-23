@@ -33,7 +33,7 @@
       open = {
         prepend_rules = [
           {
-            name = "*.jar";
+            url = "*.jar";
             use = ["jar"];
           }
         ];
