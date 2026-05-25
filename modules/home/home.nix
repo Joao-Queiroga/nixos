@@ -29,7 +29,6 @@
     home.sessionPath = [
       "${config.home.sessionVariables.CARGO_HOME}/bin"
       "${config.home.sessionVariables.GOPATH}/bin"
-      "$HOME/.local/bin"
     ];
 
     xdg.enable = true;

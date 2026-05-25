@@ -43,7 +43,7 @@
       kernelPackages = lib.mkDefault pkgs.linuxPackages_xanmod_latest;
     };
 
-    zramSwap = {
+    zramSwap = lib.mkDefault {
       enable = true;
       algorithm = "zstd";
       priority = 100;
