@@ -11,7 +11,7 @@
     ...
   }: {
     imports = [wlib.wrapperModules.yazi];
-    extraPackages = with pkgs; [ripdrag glow glib];
+    runtimePackages = with pkgs; [ripdrag glow glib];
     plugins = with pkgs.yaziPlugins; {
       smart-enter = smart-enter;
       drag = inputs.drag;

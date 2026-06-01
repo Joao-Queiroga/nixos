@@ -10,7 +10,6 @@
     ...
   }: {
     imports = [wlib.wrapperModules.noctalia-shell];
-    extraPackages = [];
     outOfStoreConfig = ".config/noctalia/";
     settings = {
       settingsVersion = 59;

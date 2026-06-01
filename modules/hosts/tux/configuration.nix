@@ -25,6 +25,6 @@
       QSG_RHI_BACKEND = "vulkan";
     };
 
-    service.ddccontrol.enable = true;
+    services.ddccontrol.enable = true;
   };
 }

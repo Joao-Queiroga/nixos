@@ -18,18 +18,13 @@
         runHook postInstall
       '';
       propagatedBuildInputs = with pkgs; [
-        (with gst_all_1; [
-          gst-plugins-base
-          gst-plugins-good
-          gst-plugins-bad
-          gst-plugins-ugly
-        ])
-        (with kdePackages; [
-          qtmultimedia
-          qtsvg
-          qt5compat
-          qtmultimedia
-        ])
+        gst_all_1.gst-plugins-base
+        gst_all_1.gst-plugins-good
+        gst_all_1.gst-plugins-bad
+        gst_all_1.gst-plugins-ugly
+        kdePackages.qtmultimedia
+        kdePackages.qtsvg
+        kdePackages.qt5compat
         fzf
       ];
       meta = with pkgs.lib; {
