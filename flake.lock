@@ -241,22 +241,6 @@
         "url": "https://install.determinate.systems/determinate-nixd/tag/v3.21.0/x86_64-linux"
       }
     },
-    "drag": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1771632727,
-        "narHash": "sha256-nmFlh+zW3aOU+YjbfrAWQ7A6FlGaTDnq2N2gOZ5yzzc=",
-        "owner": "Joao-Queiroga",
-        "repo": "drag.yazi",
-        "rev": "3dff129c52b30d8c08015e6f4ef8f2c07b299d4b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "Joao-Queiroga",
-        "repo": "drag.yazi",
-        "type": "github"
-      }
-    },
     "firefox-gnome-theme": {
       "flake": false,
       "locked": {
@@ -466,22 +450,6 @@
         "owner": "GNOME",
         "repo": "gnome-shell",
         "rev": "ef02db02bf0ff342734d525b5767814770d85b49",
-        "type": "github"
-      }
-    },
-    "gvfs-yazi": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1774809704,
-        "narHash": "sha256-UHneVJ+YXyDuPrZS+PZbs9n9h+VN5M2QG36FdprBkJc=",
-        "owner": "boydaihungst",
-        "repo": "gvfs.yazi",
-        "rev": "3abc0a258f9d7aeaa453a2d0d6e103c5a305953d",
-        "type": "github"
-      },
-      "original": {
-        "owner": "boydaihungst",
-        "repo": "gvfs.yazi",
         "type": "github"
       }
     },
@@ -1739,9 +1707,7 @@
       "inputs": {
         "betterfox": "betterfox",
         "determinate": "determinate",
-        "drag": "drag",
         "flake-parts": "flake-parts_2",
-        "gvfs-yazi": "gvfs-yazi",
         "home-manager": "home-manager",
         "hyprnix": "hyprnix",
         "import-tree": "import-tree",
@@ -1836,11 +1802,11 @@
         "tinted-zed": "tinted-zed"
       },
       "locked": {
-        "lastModified": 1780079634,
-        "narHash": "sha256-VVyCrzwLitvxZGx48FgzvlbLYGQU99GsaQnZmwqZoUo=",
+        "lastModified": 1780256506,
+        "narHash": "sha256-wEXN/OoZt9HfsKBL6694p2Y9xRlwfUbdn/M107U8fVU=",
         "owner": "nix-community",
         "repo": "stylix",
-        "rev": "ca07e0644716a7c13e91c6d92d169fc81889c589",
+        "rev": "8ed48a41087feeb66372ff718021a9512fc552b3",
         "type": "github"
       },
       "original": {

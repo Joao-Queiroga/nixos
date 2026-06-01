@@ -24,7 +24,7 @@
     home.username = "joaoqueiroga";
     home.homeDirectory = "/home/joaoqueiroga";
 
-    home.stateVersion = "26.05";
+    home.stateVersion = "26.11";
 
     home.sessionPath = [
       "${config.home.sessionVariables.CARGO_HOME}/bin"

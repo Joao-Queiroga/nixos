@@ -11,11 +11,11 @@
     ...
   }: {
     imports = [wlib.wrapperModules.yazi];
-    runtimePackages = with pkgs; [ripdrag glow glib];
+    runtimePkgs = with pkgs; [ripdrag glow glib];
     plugins = with pkgs.yaziPlugins; {
       smart-enter = smart-enter;
-      drag = inputs.drag;
-      gvfs = inputs.gvfs-yazi;
+      drag = drag;
+      gvfs = gvfs;
       git = git;
       starship = starship;
       full-border = full-border;

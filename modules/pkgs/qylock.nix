@@ -6,6 +6,7 @@
       src = inputs.qylock;
       dontBuild = true;
       dontConfigure = true;
+      dontWrapQtApps = true;
       installPhase = ''
         runHook preInstall
 

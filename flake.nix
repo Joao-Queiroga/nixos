@@ -29,16 +29,6 @@
       flake = false;
     };
 
-    # Yazi plugins
-    drag = {
-      url = "github:Joao-Queiroga/drag.yazi";
-      flake = false;
-    };
-    gvfs-yazi = {
-      url = "github:boydaihungst/gvfs.yazi";
-      flake = false;
-    };
-
     qylock = {
       url = "github:Darkkal44/qylock";
       flake = false;
