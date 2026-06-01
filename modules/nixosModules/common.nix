@@ -29,6 +29,9 @@
       "flakes"
     ];
 
+    programs.appimage.enable = true;
+    programs.appimage.binfmt = true;
+
     nix.settings.use-xdg-base-directories = true;
     nix.settings = {
       trusted-users = ["root" "@wheel"];
@@ -41,12 +44,6 @@
 
     boot = {
       kernelPackages = lib.mkDefault pkgs.linuxPackages_xanmod_latest;
-    };
-
-    zramSwap = lib.mkDefault {
-      enable = true;
-      algorithm = "zstd";
-      priority = 100;
     };
 
     networking.networkmanager = {
@@ -66,10 +63,6 @@
     services.udisks2.enable = true;
     services.gvfs.enable = true;
     services.geoclue2.enable = true;
-    services.mullvad-vpn = {
-      enable = true;
-      package = pkgs.mullvad-vpn;
-    };
 
     services.xserver.xkb.layout = "br";
     services.xserver.xkb.options = "numlock:on";
@@ -141,6 +134,7 @@
       gparted
       exfatprogs
       killall
+      python3
       self.packages.${pkgs.stdenv.hostPlatform.system}.yazi
       inputs.hyprnix.packages.${pkgs.stdenv.hostPlatform.system}.hyprland
     ];

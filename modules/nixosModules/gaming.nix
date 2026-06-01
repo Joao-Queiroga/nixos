@@ -1,5 +1,8 @@
-{inputs, ...}: {
+{self, ...}: {
   flake.nixosModules.gaming = {pkgs, ...}: {
+    imports = [
+      self.nixosModules.zram
+    ];
     environment.systemPackages = with pkgs; [
       lsfg-vk
       lsfg-vk-ui
@@ -10,6 +13,21 @@
       mangohud
       heroic
     ];
+
+    zramSwap.memoryPercent = 75;
+    boot.kernelParams = ["transparent_hugepage=madvise"];
+    boot.kernel.sysctl = {
+      "vm.swappiness" = 180;
+      "vm.watermark_boost_factor" = 0;
+      "vm.watermark_scale_factor" = 125;
+      "vm.page-cluster" = 0;
+      "vm.min_free_kbytes" = 524288;
+      "vm.dirty_ratio" = 10;
+      "vm.dirty_background_ratio" = 5;
+      "vm.compaction_proactiveness" = 20;
+      "vm.lru_gen.enabled" = 7;
+      "vm.lru_gen.min_ttl_ms" = 1000;
+    };
 
     programs.gamescope = {
       enable = true;
