@@ -20,18 +20,14 @@
       self.homeModules.dirColors
       self.homeModules.shell
       self.homeModules.hyprland
+      self.homeModules.vars
+      self.homeModules.terminals
+      self.homeModules.services
     ];
     home.username = "joaoqueiroga";
     home.homeDirectory = "/home/joaoqueiroga";
 
     home.stateVersion = "26.11";
-
-    home.sessionPath = [
-      "${config.home.sessionVariables.CARGO_HOME}/bin"
-      "${config.home.sessionVariables.GOPATH}/bin"
-    ];
-
-    xdg.enable = true;
 
     home.packages = with pkgs; [
       nerd-fonts.jetbrains-mono
@@ -110,121 +106,9 @@
       };
     };
 
-    services = {
-      udiskie = {
-        enable = true;
-        tray = "auto";
-        settings = {program_options = {terminal = "kitty -1";};};
-      };
-      network-manager-applet.enable = true;
-      kdeconnect = {
-        enable = true;
-        indicator = true;
-      };
-      wluma = {
-        enable = true;
-        settings = {
-          als.time.thresholds = {
-            "0" = "night";
-            "7" = "dark";
-            "9" = "dim";
-            "11" = "normal";
-            "13" = "bright";
-            "16" = "normal";
-            "18" = "dark";
-            "20" = "night";
-          };
-          output.backlight = [
-            {
-              name = "SFP2412FHD";
-              path = "/sys/class/backlight/ddcci6";
-              capturer = "wayland";
-              predictor.manual = {
-                thresholds.day = {
-                  "0" = 0;
-                  "100" = 10;
-                };
-                thresholds.night = {
-                  "0" = 0;
-                  "100" = 60;
-                };
-              };
-            }
-            {
-              name = "eDP-1";
-              path = "/sys/class/backlight/intel_backlight";
-              capturer = "wayland";
-              predictor.manual = {
-                thresholds.day = {
-                  "0" = 0;
-                  "100" = 10;
-                };
-                thresholds.night = {
-                  "0" = 0;
-                  "100" = 60;
-                };
-              };
-            }
-          ];
-        };
-      };
-    };
-
-    home.file = {};
-
     gtk.enable = true;
     gtk.gtk2.configLocation = "${config.xdg.configHome}/gtk-2.0/gtkrc";
     qt.enable = true;
-
-    xdg.terminal-exec = {
-      enable = true;
-      settings = {default = ["kitty.desktop"];};
-    };
-
-    programs.kitty = {
-      enable = true;
-      settings = {
-        cursor = "none";
-        enable_audio_bell = false;
-        tab_bar_style = "slant";
-        confirm_os_window_close = 0;
-      };
-      extraConfig = "cursor none";
-    };
-
-    home.sessionVariables = {
-      EDITOR = "nvim";
-      PF_INFO = "ascii title os host kernel uptime pkgs wm memory palette";
-
-      MESA_SHADER_CACHE_DIR = "${config.home.homeDirectory}/.cache/mesa_shader_cache";
-      MESA_SHADER_CACHE_MAX_SIZE = "12G";
-      RADV_PERFTEST = "aco";
-      NIXOS_OZONE_WL = "1";
-      XINITRC = "${config.xdg.configHome}/x11/xinitrc";
-      _JAVA_OPTIONS = "-Djava.util.prefs.userRoot=${config.xdg.configHome}/java";
-      GOPATH = "${config.xdg.dataHome}/go";
-      CARGO_HOME = "${config.xdg.dataHome}/cargo";
-      RUSTUP_HOME = "${config.xdg.dataHome}/rustup";
-      WGETRC = "${config.xdg.configHome}/wget/wgetrc";
-      GNUPGHOME = "${config.xdg.dataHome}/gnupg";
-      ANDROID_SDK_HOME = "${config.xdg.configHome}/android";
-      ANDROID_USER_HOME = "${config.xdg.dataHome}/android";
-      BUN_INSTALL = "${config.xdg.dataHome}/bun";
-      NPM_CONFIG_INIT_MODULE = "${config.xdg.configHome}/npm/config/npm-init.js";
-      NPM_CONFIG_CACHE = "${config.xdg.cacheHome}/npm";
-      NPM_CONFIG_TMP = "$XDG_RUNTIME_DIR/npm";
-      WINEPREFIX = "${config.xdg.dataHome}/wine";
-
-      CARAPACE_HIDDEN = 1;
-      CARAPACE_LENIENT = 1;
-      CARAPACE_MATCH = 1;
-
-      W3M_DIR = "${config.xdg.configHome}/w3m";
-
-      MANPAGER = "nvim +Man!";
-    };
-
-    xdg.configFile."w3m/config".text = "inline_img_protocol 4";
 
     programs.home-manager.enable = true;
   };

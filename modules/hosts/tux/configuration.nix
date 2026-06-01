@@ -26,5 +26,6 @@
     };
 
     services.ddccontrol.enable = true;
+    services.ddccontrol.package = pkgs.ddcutil-service;
   };
 }
