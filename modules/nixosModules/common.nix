@@ -165,6 +165,7 @@
       polarity = "dark";
       targets.grub.useWallpaper = false;
       targets.chromium.enable = false;
+      targets.kmscon.enable = false;
     };
 
     system.autoUpgrade = {
