@@ -21,6 +21,20 @@
       full-border = full-border;
     };
     settings.yazi = {
+      plugin = {
+        prepend_preloaders = [
+          {
+            mime = "image/svg+xml";
+            run = "magick";
+          }
+        ];
+        prepend_previewers = [
+          {
+            mime = "image/svg+xml";
+            run = "magick";
+          }
+        ];
+      };
       opener = {
         jar = [
           {
@@ -29,12 +43,23 @@
             desc = "Open jar file";
           }
         ];
+        svg = [
+          {
+            run = ''imv -b#ffffff "$1"'';
+            orphan = true;
+            desc = "Open svg";
+          }
+        ];
       };
       open = {
         prepend_rules = [
           {
             url = "*.jar";
             use = ["jar"];
+          }
+          {
+            mime = "image/svg+xml";
+            use = ["svg"];
           }
         ];
       };
