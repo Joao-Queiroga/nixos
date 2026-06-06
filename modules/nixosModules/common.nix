@@ -101,6 +101,7 @@
         "wheel"
         "networkmanager"
         "gamemode"
+        "libvirtd"
       ];
     };
 

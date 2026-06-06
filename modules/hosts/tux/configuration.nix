@@ -13,6 +13,8 @@
     imports = [
       self.nixosModules.common
       self.nixosModules.gaming
+      self.nixosModules.vm
+      self.nixosModules.periferics
     ];
     environment.systemPackages = with pkgs; [
       ddcutil
