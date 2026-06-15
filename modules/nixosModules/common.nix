@@ -143,6 +143,10 @@
     environment.binsh = "${pkgs.dash}/bin/dash";
     security.apparmor.enable = true;
 
+    fonts.packages = with pkgs; [
+      corefonts
+    ];
+
     stylix = {
       enable = true;
       base16Scheme = self.theme;

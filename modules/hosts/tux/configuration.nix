@@ -15,6 +15,7 @@
       self.nixosModules.gaming
       self.nixosModules.vm
       self.nixosModules.periferics
+      self.nixosModules.container
     ];
     environment.systemPackages = with pkgs; [
       ddcutil
