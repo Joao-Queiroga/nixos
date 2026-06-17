@@ -31,6 +31,7 @@
 
     programs.appimage.enable = true;
     programs.appimage.binfmt = true;
+    programs.fuse.userAllowOther = true;
 
     nix.settings.use-xdg-base-directories = true;
     nix.settings = {
@@ -99,6 +100,7 @@
       description = "João Queiroga";
       extraGroups = [
         "wheel"
+        "fuse"
         "networkmanager"
         "gamemode"
         "libvirtd"
