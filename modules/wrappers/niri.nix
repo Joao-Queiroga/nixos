@@ -127,7 +127,7 @@
 
         "Mod+B" = _: {
           props = {hotkey-overlay-title = "Open Browser";};
-          content.spawn = ["brave"];
+          content.spawn = ["firefox"];
         };
 
         "XF86AudioPlay".spawn = [(lib.getExe pkgs.playerctl) "play"];

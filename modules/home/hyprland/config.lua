@@ -72,6 +72,7 @@ hl.config({
 		float_gaps = 10,
 		resize_on_border = true,
 		layout = "scrolling",
+		allow_tearing = true,
 	},
 	misc = {
 		enable_anr_dialog = false,
@@ -112,6 +113,9 @@ hl.window_rule({ match = { class = "(discord)" }, workspace = 6 })
 hl.window_rule({ match = { class = "(WebCord)" }, workspace = 6 })
 hl.window_rule({ match = { class = "(teams-for-linux)" }, workspace = 7 })
 hl.window_rule({ match = { class = "(info.cemu.Cemu)" }, idle_inhibit = "focus" })
+
+hl.window_rule({ match = { initial_title = ".*[Mm]inecraft.*" }, tag = "+tear" })
+hl.window_rule({ match = { tag = "tear*" }, immediate = true })
 
 --layer rules
 hl.layer_rule({
