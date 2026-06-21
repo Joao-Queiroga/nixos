@@ -53,13 +53,6 @@
           ];
           mode = "insert";
         };
-        "\\t" = {
-          command = [
-            "expand-abbr"
-            "complete"
-          ];
-          mode = "insert";
-        };
       };
       interactiveShellInit =
         /*
@@ -77,6 +70,10 @@
         {
           name = "autopair";
           src = autopair.src;
+        }
+        {
+          name = "async-prompt";
+          src = async-prompt.src;
         }
       ];
     };
@@ -127,6 +124,7 @@
       starship = {
         enable = true;
         enableTransience = true;
+        enableInteractive = false;
         settings = {
           add_newline = false;
           character = {
