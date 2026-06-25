@@ -65,6 +65,17 @@
     services.gvfs.enable = true;
     services.geoclue2.enable = true;
 
+    services.chrony = {
+      enable = true;
+      servers = [
+        "a.st1.ntp.br"
+        "b.st1.ntp.br"
+        "c.st1.ntp.br"
+        "d.st1.ntp.br"
+      ];
+    };
+    services.timesyncd.enable = false;
+
     services.xserver.xkb.layout = "br";
     services.xserver.xkb.options = "numlock:on";
 
