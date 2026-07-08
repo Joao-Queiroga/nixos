@@ -1,7 +1,16 @@
 {inputs, ...}: {
-  flake.nixosModules.boot = {pkgs, ...}: {
+  flake.nixosModules.boot = {
+    pkgs,
+    config,
+    ...
+  }: {
     imports = [];
     boot = {
+      extraModulePackages = [config.boot.kernelPackages.v4l2loopback];
+      kernelModules = ["v4l2loopback"];
+      extraModprobeConfig = ''
+        options v4l2loopback exclusive_caps=1 card_label="DroidCam" video_nr=10
+      '';
       plymouth.enable = true;
       loader = {
         grub = {

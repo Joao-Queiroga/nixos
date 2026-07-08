@@ -154,7 +154,7 @@ bind(mainMod .. " + P", exec("$(bemenu-run --binding vim)"))
 -- Launch keybindings
 bind(mainMod .. " + Return", exec(terminal))
 bind(mainMod .. " + SHIFT + Return", exec("thunar"))
-bind(mainMod .. " + B", exec("firefox"))
+bind(mainMod .. " + B", exec("brave"))
 bind(mainMod .. " + V", noctalia("launcher clipboard"))
 
 -- Move focus with mainMod + arrow keys

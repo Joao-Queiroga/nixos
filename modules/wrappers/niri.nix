@@ -127,7 +127,7 @@
 
         "Mod+B" = _: {
           props = {hotkey-overlay-title = "Open Browser";};
-          content.spawn = ["firefox"];
+          content.spawn = ["brave"];
         };
 
         "XF86AudioPlay".spawn = [(lib.getExe pkgs.playerctl) "play"];
@@ -302,5 +302,8 @@
         "Mod+Shift+P".power-off-monitors = _: {};
       };
     };
+    extraSettings = [
+      {include = [{optional = true;} "~/.config/niri/overrides.kdl"];}
+    ];
   };
 }
