@@ -1,6 +1,0 @@
-[selene]
-base = "lua51"
-
-[globals]
-hl = { any = true }
-nix = { any = true }

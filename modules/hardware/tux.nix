@@ -1,11 +1,9 @@
-{inputs, ...}: {
-  flake.nixosModules.tuxModule = {
-    config,
-    lib,
-    pkgs,
-    modulesPath,
-    ...
-  }: {
+{
+  den,
+  lib,
+  ...
+}: {
+  den.aspects.tux-hardware.nixos = { config, pkgs, lib, modulesPath, ... }: {
     imports = [
       (modulesPath + "/installer/scan/not-detected.nix")
     ];

@@ -1,11 +1,9 @@
-{inputs, ...}: {
-  flake.nixosModules.tuxnoteModule = {
-    config,
-    lib,
-    pkgs,
-    modulesPath,
-    ...
-  }: {
+{
+  den,
+  lib,
+  ...
+}: {
+  den.aspects.tuxnote-hardware.nixos = { config, pkgs, lib, modulesPath, ... }: {
     imports = [(modulesPath + "/installer/scan/not-detected.nix")];
 
     boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "usb_storage" "sd_mod" "sr_mod" "rtsx_usb_sdmmc"];
