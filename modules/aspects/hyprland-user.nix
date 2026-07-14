@@ -1,5 +1,14 @@
-{ den, inputs, ... }: {
-  den.aspects.hyprland-user.homeManager = { pkgs, lib, config, ... }: let
+{
+  den,
+  inputs,
+  ...
+}: {
+  den.aspects.hyprland-user.homeManager = {
+    pkgs,
+    lib,
+    config,
+    ...
+  }: let
     noctalia = inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.noctalia-shell;
     myPkgs = with pkgs; [
       inputs.hyprnix.packages.${pkgs.stdenv.hostPlatform.system}.hyprshutdown
@@ -17,13 +26,12 @@
     toLuaTable = set: prefix:
       "{\n"
       + lib.concatStringsSep ",\n" (
-        lib.mapAttrsToList (k: v: ''  ${k} = "${prefix v}"'') set
+        lib.mapAttrsToList (k: v: ''${k} = "${prefix v}"'') set
       )
       + "\n}";
   in {
     home.packages = [
       noctalia
-      inputs.hyprnix.packages.${pkgs.stdenv.hostPlatform.system}.hyprpwcenter
       pkgs.runapp
     ];
     wayland.windowManager.hyprland = {
@@ -34,7 +42,7 @@
       systemd.enable = true;
       systemd.enableXdgAutostart = true;
       extraConfig = ''
-        package.path = package.path .. ";${./config.lua}/?.lua"
+        package.path = package.path .. ";${./.}/?.lua"
         _G.nix = {
           pkgs = ${toLuaTable mergedPkgs lib.getExe},
           pkgpath = ${toLuaTable mergedPkgs (p: "${p}")},
@@ -43,6 +51,5 @@
         require("config")
       '';
     };
-    services.hyprpolkitagent.enable = true;
   };
 }
