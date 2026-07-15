@@ -13,6 +13,7 @@
       den.aspects.hyprland-user
       den.aspects.firefox
       den.aspects.user-apps
+      den.aspects.yazi
     ];
 
     homeManager = {

@@ -38,15 +38,25 @@
       den.aspects.autoupgrade
     ];
 
-    nixos = { pkgs, ... }: {
-      environment.systemPackages = with pkgs; [
-        vim wget btop file kitty unzip
-        ventoy-full-gtk gparted exfatprogs killall python3
-      ] ++ [
-        inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.yazi
-        inputs.hyprnix.packages.${pkgs.stdenv.hostPlatform.system}.hyprland
-      ];
-      fonts.packages = with pkgs; [ corefonts ];
+    nixos = {pkgs, ...}: {
+      environment.systemPackages = with pkgs;
+        [
+          vim
+          wget
+          btop
+          file
+          kitty
+          unzip
+          ventoy-full-gtk
+          gparted
+          exfatprogs
+          killall
+          python3
+        ]
+        ++ [
+          inputs.hyprnix.packages.${pkgs.stdenv.hostPlatform.system}.hyprland
+        ];
+      fonts.packages = with pkgs; [corefonts];
     };
   };
 
