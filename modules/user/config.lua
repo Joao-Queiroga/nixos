@@ -55,7 +55,6 @@ hl.on("hyprland.start", function()
 	local function exec(cmd)
 		hl.exec_cmd(nix.pkgs.runapp .. " -- " .. cmd)
 	end
-	exec(nix.pkgs.noctalia)
 	workspaces_set()
 end)
 
@@ -133,7 +132,7 @@ local bind = hl.bind
 local dsp = hl.dsp
 
 local noctalia = function(cmd)
-	return dsp.exec_cmd(nix.pkgs.noctalia .. " ipc call " .. cmd)
+	return dsp.exec_cmd("noctalia msg " .. cmd)
 end
 
 bind(mainMod .. " + SHIFT + C", dsp.window.close())
@@ -148,14 +147,14 @@ bind(
 	)
 )
 bind(mainMod .. " + T", dsp.window.float({ action = "toggle" }))
-bind(mainMod .. " + R", noctalia("launcher toggle"))
+bind(mainMod .. " + R", noctalia("panel-toggle launcher"))
 bind(mainMod .. " + P", exec("$(bemenu-run --binding vim)"))
 
 -- Launch keybindings
 bind(mainMod .. " + Return", exec(terminal))
 bind(mainMod .. " + SHIFT + Return", exec("thunar"))
 bind(mainMod .. " + B", exec("brave"))
-bind(mainMod .. " + V", noctalia("launcher clipboard"))
+bind(mainMod .. " + V", noctalia("pannel-toggle clipboard"))
 
 -- Move focus with mainMod + arrow keys
 bind(mainMod .. " + left", dsp.focus({ direction = "left" }))
@@ -249,5 +248,4 @@ bind("XF86AudioPlay", dsp.exec_cmd(nix.pkgs.playerctl .. " play-pause"), { locke
 bind("XF86AudioPrev", dsp.exec_cmd(nix.pkgs.playerctl .. " previous"), { locked = true })
 
 -- Notifications
-bind("CONTROL + SPACE", noctalia("notifications dismissOldest"))
-bind("CONTROL + SHIFT + SPACE", noctalia("notifications dismissAll"))
+bind("CONTROL + SPACE", noctalia("notification-clear-active"))

@@ -14,6 +14,7 @@
       den.aspects.firefox
       den.aspects.user-apps
       den.aspects.yazi
+      den.aspects.noctalia
     ];
 
     homeManager = {

@@ -9,7 +9,6 @@
     config,
     ...
   }: let
-    noctalia = inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.noctalia-shell;
     myPkgs = with pkgs; [
       inputs.hyprnix.packages.${pkgs.stdenv.hostPlatform.system}.hyprshutdown
       runapp
@@ -17,7 +16,6 @@
       brightnessctl
     ];
     namedPkgs = {
-      noctalia = noctalia;
     };
     pkgsSet = lib.genAttrs (map (p: p.pname) myPkgs) (
       name: lib.findFirst (p: p.pname == name) null myPkgs
@@ -31,7 +29,6 @@
       + "\n}";
   in {
     home.packages = [
-      noctalia
       pkgs.runapp
     ];
     wayland.windowManager.hyprland = {

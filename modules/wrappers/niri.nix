@@ -20,13 +20,10 @@
     config,
     lib,
     ...
-  }: let
-    noctalia = lib.getExe self.packages.${pkgs.stdenv.hostPlatform.system}.noctalia-shell;
-  in {
+  }: {
     imports = [wlib.wrapperModules.niri];
     settings = {
       xwayland-satellite.path = lib.getExe pkgs.xwayland-satellite;
-      spawn-at-startup = ["${noctalia}"];
       input = {
         keyboard = {
           xkb = {
@@ -82,14 +79,13 @@
       ];
       layer-rules = [
         {
-          matches = [{namespace = "^noctalia-(background|launcher-overlay|dock)-.*$";}];
+          matches = [{namespace = "^noctalia-(bar-[^\"]+|notification|dock|panel|attached-panel|osd)$";}];
           background-effect = {
-            blur = true;
             xray = false;
           };
         }
         {
-          matches = [{namespace = "^noctalia-overview*";}];
+          matches = [{namespace = "^noctalia-backdrop";}];
           place-within-backdrop = true;
         }
       ];
@@ -112,7 +108,7 @@
 
         "Mod+R" = _: {
           props = {hotkey-overlay-title = "Run an Application: Noctalia-shell";};
-          content.spawn = ["${noctalia}" "ipc" "call" "launcher" "toggle"];
+          content.spawn = ["noctalia" "msg" "panel-toggle" "launcher"];
         };
 
         "Mod+P" = _: {
@@ -122,7 +118,7 @@
 
         "Mod+V" = _: {
           props = {hotkey-overlay-title = "Clipboard History";};
-          content.spawn = ["${noctalia}" "ipc" "call" "launcher" "clipboard"];
+          content.spawn = ["noctalia" "msg" "panel-toggle" "clipboard"];
         };
 
         "Mod+B" = _: {
@@ -143,8 +139,7 @@
         "XF86MonBrightnessUp".spawn = ["brightnessctl" "--class=backlight" "set" "+10%"];
         "XF86MonBrightnessDown".spawn = ["brightnessctl" "--class=backlight" "set" "10%-"];
 
-        "Ctrl+Space".spawn = ["${noctalia}" "ipc" "call" "notifications" "dismissOldest"];
-        "Ctrl+Shift+Space".spawn = ["${noctalia}" "ipc" "call" "notifications" "dismissAll"];
+        "Ctrl+Space".spawn = ["noctalia" "msg" "notification-clear-active"];
 
         "Mod+O" = _: {
           props = {repeat = false;};
