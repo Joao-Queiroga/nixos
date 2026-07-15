@@ -55,4 +55,10 @@
         meta.description = "lsfg-vk with Qt6 UI";
       });
   };
+  flake-file.inputs = {
+    lsfg-vk = {
+      url = "github:PancakeTAS/lsfg-vk";
+      flake = false;
+    };
+  };
 }

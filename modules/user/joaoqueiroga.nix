@@ -1,4 +1,4 @@
-{ den, ... }: {
+{den, ...}: {
   den.aspects.joaoqueiroga = {
     includes = [
       den.batteries.define-user
@@ -10,19 +10,23 @@
       den.aspects.dircolors
       den.aspects.env-vars
       den.aspects.user-services
-      den.aspects.firefox-profile
       den.aspects.hyprland-user
+      den.aspects.firefox
       den.aspects.user-apps
     ];
 
-    homeManager = { config, pkgs, ... }: {
+    homeManager = {
+      config,
+      pkgs,
+      ...
+    }: {
       home.username = "joaoqueiroga";
       home.homeDirectory = "/home/joaoqueiroga";
 
       dconf.settings = {
         "org/virt-manager/virt-manager/connections" = {
-          autoconnect = [ "qemu:///system" ];
-          uris = [ "qemu:///system" ];
+          autoconnect = ["qemu:///system"];
+          uris = ["qemu:///system"];
         };
       };
 

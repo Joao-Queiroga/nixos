@@ -7,13 +7,10 @@
 
   flake-file.inputs = {
     den.url = "github:denful/den";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-file.url = "github:vic/flake-file";
     home-manager = {
       url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    stylix = {
-      url = "github:nix-community/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     hyprnix.url = "github:hyprwm/hyprnix";
@@ -21,18 +18,5 @@
     my-neovim.inputs.nixpkgs.follows = "nixpkgs";
     wrapper-modules.url = "github:birdeehub/nix-wrapper-modules";
     wrapper-modules.inputs.nixpkgs.follows = "nixpkgs";
-
-    lsfg-vk = {
-      url = "github:PancakeTAS/lsfg-vk";
-      flake = false;
-    };
-    betterfox = {
-      url = "github:yokoffing/Betterfox";
-      flake = false;
-    };
-    qylock = {
-      url = "github:Darkkal44/qylock";
-      flake = false;
-    };
   };
 }
