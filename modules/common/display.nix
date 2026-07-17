@@ -18,6 +18,7 @@
       sddm.enable = true;
     };
     services.displayManager = {
+      defaultSession = "niri";
       sddm = {
         enable = true;
         autoNumlock = true;
