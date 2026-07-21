@@ -4,16 +4,18 @@
   ...
 }: let
   caches = {
-    extra-substituters = ["https://hyprland.cachix.org" "https://noctalia.cachix.org"];
-    extra-trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="];
+    extra-substituters = ["https://noctalia.cachix.org" "https://install.determinate.systems"];
+    extra-trusted-public-keys = ["noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4=" "cache.flakehub.com-3:hJuILl5sVK4iKm86JzgdXW12Y2Hwd5G07qKtHTOcDCM="];
   };
 in {
   den.aspects.system-base.nixos = {
     config,
     pkgs,
+    inputs',
     ...
   }: {
     imports = [inputs.self.nixosModules.niri];
+    nix.package = inputs'.determinate.packages.default;
     nixpkgs.config = {
       allowUnfree = true;
       allowBroken = true;
@@ -51,5 +53,10 @@ in {
       binsh = "${pkgs.dash}/bin/dash";
     };
   };
-  flake-file.nixConfig = caches;
+  flake-file = {
+    nixConfig = caches;
+    inputs = {
+      determinate.url = "https://flakehub.com/f/DeterminateSystems/nix-src/*";
+    };
+  };
 }

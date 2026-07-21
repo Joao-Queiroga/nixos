@@ -5,12 +5,12 @@
 
   nixConfig = {
     extra-substituters = [
-      "https://hyprland.cachix.org"
       "https://noctalia.cachix.org"
+      "https://install.determinate.systems"
     ];
     extra-trusted-public-keys = [
-      "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
       "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
+      "cache.flakehub.com-3:hJuILl5sVK4iKm86JzgdXW12Y2Hwd5G07qKtHTOcDCM="
     ];
   };
 
@@ -20,6 +20,7 @@
       flake = false;
     };
     den.url = "github:denful/den";
+    determinate.url = "https://flakehub.com/f/DeterminateSystems/nix-src/*";
     flake-file.url = "github:vic/flake-file";
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
@@ -29,7 +30,6 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    hyprnix.url = "github:hyprwm/hyprnix";
     import-tree.url = "github:vic/import-tree";
     lsfg-vk = {
       url = "github:PancakeTAS/lsfg-vk";

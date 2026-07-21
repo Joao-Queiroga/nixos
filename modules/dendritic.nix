@@ -13,9 +13,6 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    hyprnix.url = "github:hyprwm/hyprnix";
-    my-neovim.url = "github:/Joao-Queiroga/nvim";
-    my-neovim.inputs.nixpkgs.follows = "nixpkgs";
     wrapper-modules.url = "github:birdeehub/nix-wrapper-modules";
     wrapper-modules.inputs.nixpkgs.follows = "nixpkgs";
   };

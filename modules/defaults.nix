@@ -21,7 +21,6 @@
 
       den.aspects.boot
       den.aspects.display
-      den.aspects.firefox
       den.aspects.networking
       den.aspects.locale
       den.aspects.bluetooth
@@ -29,7 +28,6 @@
       den.aspects.flatpak
       den.aspects.system-base
       den.aspects.stylix
-      den.aspects.hyprland
       den.aspects.kernel
       den.aspects.shell
       den.aspects.neovim
@@ -39,23 +37,19 @@
     ];
 
     nixos = {pkgs, ...}: {
-      environment.systemPackages = with pkgs;
-        [
-          vim
-          wget
-          btop
-          file
-          kitty
-          unzip
-          ventoy-full-gtk
-          gparted
-          exfatprogs
-          killall
-          python3
-        ]
-        ++ [
-          inputs.hyprnix.packages.${pkgs.stdenv.hostPlatform.system}.hyprland
-        ];
+      environment.systemPackages = with pkgs; [
+        vim
+        wget
+        btop
+        file
+        kitty
+        unzip
+        ventoy-full-gtk
+        gparted
+        exfatprogs
+        killall
+        python3
+      ];
       fonts.packages = with pkgs; [corefonts];
     };
   };

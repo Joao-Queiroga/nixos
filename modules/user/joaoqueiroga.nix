@@ -10,11 +10,11 @@
       den.aspects.dircolors
       den.aspects.env-vars
       den.aspects.user-services
-      den.aspects.hyprland-user
       den.aspects.firefox
       den.aspects.user-apps
       den.aspects.yazi
       den.aspects.noctalia
+      den.aspects.hyprland
     ];
 
     homeManager = {

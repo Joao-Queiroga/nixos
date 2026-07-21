@@ -1,5 +1,5 @@
 {...}: let
-  theme = {
+  theme = rec {
     base00 = "#1a1b26";
     base01 = "#16161e";
     base02 = "#0C0E14";
@@ -16,6 +16,15 @@
     base0D = "#7aa2f7";
     base0E = "#bb9af7";
     base0F = "#db4b4b";
+
+    red = base08;
+    orange = base09;
+    yellow = base0A;
+    green = base0B;
+    cyan = base0C;
+    blue = base0D;
+    magenta = base0E;
+    brown = base0F;
   };
 
   stripHash = str:
