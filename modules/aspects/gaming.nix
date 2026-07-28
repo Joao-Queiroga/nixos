@@ -1,11 +1,15 @@
-{ den, ... }: {
+{den, ...}: {
   den.aspects.gaming = {
-    includes = [ den.aspects.zram ];
+    includes = [den.aspects.zram];
 
-    nixos = { pkgs, ... }: {
+    nixos = {
+      pkgs,
+      self',
+      ...
+    }: {
       zramSwap.memoryPercent = 75;
 
-      boot.kernelParams = [ "transparent_hugepage=madvise" ];
+      boot.kernelParams = ["transparent_hugepage=madvise"];
       boot.kernel.sysctl = {
         "vm.swappiness" = 180;
         "vm.watermark_boost_factor" = 0;
@@ -54,8 +58,14 @@
       };
 
       environment.systemPackages = with pkgs; [
-        lsfg-vk lsfg-vk-ui vkbasalt vkbasalt-cli
-        cemu prismlauncher mangohud heroic
+        self'.packages.lsfg-vk
+        self'.packages.lsfg-vk-ui
+        vkbasalt
+        vkbasalt-cli
+        cemu
+        prismlauncher
+        mangohud
+        heroic
       ];
     };
   };

@@ -35,6 +35,10 @@
           "-DLSFGVK_BUILD_UI=OFF"
           "-DLSFGVK_INSTALL_XDG_FILES=ON"
         ];
+        postPatch = ''
+          substituteInPlace lsfg-vk-layer/VkLayer_LSFGVK_frame_generation.json.in \
+            --replace-fail "@LSFGVK_LAYER_LIBRARY_PATH@" "$out/lib/liblsfg-vk-layer.so"
+        '';
 
         meta.description = "Vulkan layer for frame generation using Lossless Scaling";
       });
