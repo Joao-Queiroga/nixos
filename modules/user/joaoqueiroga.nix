@@ -15,6 +15,7 @@
       den.aspects.yazi
       den.aspects.noctalia
       den.aspects.hyprland
+      den.aspects.niri
     ];
 
     homeManager = {

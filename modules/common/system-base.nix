@@ -14,7 +14,6 @@ in {
     inputs',
     ...
   }: {
-    imports = [inputs.self.nixosModules.niri];
     nix.package = inputs'.determinate.packages.default;
     nixpkgs.config = {
       allowUnfree = true;

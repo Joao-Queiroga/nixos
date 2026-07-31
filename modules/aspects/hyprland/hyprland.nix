@@ -8,7 +8,6 @@
       programs.hyprland = {
         enable = true;
       };
-      environment.systemPackages = [pkgs.hyprland];
     };
     homeManager = {
       pkgs,
@@ -41,8 +40,6 @@
       wayland.windowManager.hyprland = {
         enable = true;
         configType = "lua";
-        package = null;
-        portalPackage = null;
         systemd.enable = true;
         systemd.enableXdgAutostart = true;
         extraConfig = ''

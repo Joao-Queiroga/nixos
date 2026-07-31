@@ -1,4 +1,4 @@
-{ den, ... }: {
+{den, ...}: {
   den.aspects.shells = {
     includes = [
       den.aspects.shell-fish
@@ -10,7 +10,11 @@
     ];
   };
 
-  den.aspects.shell-fish.homeManager = { config, pkgs, ... }: {
+  den.aspects.shell-fish.homeManager = {
+    config,
+    pkgs,
+    ...
+  }: {
     programs.fish = {
       enable = true;
       functions = {
@@ -18,21 +22,51 @@
         starship_transient_prompt_func.body = "starship module character";
       };
       binds = {
-        up = { command = "_atuin_bind_up"; mode = "default"; };
-        "up-insert" = { name = "up"; command = "_atuin_bind_up"; mode = "insert"; };
-        "ctrl-k" = { command = "_atuin_bind_up"; mode = "default"; };
-        "ctrl-k-insert" = { name = "ctrl-k"; command = "_atuin_bind_up"; mode = "insert"; };
-        enter = { command = [ "expand-abbr" "execute" ]; mode = "default"; };
-        "enter-insert" = { name = "enter"; command = [ "expand-abbr" "execute" ]; mode = "insert"; };
+        up = {
+          command = "_atuin_bind_up";
+          mode = "default";
+        };
+        "up-insert" = {
+          name = "up";
+          command = "_atuin_bind_up";
+          mode = "insert";
+        };
+        "ctrl-k" = {
+          command = "_atuin_bind_up";
+          mode = "default";
+        };
+        "ctrl-k-insert" = {
+          name = "ctrl-k";
+          command = "_atuin_bind_up";
+          mode = "insert";
+        };
+        enter = {
+          command = ["expand-abbr" "execute"];
+          mode = "default";
+        };
+        "enter-insert" = {
+          name = "enter";
+          command = ["expand-abbr" "execute"];
+          mode = "insert";
+        };
       };
       interactiveShellInit = ''
         set -U fish_color_command cyan
         fish_vi_key_bindings
       '';
       plugins = with pkgs.fishPlugins; [
-        { name = "fishbang"; src = fishbang.src; }
-        { name = "autopair"; src = autopair.src; }
-        { name = "async-prompt"; src = async-prompt.src; }
+        {
+          name = "fishbang";
+          src = fishbang.src;
+        }
+        {
+          name = "autopair";
+          src = autopair.src;
+        }
+        {
+          name = "async-prompt";
+          src = async-prompt.src;
+        }
       ];
     };
     programs.zsh = {
@@ -44,30 +78,53 @@
       initContent = "${pkgs.pfetch-rs}/bin/pfetch";
       profileExtra = ". ~/.config/shell/profile";
       plugins = [
-        { name = "fast-syntax-highlighting"; src = pkgs.zsh-fast-syntax-highlighting; file = "share/zsh/site-functions/fast-syntax-highlighting.plugin.zsh"; }
-        { name = "zsh-autopair"; src = pkgs.zsh-autopair; file = "share/zsh/zsh-autopair/autopair.zsh"; }
-        { name = "zsh-vi-mode"; src = pkgs.zsh-vi-mode; file = "share/zsh-vi-mode/zsh-vi-mode.plugin.zsh"; }
+        {
+          name = "fast-syntax-highlighting";
+          src = pkgs.zsh-fast-syntax-highlighting;
+          file = "share/zsh/site-functions/fast-syntax-highlighting.plugin.zsh";
+        }
+        {
+          name = "zsh-autopair";
+          src = pkgs.zsh-autopair;
+          file = "share/zsh/zsh-autopair/autopair.zsh";
+        }
+        {
+          name = "zsh-vi-mode";
+          src = pkgs.zsh-vi-mode;
+          file = "share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
+        }
       ];
     };
     programs.nushell.enable = true;
   };
 
-  den.aspects.shell-aliases.homeManager = { pkgs, ... }: {
+  den.aspects.shell-aliases.homeManager = {pkgs, ...}: {
     home.shellAliases = {
-      nvimconf = "nvim ~/.config/nvim/init.lua";
-      cat = "bat"; tree = "eza --tree"; cd = "z";
-      grep = "rg"; du = "${pkgs.dust}/bin/dust";
+      cat = "bat";
+      tree = "eza --tree";
+      cd = "z";
+      grep = "rg";
+      du = "${pkgs.dust}/bin/dust";
     };
   };
 
-  den.aspects.cli-tools.homeManager = { pkgs, ... }: {
+  den.aspects.cli-tools.homeManager = {pkgs, ...}: {
     programs = {
       zoxide.enable = true;
       bat.enable = true;
-      ripgrep = { enable = true; arguments = [ "--hidden" "--smart-case" ]; };
+      ripgrep = {
+        enable = true;
+        arguments = ["--hidden" "--smart-case"];
+      };
       carapace.enable = true;
-      fzf = { enable = true; historyWidget.command = ""; };
-      eza = { enable = true; icons = "auto"; };
+      fzf = {
+        enable = true;
+        historyWidget.command = "";
+      };
+      eza = {
+        enable = true;
+        icons = "auto";
+      };
       nix-your-shell.enable = true;
     };
   };
@@ -88,7 +145,7 @@
 
   den.aspects.atuin.homeManager.programs.atuin = {
     enable = true;
-    flags = [ "--disable-up-arrow" ];
+    flags = ["--disable-up-arrow"];
     settings = {
       dialect = "uk";
       enter_accept = true;
@@ -101,7 +158,7 @@
     };
   };
 
-  den.aspects.tmux.homeManager = { pkgs, ... }: {
+  den.aspects.tmux.homeManager = {pkgs, ...}: {
     programs.tmux = {
       enable = true;
       escapeTime = 0;
@@ -113,8 +170,13 @@
         bind C-l send-keys 'C-l'
       '';
       plugins = with pkgs.tmuxPlugins; [
-        yank vim-tmux-navigator sensible
-        { plugin = tokyo-night-tmux; extraConfig = "set -g @tokyo-night-tmux_window_id_style none"; }
+        yank
+        vim-tmux-navigator
+        sensible
+        {
+          plugin = tokyo-night-tmux;
+          extraConfig = "set -g @tokyo-night-tmux_window_id_style none";
+        }
       ];
     };
   };
