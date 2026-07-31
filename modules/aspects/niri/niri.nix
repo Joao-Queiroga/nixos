@@ -13,6 +13,9 @@
       config,
       ...
     }: {
+      home.packages = with pkgs; [
+        jq
+      ];
       wayland.windowManager.niri = let
         colors = config.lib.stylix.colors.withHashtag;
       in {
@@ -66,6 +69,7 @@
             {
               output = {
                 _args = ["LG Electronics LG TV 0x01010101"];
+                off = {};
                 mode = "1920x1080";
               };
             }
@@ -130,6 +134,11 @@
             "Mod+B" = {
               _props = {hotkey-overlay-title = "Open Browser";};
               spawn = ["brave"];
+            };
+
+            "Mod+M" = {
+              _props = {hotkey-overlay-title = "Ligar/desligar monitor";};
+              spawn = ["sh" "${./monitors.sh}"];
             };
 
             "XF86AudioPlay".spawn = [(lib.getExe pkgs.playerctl) "play"];

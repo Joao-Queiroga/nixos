@@ -47,8 +47,20 @@
             start = [
               "launcher"
               "workspaces"
+              "group:g1"
               "active_window"
               "media"
+            ];
+
+            capsule_group = [
+              {
+                enabled = true;
+                fill = "on_hover";
+                id = "g1";
+                members = ["cpu" "ram" "temp"];
+                opacity = 0.5;
+                padding = 6.0;
+              }
             ];
           };
 
@@ -233,13 +245,25 @@
             show_label = false;
           };
 
+          widget.cpu = {
+            show_value = false;
+          };
+
           widget.network = {
             show_label = false;
           };
 
+          widget.ram = {
+            show_value = false;
+          };
+
+          widget.temp = {
+            show_value = false;
+          };
+
           widget.tray = {
             capsule = true;
-            scale = 1.4;
+            scale = 1.1;
           };
 
           widget.workspaces = {
