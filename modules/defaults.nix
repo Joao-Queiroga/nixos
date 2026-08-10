@@ -34,6 +34,7 @@
       den.aspects.nixld
       den.aspects.apparmor
       den.aspects.autoupgrade
+      den.aspects.comma
     ];
 
     nixos = {pkgs, ...}: {

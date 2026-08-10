@@ -76,6 +76,21 @@
             mem_graphs = false;
           };
         };
+        wiremix = {
+          enable = true;
+          settings = {
+            keybindings = [
+              {
+                key = {Char = "L";};
+                action = {SetRelativeVolume = 0.1;};
+              }
+              {
+                key = {Char = "H";};
+                action = {SetRelativeVolume = -0.1;};
+              }
+            ];
+          };
+        };
         home-manager.enable = true;
       };
     };
