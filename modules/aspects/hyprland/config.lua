@@ -110,6 +110,7 @@ hl.config({
 
 --window rules
 hl.window_rule({ match = { class = "(brave-browser)" }, workspace = 2 })
+hl.window_rule({ match = { class = "(brave-origin)" }, workspace = 2 })
 hl.window_rule({ match = { class = "(firefox)" }, workspace = 2 })
 hl.window_rule({ match = { class = "(discord)" }, workspace = 6 })
 hl.window_rule({ match = { class = "(WebCord)" }, workspace = 6 })
@@ -156,7 +157,7 @@ bind(mainMod .. " + P", exec("$(bemenu-run --binding vim)"))
 -- Launch keybindings
 bind(mainMod .. " + Return", exec(terminal))
 bind(mainMod .. " + SHIFT + Return", exec("thunar"))
-bind(mainMod .. " + B", exec("brave"))
+bind(mainMod .. " + B", exec("brave-origin"))
 bind(mainMod .. " + V", noctalia("pannel-toggle clipboard"))
 
 -- Move focus with mainMod + arrow keys

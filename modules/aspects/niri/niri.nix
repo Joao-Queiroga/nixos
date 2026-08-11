@@ -95,7 +95,7 @@
             }
             {
               window-rule = {
-                _children = [{match._props = {app-id = "brave-browser";};} {match._props = {app-id = "kitty";};}];
+                _children = [{match._props = {app-id = "brave-browser";};} {match._props = {app-id = "brave-origin";};} {match._props = {app-id = "kitty";};}];
                 open-maximized = true;
               };
             }
@@ -133,7 +133,7 @@
 
             "Mod+B" = {
               _props = {hotkey-overlay-title = "Open Browser";};
-              spawn = ["brave"];
+              spawn = ["brave-origin"];
             };
 
             "Mod+M" = {
