@@ -18,7 +18,7 @@ in {
     nixpkgs.config = {
       allowUnfree = true;
       allowBroken = true;
-      permittedInsecurePackages = ["ventoy-gtk3-1.1.12"];
+      permittedInsecurePackages = ["ventoy-gtk3-1.1.17"];
     };
     nix = {
       settings =
