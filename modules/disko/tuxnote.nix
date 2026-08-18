@@ -3,11 +3,8 @@
   den,
   ...
 }: {
-  den.aspects.tuxnote-hardware.nixos = {config, lib, modulesPath, ...}: {
-    imports = [
-      inputs.disko.nixosModules.disko
-      (modulesPath + "/installer/scan/not-detected.nix")
-    ];
+  den.aspects.tuxnote-disko.nixos = {
+    imports = [inputs.disko.nixosModules.disko];
 
     disko.devices.disk.main = {
       type = "disk";
@@ -70,15 +67,5 @@
         };
       };
     };
-
-    boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "usb_storage" "sd_mod" "sr_mod" "rtsx_usb_sdmmc"];
-    boot.initrd.kernelModules = [];
-    boot.kernelModules = [];
-    boot.extraModulePackages = [];
-
-    networking.useDHCP = lib.mkDefault true;
-    nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-    hardware.cpu.intel.updateMicrocode =
-      lib.mkDefault config.hardware.enableRedistributableFirmware;
   };
 }
