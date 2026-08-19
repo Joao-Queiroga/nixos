@@ -4,8 +4,7 @@
   ...
 }: {
   den.aspects.tuxnote-minimal.includes = [
-    den.aspects.tuxnote-disko
-    den.aspects.tuxnote-minimal-hardware
+    den.aspects.tuxnote-hardware
     den.aspects.boot
     den.aspects.networking
   ];
