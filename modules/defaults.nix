@@ -28,7 +28,6 @@
       den.aspects.flatpak
       den.aspects.system-base
       den.aspects.stylix
-      den.aspects.kernel
       den.aspects.shell
       den.aspects.neovim
       den.aspects.nixld

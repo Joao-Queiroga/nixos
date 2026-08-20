@@ -4,9 +4,12 @@
 
     nixos = {
       pkgs,
+      lib,
       self',
       ...
     }: {
+      boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_xanmod_latest;
+
       zramSwap.memoryPercent = 75;
 
       boot.kernelParams = ["transparent_hugepage=madvise"];

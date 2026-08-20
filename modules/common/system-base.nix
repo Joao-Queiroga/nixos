@@ -17,7 +17,6 @@ in {
     nix.package = inputs'.determinate.packages.default;
     nixpkgs.config = {
       allowUnfree = true;
-      allowBroken = true;
       permittedInsecurePackages = ["ventoy-gtk3-1.1.17"];
     };
     nix = {
