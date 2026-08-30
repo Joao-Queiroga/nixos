@@ -212,14 +212,6 @@
             niri_overview_type_to_launch_enabled = true;
             polkit_agent = true;
             settings_show_advanced = false;
-
-            launcher = {
-              launcher_categories = false;
-            };
-            panel = {
-              launcher_categories = false;
-            };
-
             screen_corners = {
               enabled = true;
             };
@@ -267,7 +259,7 @@
           };
 
           widget.workspaces = {
-            display = "none";
+            show_labels = false;
           };
         };
       };

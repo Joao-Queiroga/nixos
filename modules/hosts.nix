@@ -2,7 +2,10 @@
 # then config their aspects in as many files you want
 {
   # tux user at igloo host.
-  den.hosts.x86_64-linux.tux.users.joaoqueiroga = {};
+  den.hosts.x86_64-linux.tux = {
+    strong = true;
+    users.joaoqueiroga = {};
+  };
   den.hosts.x86_64-linux.tuxnote.users.joaoqueiroga = {};
   den.hosts.x86_64-linux.tuxnote-minimal = {};
 

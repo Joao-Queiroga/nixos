@@ -17,23 +17,19 @@
 
   den.aspects.common = {
     includes = [
-      den.batteries.hostname
+      den.aspects.minimal
 
-      den.aspects.boot
       den.aspects.display
-      den.aspects.networking
-      den.aspects.locale
       den.aspects.bluetooth
       den.aspects.graphics
       den.aspects.flatpak
-      den.aspects.system-base
       den.aspects.stylix
-      den.aspects.shell
       den.aspects.neovim
       den.aspects.nixld
       den.aspects.apparmor
       den.aspects.autoupgrade
       den.aspects.comma
+      den.aspects.desktop-base
     ];
 
     nixos = {pkgs, ...}: {
@@ -55,4 +51,8 @@
   };
 
   den.schema.user.classes = lib.mkDefault ["homeManager"];
+
+  den.schema.host = {lib, ...}: {
+    options.strong = lib.mkEnableOption "whether this is a strong (high-performance) host";
+  };
 }

@@ -6,6 +6,7 @@
   den.aspects.niri = {
     nixos = {
       programs.niri.enable = true;
+      services.displayManager.defaultSession = "niri";
     };
     homeManager = {
       pkgs,

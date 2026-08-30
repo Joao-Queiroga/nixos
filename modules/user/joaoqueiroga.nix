@@ -1,5 +1,5 @@
 {den, ...}: {
-  den.aspects.joaoqueiroga = {
+  den.aspects.joaoqueiroga = {host, ...}: {
     includes = [
       den.batteries.define-user
       den.batteries.primary-user
@@ -14,8 +14,8 @@
       den.aspects.user-apps
       den.aspects.yazi
       den.aspects.noctalia
-      den.aspects.hyprland
       den.aspects.niri
+      (if host.strong then den.aspects.strong else den.aspects.weak)
     ];
 
     homeManager = {

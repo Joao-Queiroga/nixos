@@ -8,7 +8,7 @@
       self',
       ...
     }: {
-      boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_xanmod_latest;
+      boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_xanmod;
 
       zramSwap.memoryPercent = 75;
 

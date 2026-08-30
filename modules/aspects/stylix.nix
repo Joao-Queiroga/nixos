@@ -37,6 +37,10 @@
         };
       };
     };
+
+    provides.to-users = {user, ...}: {
+      homeManager.stylix.targets.firefox.enable = false;
+    };
   };
   flake-file.inputs = {
     stylix = {

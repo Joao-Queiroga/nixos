@@ -1,21 +1,13 @@
 {
   den,
-  lib,
   ...
 }: {
   den.aspects.tuxnote-minimal.includes = [
+    den.aspects.minimal
     den.aspects.tuxnote-hardware
-    den.aspects.boot
-    den.aspects.networking
   ];
 
   den.aspects.tuxnote-minimal.nixos = {pkgs, ...}: {
-    boot.extraModulePackages = lib.mkForce [];
-    boot.kernelModules = lib.mkForce [];
-    boot.extraModprobeConfig = lib.mkForce "";
-    boot.plymouth.enable = lib.mkForce false;
-    boot.kernelParams = lib.mkForce [];
-
     environment.systemPackages = with pkgs; [
       btrfs-progs
       curl

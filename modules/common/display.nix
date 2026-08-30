@@ -11,6 +11,7 @@
   }: {
     imports = [inputs.qylock.nixosModules.default];
     services.xserver.enable = true;
+    boot.plymouth.enable = true;
     environment.systemPackages = [config.stylix.cursor.package];
     programs.qylock = {
       enable = true;
@@ -18,7 +19,6 @@
       sddm.enable = true;
     };
     services.displayManager = {
-      defaultSession = "niri";
       sddm = {
         enable = true;
         autoNumlock = true;
