@@ -35,10 +35,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     import-tree.url = "github:vic/import-tree";
-    lsfg-vk = {
-      url = "github:PancakeTAS/lsfg-vk";
-      flake = false;
-    };
     my-neovim = {
       url = "github:/Joao-Queiroga/nvim";
       inputs.nixpkgs.follows = "nixpkgs";

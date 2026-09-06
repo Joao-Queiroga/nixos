@@ -61,8 +61,8 @@
       };
 
       environment.systemPackages = with pkgs; [
-        self'.packages.lsfg-vk
-        self'.packages.lsfg-vk-ui
+        lsfg-vk
+        lsfg-vk-ui
         vkbasalt
         vkbasalt-cli
         cemu
