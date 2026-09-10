@@ -1,5 +1,5 @@
-{...}: {
-  den.aspects.yazi.homeManager = {pkgs, ...}: {
+{ ... }: {
+  den.aspects.yazi.homeManager = { pkgs, ... }: {
     programs.yazi = {
       enable = true;
       plugins = with pkgs.yaziPlugins; {
@@ -10,19 +10,15 @@
         starship = starship;
         full-border = full-border;
       };
-      initLua =
-        /*
-        lua
-        */
-        ''
-          require("starship"):setup()
-          require("full-border"):setup()
-          require("git"):setup()
-          require("zoxide"):setup({
-            update_db = true,
-          })
-          require("gvfs"):setup()
-        '';
+      initLua = /* lua */ ''
+        require("starship"):setup()
+        require("full-border"):setup()
+        require("git"):setup()
+        require("zoxide"):setup({
+          update_db = true,
+        })
+        require("gvfs"):setup()
+      '';
       settings = {
         plugin = {
           prepend_preloaders = [
@@ -41,14 +37,14 @@
         opener = {
           jar = [
             {
-              run = ''java -jar "$1"'';
+              run = ''java -jar "%h"'';
               orphan = true;
               desc = "Open jar file";
             }
           ];
           svg = [
             {
-              run = ''imv -b#ffffff "$1"'';
+              run = ''imv -b#ffffff "%h"'';
               orphan = true;
               desc = "Open svg";
             }
@@ -58,11 +54,11 @@
           prepend_rules = [
             {
               url = "*.jar";
-              use = ["jar"];
+              use = [ "jar" ];
             }
             {
               mime = "image/svg+xml";
-              use = ["svg"];
+              use = [ "svg" ];
             }
           ];
         };
@@ -86,58 +82,91 @@
               desc = "Drag files";
             }
             {
-              on = ["M" "m"];
+              on = [
+                "M"
+                "m"
+              ];
               run = "plugin gvfs -- select-then-mount --jump";
               desc = "Select device to mount and jump to its mount point";
             }
 
             {
-              on = ["M" "R"];
+              on = [
+                "M"
+                "R"
+              ];
               run = "plugin gvfs -- remount-current-cwd-device";
               desc = "Remount device under cwd";
             }
             {
-              on = ["M" "u"];
+              on = [
+                "M"
+                "u"
+              ];
               run = "plugin gvfs -- select-then-unmount --eject";
               desc = "Select device then eject";
             }
             {
-              on = ["M" "U"];
+              on = [
+                "M"
+                "U"
+              ];
               run = "plugin gvfs -- select-then-unmount --eject --force";
               desc = "Select device then force to eject/unmount";
             }
             {
-              on = ["M" "a"];
+              on = [
+                "M"
+                "a"
+              ];
               run = "plugin gvfs -- add-mount";
               desc = "Add a GVFS mount URI";
             }
             {
-              on = ["M" "e"];
+              on = [
+                "M"
+                "e"
+              ];
               run = "plugin gvfs -- edit-mount";
               desc = "Edit a GVFS mount URI";
             }
             {
-              on = ["M" "r"];
+              on = [
+                "M"
+                "r"
+              ];
               run = "plugin gvfs -- remove-mount";
               desc = "Remove a GVFS mount URI";
             }
             {
-              on = ["g" "m"];
+              on = [
+                "g"
+                "m"
+              ];
               run = "plugin gvfs -- jump-to-device";
               desc = "Select device then jump to its mount point";
             }
             {
-              on = ["`" "`"];
+              on = [
+                "`"
+                "`"
+              ];
               run = "plugin gvfs -- jump-back-prev-cwd";
               desc = "Jump back to the position before jumped to device";
             }
             {
-              on = ["M" "t"];
+              on = [
+                "M"
+                "t"
+              ];
               run = "plugin gvfs -- automount-when-cd";
               desc = "Enable automount when cd to device under cwd";
             }
             {
-              on = ["M" "T"];
+              on = [
+                "M"
+                "T"
+              ];
               run = "plugin gvfs -- automount-when-cd --disabled";
               desc = "Disable automount when cd to device under cwd";
             }
