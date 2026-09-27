@@ -16,6 +16,7 @@
       den.aspects.noctalia
       den.aspects.niri
       den.aspects.mango
+      den.aspects.ai
       (if host.strong then den.aspects.strong else den.aspects.weak)
     ];
 

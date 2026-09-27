@@ -39,6 +39,7 @@
       url = "github:mangowm/mango";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    mcp-servers-nix.url = "github:natsukium/mcp-servers-nix";
     my-neovim = {
       url = "github:/Joao-Queiroga/nvim";
       inputs.nixpkgs.follows = "nixpkgs";
