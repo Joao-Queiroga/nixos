@@ -57,6 +57,7 @@
             enable = true;
             flake = "${config.home.homeDirectory}/Projects/nixos";
           };
+          devenv.enable = true;
           lazygit = {
             enable = true;
             settings = {

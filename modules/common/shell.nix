@@ -3,14 +3,19 @@
     nixos = { pkgs, ... }: {
       programs.bash = {
         enable = true;
-        interactiveShellInit = ''
-          if [[ $(${pkgs.procps}/bin/ps --no-header --pid=$PPID --format=comm) != "fish" && -z ''${BASH_EXECUTION_STRING} ]] then
-            shopt -q login_shell && LOGIN_OPTION='--login' || LOGIN_OPTION=""
-            exec "$(command -v fish || echo ${pkgs.fish}/bin/fish)" $LOGIN_OPTION
+        interactiveShellInit = /* sh */ ''
+          if [[ $USER == root ]] && grep -qv fish /proc/$PPID/comm && [[ $SHLVL == [12] ]]; then
+            SHELL=${pkgs.fish}/bin/fish exec fish
           fi
         '';
       };
-      programs.zsh = { enable = true; enableCompletion = true; };
+      programs.fish.enable = true;
+      users.defaultUserShell = pkgs.fish;
+      users.users.root.shell = pkgs.bash;
+      programs.zsh = {
+        enable = true;
+        enableCompletion = true;
+      };
     };
   };
 }
