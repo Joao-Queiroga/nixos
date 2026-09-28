@@ -10,6 +10,7 @@
         inputs.mangowm.nixosModules.mango
       ];
       programs.mango.enable = true;
+      services.displayManager.defaultSession = "mango";
     };
     homeManager =
       {

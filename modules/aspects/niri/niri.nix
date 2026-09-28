@@ -4,9 +4,9 @@
   ...
 }: {
   den.aspects.niri = {
-    nixos = {
+    nixos = {lib, ...}: {
       programs.niri.enable = true;
-      services.displayManager.defaultSession = "niri";
+      services.displayManager.defaultSession = lib.mkDefault "niri";
     };
     homeManager = {
       pkgs,
