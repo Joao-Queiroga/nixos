@@ -20,6 +20,9 @@
       (if host.strong then den.aspects.strong else den.aspects.weak)
     ];
 
+    user = {
+      extraGroups = [ "gamemode" ];
+    };
     homeManager =
       {
         config,
