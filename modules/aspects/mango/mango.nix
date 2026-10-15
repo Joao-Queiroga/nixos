@@ -10,7 +10,6 @@
         inputs.mangowm.nixosModules.mango
       ];
       programs.mango.enable = true;
-      services.displayManager.defaultSession = "mango";
     };
     homeManager =
       {
@@ -37,7 +36,7 @@
               cursor = config.stylix.cursor;
             in
             {
-              numlockon = 1;
+              numlock_on = 1;
               xkb_rules_layout = "br";
 
               # troca de tags animada na vertical (0 = vertical, 1 = horizontal)
@@ -46,18 +45,18 @@
               axis_bind_apply_timeout = 150;
 
               # aparência (niri: layout.gaps/border, cursor, input)
-              gappih = 16;
-              gappiv = 16;
-              gappoh = 16;
-              gappov = 16;
-              borderpx = 1;
+              gap_inner_horizontal = 16;
+              gap_inner_vertical = 16;
+              gap_outer_horizontal = 16;
+              gap_outer_vertical = 16;
+              border_px = 1;
               border_radius = 20;
-              focuscolor = "0x${colors.base0D}ff";
-              bordercolor = "0x${colors.base03}ff";
+              focus_color = "0x${colors.base0D}ff";
+              border_color = "0x${colors.base03}ff";
               cursor_theme = cursor.name;
               cursor_size = cursor.size;
               # niri: focus-follows-mouse e tap-to-click (já são padrão, explícitos)
-              sloppyfocus = 1;
+              sloppy_focus = 1;
               tap_to_click = 1;
 
               # layout scroller (~ niri/hyprland scrolling)
@@ -67,33 +66,33 @@
               # aplica presets também com uma única janela aberta
               scroller_ignore_proportion_single = 0;
 
-              tagrule = [
+              tag_rule = [
                 # todas as tags usam scroller; no_hide = workspaces persistentes
                 # do hyprland (visível para barras via ext-workspace)
                 "id:*,layout_name:scroller,no_hide:1"
               ];
 
-              windowrule = [
+              window_rule = [
                 # niri: open-maximized (mango não tem regra de abrir maximizado;
                 # proporção 1.0 ≈ coluna de largura total)
-                "scroller_proportion:1.0,appid:brave-browser"
-                "scroller_proportion:1.0,appid:brave-origin"
-                "scroller_proportion:1.0,appid:kitty"
+                "scroller_proportion:1.0,app_id:brave-browser"
+                "scroller_proportion:1.0,app_id:brave-origin"
+                "scroller_proportion:1.0,app_id:kitty"
                 # hyprland: workspace rules adaptadas para tags
-                "tags:2,appid:brave-browser"
-                "tags:2,appid:brave-origin"
-                "tags:2,appid:firefox"
-                "tags:6,appid:discord"
-                "tags:6,appid:WebCord"
-                "tags:7,appid:teams-for-linux"
+                "tags:2,app_id:brave-browser"
+                "tags:2,app_id:brave-origin"
+                "tags:2,app_id:firefox"
+                "tags:6,app_id:discord"
+                "tags:6,app_id:WebCord"
+                "tags:7,app_id:teams-for-linux"
               ];
 
-              layerrule = [
+              layer_rule = [
                 # slurp/screenshot: sem blur/animação na camada de seleção
-                "noanim:1,noblur:1,layer_name:selection"
+                "no_animation:1,no_blur:1,layer_name:selection"
               ];
 
-              monitorrule = [
+              monitor_rule = [
                 # niri: DP-1 1920x1080, VRR off (refresh:999 = modo 1080p de
                 # maior taxa ≈ highrr do hyprland; cai no preferred se não houver)
                 "name:^DP-1$,width:1920,height:1080,refresh:999,vrr:0"
@@ -268,7 +267,7 @@
               ];
 
               # submapa de redimensionar (ALT+R)
-              keymode = {
+              key_mode = {
                 resize = {
                   bind = [
                     "NONE,Left,resizewin,-10,0"
