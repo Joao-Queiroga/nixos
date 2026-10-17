@@ -10,8 +10,7 @@
         '';
       };
       programs.fish.enable = true;
-      users.defaultUserShell = pkgs.fish;
-      users.users.root.shell = pkgs.bash;
+      users.defaultUserShell = pkgs.zsh;
       programs.zsh = {
         enable = true;
         enableCompletion = true;

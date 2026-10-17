@@ -3,7 +3,7 @@
     includes = [
       den.batteries.define-user
       den.batteries.primary-user
-      (den.batteries.user-shell "fish")
+      (den.batteries.user-shell "zsh")
 
       den.aspects.shells
       den.aspects.kitty
