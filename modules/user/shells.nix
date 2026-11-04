@@ -99,7 +99,7 @@
           autoload -Uz compinit
           _zcd=(''${ZDOTDIR:-$HOME}/.zcompdump(N.mh+24))
           if (( $#_zcd )) || [[ ! -f ''${ZDOTDIR:-$HOME}/.zcompdump ]]; then
-            compinit
+            compinit -u
           else
             compinit -C
           fi
