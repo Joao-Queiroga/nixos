@@ -33,6 +33,8 @@
       };
 
       services.lact.enable = true;
+      # LACT uses sudo to monitor GameMode on the user's D-Bus session.
+      systemd.services.lactd.path = ["/run/wrappers"];
 
       programs = {
         steam = {
