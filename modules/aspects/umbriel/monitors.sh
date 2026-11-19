@@ -40,13 +40,12 @@ fi
 output_name=$(printf '%s\n' "$line" | cut -f2)
 current_state=$(printf '%s\n' "$line" | cut -f3)
 
-# 2. Alterna: se está ligado, desliga; se está desligado, liga
+# 2. Alterna o estado do output (liga/desliga)
 if [ "$current_state" = "on" ]; then
-  umbriel msg output-disable "$output_name"
   action_desc="desligado"
 else
-  umbriel msg output-enable "$output_name"
   action_desc="ligado"
 fi
+umbriel msg output-toggle "$output_name"
 
 notify-send "umbriel" "$output_name $action_desc" 2>/dev/null || true

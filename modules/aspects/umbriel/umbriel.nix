@@ -42,6 +42,14 @@
             in
             {
               # ==============================================================================
+              # General
+              general = {
+                # Desliga a TV LG no início da sessão (runtime), mantendo a posição
+                # configurada para quando for reativada via script (output-toggle).
+                autostart = [ "umbriel msg output-disable 'LG Electronics LG TV 0x01010101'" ];
+              };
+
+              # ==============================================================================
               # Input
               input = {
                 keyboard = {
@@ -108,13 +116,19 @@
                   mode = "1920x1080";
                   vrr = "always";
                   focus_at_startup = true;
+                  position = [
+                    0
+                    0
+                  ];
                 };
-                # niri: LG TV desligada
                 "LG Electronics LG TV 0x01010101" = {
-                  enabled = false;
-                  # HDR sempre ligado quando o output é usado ("auto" liga só em
-                  # fullscreen com metadados HDR)
+                  mode = "1920x1080";
                   hdr = "on";
+                  # à esquerda do DP-1 para estender (não espelhar)
+                  position = [
+                    (-1920)
+                    0
+                  ];
                 };
               };
 
